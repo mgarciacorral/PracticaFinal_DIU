@@ -12,16 +12,22 @@ public class Menu extends Plantilla{
 
     public Menu(){
         setLayout(new BorderLayout());
+
         logo.setIcon(new ImageIcon("src/resources/logo.png"));
-        logo.setBorder(BorderFactory.createEmptyBorder(20, 55, 0, 50));
+        logo.setHorizontalAlignment(SwingConstants.CENTER);
+        logo.setBorder(BorderFactory.createEmptyBorder(50, 0, 60, 0));
+
         panelBoton.setLayout(new BoxLayout(panelBoton, BoxLayout.Y_AXIS));
         panelBoton.setAlignmentX(CENTER_ALIGNMENT);
+
         botones[0] = new JButton("Jugar");
         botones[1] = new JButton("Ranking");
         botones[2] = new JButton("Configuracion");
         botones[3] = new JButton("Salir");
+
         add(Box.createHorizontalGlue());
         add(logo, BorderLayout.NORTH);
+
         for(int i=0; i<botones.length; i++){
             botones[i].setFont(new Font("Showcard Gothic", Font.BOLD, 20));
             botones[i].setForeground(Color.decode("#75F94D"));
@@ -30,11 +36,11 @@ public class Menu extends Plantilla{
             botones[i].setBorderPainted(false);
             botones[i].setIcon(new ImageIcon("src/resources/red_button01.png"));
             botones[i].setAlignmentX(CENTER_ALIGNMENT);
-            panelBoton.add(botones[i], CENTER_ALIGNMENT);
             animacionPulsar(i);
+
+            panelBoton.add(botones[i], CENTER_ALIGNMENT);
         }
 
-        add(Box.createHorizontalGlue());
         panelBoton.setAlignmentY(Component.CENTER_ALIGNMENT);
         panelBoton.setOpaque(false);
         add(panelBoton, BorderLayout.CENTER);
