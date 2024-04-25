@@ -6,7 +6,7 @@ public class ControladorGeneral extends JFrame {
     public ControladorGeneral(){
         instancia = this;
         setTitle("BreakOut");
-        setIconImage(new ImageIcon("src/resources/logo.png").getImage());
+        setIconImage(new ImageIcon("src/resources/logo2.png").getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 800);
         setResizable(false);

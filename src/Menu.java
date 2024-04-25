@@ -17,7 +17,7 @@ public class Menu extends Plantilla{
         panelBoton.setLayout(new BoxLayout(panelBoton, BoxLayout.Y_AXIS));
         panelBoton.setAlignmentX(CENTER_ALIGNMENT);
         botones[0] = new JButton("Jugar");
-        botones[1] = new JButton("Puntuajes");
+        botones[1] = new JButton("Ranking");
         botones[2] = new JButton("Configuracion");
         botones[3] = new JButton("Salir");
         add(Box.createHorizontalGlue());
@@ -70,6 +70,14 @@ public class Menu extends Plantilla{
         botones[i].addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 botones[i].setIcon(new ImageIcon("src/resources/red_button02.png"));
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                botones[i].setIcon(new ImageIcon("src/resources/red_button11.png"));
+            }
+
+            public void mouseExited(MouseEvent e) {
+                botones[i].setIcon(new ImageIcon("src/resources/red_button01.png"));
             }
 
             public void mouseReleased(MouseEvent e) {
