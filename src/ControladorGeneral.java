@@ -7,7 +7,7 @@ public class ControladorGeneral extends JFrame {
         setSize(700, 800);
         setResizable(false);
         setLayout(new CardLayout());
-        Plantilla p = new Plantilla();
+        Plantilla p = new Menu();
         add(p);
         setVisible(true);
 
