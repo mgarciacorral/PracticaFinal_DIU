@@ -17,7 +17,7 @@ public class Menu extends Plantilla{
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setBorder(BorderFactory.createEmptyBorder(50, 0, 60, 0));
 
-        panelBoton.setLayout(new BoxLayout(panelBoton, BoxLayout.Y_AXIS));
+        panelBoton.setLayout(new GridLayout(4,1));
         panelBoton.setAlignmentX(CENTER_ALIGNMENT);
 
         botones[0] = new JButton("Jugar");
@@ -27,20 +27,23 @@ public class Menu extends Plantilla{
 
         add(Box.createHorizontalGlue());
         add(logo, BorderLayout.NORTH);
+        ImageIcon icono = new ImageIcon("src/resources/red_button01.png");
 
         for(int i=0; i<botones.length; i++){
+
             botones[i].setFont(new Font("Showcard Gothic", Font.BOLD, 20));
             botones[i].setForeground(Color.decode("#75F94D"));
             botones[i].setHorizontalTextPosition(SwingConstants.CENTER);
             botones[i].setContentAreaFilled(false);
             botones[i].setBorderPainted(false);
-            botones[i].setIcon(new ImageIcon("src/resources/red_button01.png"));
+            botones[i].setIcon(icono);
             botones[i].setAlignmentX(CENTER_ALIGNMENT);
             animacionPulsar(i);
-
             panelBoton.add(botones[i], CENTER_ALIGNMENT);
         }
 
+
+        panelBoton.setBorder(BorderFactory.createEmptyBorder(0, icono.getIconWidth()+50, 0, icono.getIconWidth()+50));
         panelBoton.setAlignmentY(Component.CENTER_ALIGNMENT);
         panelBoton.setOpaque(false);
         add(panelBoton, BorderLayout.CENTER);
