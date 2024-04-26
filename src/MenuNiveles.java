@@ -49,6 +49,7 @@ public class MenuNiveles extends Plantilla{
         label.setFont(new Font("Showcard Gothic", Font.BOLD, 60));
         label.setForeground(Color.decode("#75F94D"));
         label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
         panelLabel.setBackground(Color.decode("#475C8D"));
         panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 
