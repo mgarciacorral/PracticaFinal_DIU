@@ -22,7 +22,7 @@ public class MenuNiveles extends Plantilla{
             botones[i] = new JButton();
             botones[i].setText(String.valueOf(i+1));
             botones[i].setFont(new Font("Showcard Gothic", Font.BOLD, 30));
-            botones[i].setForeground(Color.decode("#75F94D"));
+            botones[i].setForeground(Color.decode("#404040"));
             botones[i].setHorizontalTextPosition(SwingConstants.CENTER);
             botones[i].setContentAreaFilled(false);
             botones[i].setBorderPainted(false);
@@ -32,7 +32,6 @@ public class MenuNiveles extends Plantilla{
         }
 
         atras.setIcon(new ImageIcon("src/resources/red_sliderLeft.png"));
-        atras.setForeground(Color.decode("#75F94D"));
         atras.setContentAreaFilled(false);
         atras.setBorderPainted(false);
         atras.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
@@ -47,7 +46,7 @@ public class MenuNiveles extends Plantilla{
         panelLabel.add(label, BorderLayout.CENTER);
         panelLabel.add(atras, BorderLayout.WEST);
         label.setFont(new Font("Showcard Gothic", Font.BOLD, 60));
-        label.setForeground(Color.decode("#75F94D"));
+        label.setForeground(Color.decode("#74CD4F"));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
         panelLabel.setBackground(Color.decode("#475C8D"));

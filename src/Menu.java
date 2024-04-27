@@ -31,8 +31,8 @@ public class Menu extends Plantilla{
 
         for(int i=0; i<botones.length; i++){
 
-            botones[i].setFont(new Font("Showcard Gothic", Font.BOLD, 20));
-            botones[i].setForeground(Color.decode("#75F94D"));
+            botones[i].setFont(new Font("TimesRoman", Font.BOLD, 20));
+            botones[i].setForeground(Color.decode("#404040"));
             botones[i].setHorizontalTextPosition(SwingConstants.CENTER);
             botones[i].setContentAreaFilled(false);
             botones[i].setBorderPainted(false);

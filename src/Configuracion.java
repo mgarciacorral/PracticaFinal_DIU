@@ -13,13 +13,12 @@ public class Configuracion  extends Plantilla
         setLayout(new BorderLayout());
 
         atras.setIcon(new ImageIcon("src/resources/red_sliderLeft.png"));
-        atras.setForeground(Color.decode("#75F94D"));
         atras.setContentAreaFilled(false);
         atras.setBorderPainted(false);
         atras.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
 
         label.setFont(new Font("Showcard Gothic", Font.BOLD, 60));
-        label.setForeground(Color.decode("#75F94D"));
+        label.setForeground(Color.decode("#74CD4F"));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
 
