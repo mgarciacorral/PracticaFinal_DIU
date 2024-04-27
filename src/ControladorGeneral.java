@@ -13,8 +13,13 @@ public class ControladorGeneral extends JFrame {
         setLayout(new CardLayout());
         Menu menuPrincipal = new Menu();
         MenuNiveles menuNiveles = new MenuNiveles();
-        add(menuPrincipal);
-        add(menuNiveles);
+        Ranking ranking = new Ranking();
+        Configuracion configuracion = new Configuracion();
+
+        add(menuPrincipal, "MenuPrincipal");
+        add(menuNiveles, "MenuNiveles");
+        add(ranking, "Ranking");
+        add(configuracion, "Configuracion");
 
         setVisible(true);
     }

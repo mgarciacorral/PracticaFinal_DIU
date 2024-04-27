@@ -51,19 +51,21 @@ public class Menu extends Plantilla{
         botones[0].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
-                cl.next(ControladorGeneral.instancia.getContentPane());
+                cl.show(ControladorGeneral.instancia.getContentPane(), "MenuNiveles");
             }
         });
 
         botones[1].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
+                cl.show(ControladorGeneral.instancia.getContentPane(), "Ranking");
             }
         });
 
         botones[2].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
+                cl.show(ControladorGeneral.instancia.getContentPane(), "Configuracion");
             }
         });
 

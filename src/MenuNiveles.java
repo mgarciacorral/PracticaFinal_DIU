@@ -39,7 +39,7 @@ public class MenuNiveles extends Plantilla{
         atras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
-                cl.previous(ControladorGeneral.instancia.getContentPane());
+                cl.show(ControladorGeneral.instancia.getContentPane(), "MenuPrincipal");
             }
         });
 
