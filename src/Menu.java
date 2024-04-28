@@ -1,19 +1,24 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 public class Menu extends Plantilla{
     private JLabel logo = new JLabel();
     private JButton[] botones = new JButton[4];
-    JPanel panelBoton = new JPanel();
+    private JPanel panelBoton = new JPanel();
+    private Clip clip;
 
     public Menu(){
         setLayout(new BorderLayout());
 
-        logo.setIcon(new ImageIcon("src/resources/logo.png"));
+        logo.setIcon(new ImageIcon("src/resources/Imagenes/logo.png"));
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         logo.setBorder(BorderFactory.createEmptyBorder(50, 0, 60, 0));
 
@@ -27,7 +32,15 @@ public class Menu extends Plantilla{
 
         add(Box.createHorizontalGlue());
         add(logo, BorderLayout.NORTH);
-        ImageIcon icono = new ImageIcon("src/resources/red_button01.png");
+        ImageIcon icono = new ImageIcon("src/resources/Imagenes/red_button01.png");
+
+        try {
+            clip = AudioSystem.getClip();
+            AudioInputStream audio = AudioSystem.getAudioInputStream(new File("src/resources/Sonidos/click.wav"));
+            clip.open(audio);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         for(int i=0; i<botones.length; i++){
 
@@ -80,19 +93,25 @@ public class Menu extends Plantilla{
     {
         botones[i].addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                botones[i].setIcon(new ImageIcon("src/resources/red_button02.png"));
+                botones[i].setIcon(new ImageIcon("src/resources/Imagenes/red_button02.png"));
+                new Thread(new Runnable() {
+                    public void run() {
+                        clip.setFramePosition(0);
+                        clip.start();
+                    }
+                }).start();
             }
 
             public void mouseEntered(MouseEvent e) {
-                botones[i].setIcon(new ImageIcon("src/resources/red_button11.png"));
+                botones[i].setIcon(new ImageIcon("src/resources/Imagenes/red_button11.png"));
             }
 
             public void mouseExited(MouseEvent e) {
-                botones[i].setIcon(new ImageIcon("src/resources/red_button01.png"));
+                botones[i].setIcon(new ImageIcon("src/resources/Imagenes/red_button01.png"));
             }
 
             public void mouseReleased(MouseEvent e) {
-                botones[i].setIcon(new ImageIcon("src/resources/red_button01.png"));
+                botones[i].setIcon(new ImageIcon("src/resources/Imagenes/red_button01.png"));
             }
         });
     }

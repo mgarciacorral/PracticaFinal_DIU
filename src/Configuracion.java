@@ -12,7 +12,7 @@ public class Configuracion  extends Plantilla
     {
         setLayout(new BorderLayout());
 
-        atras.setIcon(new ImageIcon("src/resources/red_sliderLeft.png"));
+        atras.setIcon(new ImageIcon("src/resources/Imagenes/red_sliderLeft.png"));
         atras.setContentAreaFilled(false);
         atras.setBorderPainted(false);
         atras.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
