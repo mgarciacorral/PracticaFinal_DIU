@@ -12,20 +12,20 @@ public class Ranking extends Plantilla
     {
         setLayout(new BorderLayout());
 
-        atras.setIcon(new ImageIcon("src/resources/Imagenes/red_sliderLeft.png"));
+        atras.setIcon(botonAtras);
         atras.setContentAreaFilled(false);
         atras.setBorderPainted(false);
         atras.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
 
         label.setFont(new Font("Showcard Gothic", Font.BOLD, 60));
-        label.setForeground(Color.decode("#74CD4F"));
+        label.setForeground(colorLabel);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
 
         panelLabel.setLayout(new BorderLayout());
         panelLabel.add(label, BorderLayout.CENTER);
         panelLabel.add(atras, BorderLayout.WEST);
-        panelLabel.setBackground(Color.decode("#475C8D"));
+        panelLabel.setBackground(colorFondo);
         panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 
         add(panelLabel, BorderLayout.NORTH);

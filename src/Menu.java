@@ -1,6 +1,3 @@
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,7 +10,6 @@ public class Menu extends Plantilla{
     private JLabel logo = new JLabel();
     private JButton[] botones = new JButton[4];
     private JPanel panelBoton = new JPanel();
-    private Clip clip;
 
     public Menu(){
         setLayout(new BorderLayout());
@@ -32,31 +28,22 @@ public class Menu extends Plantilla{
 
         add(Box.createHorizontalGlue());
         add(logo, BorderLayout.NORTH);
-        ImageIcon icono = new ImageIcon("src/resources/Imagenes/red_button01.png");
-
-        try {
-            clip = AudioSystem.getClip();
-            AudioInputStream audio = AudioSystem.getAudioInputStream(new File("src/resources/Sonidos/click.wav"));
-            clip.open(audio);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         for(int i=0; i<botones.length; i++){
 
-            botones[i].setFont(new Font("TimesRoman", Font.BOLD, 20));
-            botones[i].setForeground(Color.decode("#404040"));
+            botones[i].setFont(new Font("Showcard Gothic", Font.BOLD, 20));
+            botones[i].setForeground(colorLetraBoton);
             botones[i].setHorizontalTextPosition(SwingConstants.CENTER);
             botones[i].setContentAreaFilled(false);
             botones[i].setBorderPainted(false);
-            botones[i].setIcon(icono);
+            botones[i].setIcon(botonNormal);
             botones[i].setAlignmentX(CENTER_ALIGNMENT);
             animacionPulsar(i);
             panelBoton.add(botones[i], CENTER_ALIGNMENT);
         }
 
 
-        panelBoton.setBorder(BorderFactory.createEmptyBorder(0, icono.getIconWidth()+50, 0, icono.getIconWidth()+50));
+        panelBoton.setBorder(BorderFactory.createEmptyBorder(0, botonNormal.getIconWidth()+50, 0, botonNormal.getIconWidth()+50));
         panelBoton.setAlignmentY(Component.CENTER_ALIGNMENT);
         panelBoton.setOpaque(false);
         add(panelBoton, BorderLayout.CENTER);
@@ -93,25 +80,25 @@ public class Menu extends Plantilla{
     {
         botones[i].addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                botones[i].setIcon(new ImageIcon("src/resources/Imagenes/red_button02.png"));
+                botones[i].setIcon(botonPulsado);
                 new Thread(new Runnable() {
                     public void run() {
-                        clip.setFramePosition(0);
-                        clip.start();
+                        sonidoBoton.setFramePosition(0);
+                        sonidoBoton.start();
                     }
                 }).start();
             }
 
             public void mouseEntered(MouseEvent e) {
-                botones[i].setIcon(new ImageIcon("src/resources/Imagenes/red_button11.png"));
+                botones[i].setIcon(botonHover);
             }
 
             public void mouseExited(MouseEvent e) {
-                botones[i].setIcon(new ImageIcon("src/resources/Imagenes/red_button01.png"));
+                botones[i].setIcon(botonNormal);
             }
 
             public void mouseReleased(MouseEvent e) {
-                botones[i].setIcon(new ImageIcon("src/resources/Imagenes/red_button01.png"));
+                botones[i].setIcon(botonNormal);
             }
         });
     }
