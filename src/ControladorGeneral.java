@@ -87,8 +87,8 @@ public class ControladorGeneral extends JFrame {
         espanolIngles.put("Salir", "Exit");
         espanolIngles.put("Niveles", "Levels");
         espanolIngles.put("Sonido", "Sound");
-        espanolIngles.put("On", "On");
-        espanolIngles.put("Off", "Off");
+        espanolIngles.put("Sonido: On", "Sound: On");
+        espanolIngles.put("Sonido: Off", "Sound: Off");
         espanolIngles.put("Idioma", "Language");
         espanolIngles.put("Predeterminado", "Default");
         espanolIngles.put("Selector Idioma", "Language Selector");
@@ -104,8 +104,8 @@ public class ControladorGeneral extends JFrame {
         espanolPortugues.put("Salir", "Sair");
         espanolPortugues.put("Niveles", "Níveis");
         espanolPortugues.put("Sonido", "Som");
-        espanolPortugues.put("On", "On");
-        espanolPortugues.put("Off", "Off");
+        espanolPortugues.put("Sonido: On", "Som: On");
+        espanolPortugues.put("Sonido: Off", "Som: Off");
         espanolPortugues.put("Idioma", "Linguagem");
         espanolPortugues.put("Predeterminado", "Predeterminado");
         espanolPortugues.put("Selector Idioma", "Seletor de Idioma");
@@ -121,8 +121,8 @@ public class ControladorGeneral extends JFrame {
         espanolGallego.put("Salir", "Saia");
         espanolGallego.put("Niveles", "Niveis");
         espanolGallego.put("Sonido", "Son");
-        espanolGallego.put("On", "On");
-        espanolGallego.put("Off", "Off");
+        espanolGallego.put("Sonido: On", "Son: On");
+        espanolGallego.put("Sonido: Off", "Son: Off");
         espanolGallego.put("Idioma", "Lingua");
         espanolGallego.put("Predeterminado", "Predeterminado");
         espanolGallego.put("Selector Idioma", "Selector de Lingua");

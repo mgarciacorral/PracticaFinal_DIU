@@ -60,13 +60,13 @@ public class Configuracion  extends Plantilla
                 if(sonido)
                 {
                     sonido=false;
-                    botones[0].setText("Sonido: Off");
+                    botones[0].setText(translate("Sonido: Off"));
                     ControladorGeneral.instancia.stopMusica();
                 }
                 else
                 {
                     sonido=true;
-                    botones[0].setText("Sonido: On");
+                    botones[0].setText(translate("Sonido: On"));
                     ControladorGeneral.instancia.startMusica();
                 }
 
