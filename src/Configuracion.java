@@ -41,11 +41,11 @@ public class Configuracion  extends Plantilla
         sonido = DatosSerialiazados.getInstancia().getSonido();
         if(sonido)
         {
-            botones[0] = new JButton(translate("Sonido: On"));
+            botones[0] = new JButton(translate("Musica: On"));
         }
         else
         {
-            botones[0] = new JButton(translate("Sonido: Off"));
+            botones[0] = new JButton(translate("Musica: Off"));
         }
         botones[1] = new JButton(translate("Daltonismo"));
         botones[2] = new JButton(translate("Idioma"));
@@ -69,14 +69,14 @@ public class Configuracion  extends Plantilla
                 if(sonido)
                 {
                     sonido=false;
-                    botones[0].setText(translate("Sonido: Off"));
+                    botones[0].setText(translate("Musica: Off"));
                     DatosSerialiazados.getInstancia().setSonido(false);
                     ControladorGeneral.instancia.stopMusica();
                 }
                 else
                 {
                     sonido=true;
-                    botones[0].setText(translate("Sonido: On"));
+                    botones[0].setText(translate("Musica: On"));
                     DatosSerialiazados.getInstancia().setSonido(true);
                     ControladorGeneral.instancia.startMusica();
                 }
@@ -101,7 +101,7 @@ public class Configuracion  extends Plantilla
         botones[3].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 sonido = true;
-                botones[0].setText(translate("Sonido: On"));
+                botones[0].setText(translate("Musica: On"));
                 DatosSerialiazados.getInstancia().setSonido(true);
                 DatosSerialiazados.getInstancia().setModoDaltonico("desactivado");
                 ControladorGeneral.instancia.startMusica();
@@ -165,9 +165,9 @@ public class Configuracion  extends Plantilla
     {
         label.setText(translate("Configuracion"));
         if(sonido)
-        {botones[0].setText(translate("Sonido: On"));}
+        {botones[0].setText(translate("Musica: On"));}
         else
-        {botones[0].setText(translate("Sonido: Off"));}
+        {botones[0].setText(translate("Musica: Off"));}
 
         botones[1].setText(translate("Daltonismo"));
         botones[2].setText(translate("Idioma"));

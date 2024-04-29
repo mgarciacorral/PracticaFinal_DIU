@@ -86,6 +86,7 @@ public class ControladorGeneral extends JFrame {
         configuracion.actualizarTexto();
         menuIdioma.actualizarTexto();
         menuDaltonicos.actualizarTexto();
+        login.actualizarTexto();
     }
 
     public void actualizarVista()
@@ -96,6 +97,7 @@ public class ControladorGeneral extends JFrame {
         configuracion.actualizarVista();
         menuIdioma.actualizarVista();
         menuDaltonicos.actualizarVista();
+        login.actualizarVista();
     }
 
     public void actualizarBotones()
@@ -123,9 +125,9 @@ public class ControladorGeneral extends JFrame {
         espanolIngles.put("Configuracion", "Settings");
         espanolIngles.put("Salir", "Exit");
         espanolIngles.put("Niveles", "Levels");
-        espanolIngles.put("Sonido", "Sound");
-        espanolIngles.put("Sonido: On", "Sound: On");
-        espanolIngles.put("Sonido: Off", "Sound: Off");
+        espanolIngles.put("Musica", "Music");
+        espanolIngles.put("Musica: On", "Music: On");
+        espanolIngles.put("Musica: Off", "Music: Off");
         espanolIngles.put("Idioma", "Language");
         espanolIngles.put("Predeterminado", "Default");
         espanolIngles.put("Selector Idioma", "Language Selector");
@@ -139,15 +141,17 @@ public class ControladorGeneral extends JFrame {
         espanolIngles.put("Protanopia", "Protanopia");
         espanolIngles.put("Tritanopia", "Tritanopia");
         espanolIngles.put("Daltonismo", "Colorblindness");
+        espanolIngles.put("Usuario", "User");
+        espanolIngles.put("Aceptar", "Accept");
 
         espanolPortugues.put("Jugar", "Jogar");
         espanolPortugues.put("Ranking", "Classificação");
         espanolPortugues.put("Configuracion", "Contexto");
         espanolPortugues.put("Salir", "Sair");
         espanolPortugues.put("Niveles", "Níveis");
-        espanolPortugues.put("Sonido", "Som");
-        espanolPortugues.put("Sonido: On", "Som: On");
-        espanolPortugues.put("Sonido: Off", "Som: Off");
+        espanolPortugues.put("Musica", "Música");
+        espanolPortugues.put("Musica: On", "Música: On");
+        espanolPortugues.put("Musica: Off", "Música: Off");
         espanolPortugues.put("Idioma", "Linguagem");
         espanolPortugues.put("Predeterminado", "Predeterminado");
         espanolPortugues.put("Selector Idioma", "Seletor de Idioma");
@@ -161,15 +165,17 @@ public class ControladorGeneral extends JFrame {
         espanolPortugues.put("Protanopia", "Protanopia");
         espanolPortugues.put("Tritanopia", "Tritanopia");
         espanolPortugues.put("Daltonismo", "Daltonismo");
+        espanolPortugues.put("Usuario", "Usuário");
+        espanolPortugues.put("Aceptar", "Aceitar");
 
         espanolGallego.put("Jugar", "Xogar");
         espanolGallego.put("Ranking", "Clasificacion");
         espanolGallego.put("Configuracion", "Configuración");
         espanolGallego.put("Salir", "Saia");
         espanolGallego.put("Niveles", "Niveis");
-        espanolGallego.put("Sonido", "Son");
-        espanolGallego.put("Sonido: On", "Son: On");
-        espanolGallego.put("Sonido: Off", "Son: Off");
+        espanolGallego.put("Musica", "Música");
+        espanolGallego.put("Musica: On", "Música: On");
+        espanolGallego.put("Musica: Off", "Música: Off");
         espanolGallego.put("Idioma", "Lingua");
         espanolGallego.put("Predeterminado", "Predeterminado");
         espanolGallego.put("Selector Idioma", "Selector de Lingua");
@@ -183,6 +189,8 @@ public class ControladorGeneral extends JFrame {
         espanolGallego.put("Protanopia", "Protanopia");
         espanolGallego.put("Tritanopia", "Tritanopia");
         espanolGallego.put("Daltonismo", "Daltonismo");
+        espanolGallego.put("Usuario", "Usuario");
+        espanolGallego.put("Aceptar", "Aceptar");
     }
 
     public static String translate(String key){
@@ -207,6 +215,11 @@ public class ControladorGeneral extends JFrame {
         else{
             return key;
         }
+    }
+
+    public MenuNiveles getMenuNiveles()
+    {
+        return menuNiveles;
     }
 
     public void cambiarModoDaltonico()

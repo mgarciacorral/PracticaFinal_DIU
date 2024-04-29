@@ -14,7 +14,9 @@ public class MenuNiveles extends Plantilla{
     private JPanel panelBoton = new JPanel();
     private JButton atras = new JButton();
     private JPanel panelLabel = new JPanel();
-    private JLabel label = new JLabel("Niveles");
+    private JLabel label = new JLabel(translate("Niveles"));
+    private Usuario user;
+
     public MenuNiveles(){
         botones = new JButton[16];
         panelBoton.setLayout(new GridLayout(4,4));
@@ -31,6 +33,7 @@ public class MenuNiveles extends Plantilla{
             botones[i].setContentAreaFilled(false);
             botones[i].setBorderPainted(false);
             botones[i].setIcon(botonNivel);
+            botones[i].setEnabled(false);
             panelBoton.add(botones[i]);
             animacionPulsar(i);
         }
@@ -58,6 +61,13 @@ public class MenuNiveles extends Plantilla{
 
         add(panelBoton, BorderLayout.CENTER);
         add(panelLabel, BorderLayout.NORTH);
+    }
+
+    public void activarNiveles()
+    {
+        for (int i = 0; i < user.getNiveles(); i++) {
+            botones[i].setEnabled(true);
+        }
     }
 
     public void actualizarVista()
@@ -93,6 +103,10 @@ public class MenuNiveles extends Plantilla{
     public void actualizarTexto()
     {
         label.setText(translate("Niveles"));
+    }
+
+    public void setUser(Usuario user){
+        this.user = user;
     }
 
 }

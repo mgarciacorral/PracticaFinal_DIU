@@ -1,19 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Login extends Plantilla{
 
     private JPanel panelLabel = new JPanel();
-    private JLabel label = new JLabel(translate("Login"));
+    private JLabel label = new JLabel(translate("Usuario"));
     private JButton atras = new JButton();
     private JTextField usuario = new JTextField();
     private JButton submit = new JButton();
     private JPanel panelAtras = new JPanel();
-
+    private JPanel panelUsuario = new JPanel();
 
     public Login(){
         setLayout(new GridLayout(3, 1));
@@ -30,25 +29,30 @@ public class Login extends Plantilla{
         add(panelAtras);
 
 
-        panelLabel.setLayout(new BoxLayout(panelLabel, BoxLayout.Y_AXIS));
-        panelLabel.add(label);
+        panelLabel.setLayout(new GridLayout(3, 1));
+
         label.setForeground(colorLabel);
         label.setFont(new Font("Showcard Gothic", Font.BOLD, 45));
         label.setHorizontalAlignment(SwingConstants.CENTER);
-        label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
+        label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         label.setOpaque(false);
 
-        usuario.setOpaque(false);
+        panelUsuario.setLayout(new BorderLayout());
+        panelUsuario.setOpaque(false);
+        panelUsuario.add(usuario, BorderLayout.CENTER);
+        panelUsuario.setBorder(BorderFactory.createEmptyBorder(0, 150, 30, 150));
+
         usuario.setFont(new Font("Showcard Gothic", Font.BOLD, 20));
         usuario.setPreferredSize(new Dimension(100, 20));
-        usuario.setToolTipText(translate("Introduce Usuario"));
         usuario.setHorizontalAlignment(SwingConstants.CENTER);
+        usuario.setBackground(Color.GRAY);
+
         panelLabel.setOpaque(false);
+        panelLabel.add(label);
+        panelLabel.add(panelUsuario);
+        panelLabel.add(submit);
 
-        panelLabel.add(usuario);
-
-
-        submit.setText(translate("Submit"));
+        submit.setText(translate("Aceptar"));
         submit.setFont(new Font("Showcard Gothic", Font.BOLD, 20));
         submit.setForeground(colorLetraBoton);
         submit.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -57,14 +61,19 @@ public class Login extends Plantilla{
         submit.setIcon(botonNormal);
         submit.setAlignmentX(CENTER_ALIGNMENT);
         submit.setOpaque(false);
-        submit.setBorder(BorderFactory.createEmptyBorder(0, 100, 30, 0));
-
+        submit.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
 
         animacionPulsar();
-        panelLabel.add(submit);
 
         add(panelLabel, BorderLayout.CENTER);
 
+        usuario.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    submit.doClick();
+                }
+            }
+        });
 
         atras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -73,6 +82,19 @@ public class Login extends Plantilla{
             }
         });
 
+        submit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(usuario.getText().length() > 0){
+                    Usuario user = new Usuario();
+                    user.setNombre(usuario.getText());
+                    DatosSerialiazados.getInstancia().getUsuarios().add(user);
+                    ControladorGeneral.instancia.getMenuNiveles().setUser(user);
+                    ControladorGeneral.instancia.getMenuNiveles().activarNiveles();
+                    CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
+                    cl.show(ControladorGeneral.instancia.getContentPane(), "MenuNiveles");
+                }
+            }
+        });
     }
 
     public void animacionPulsar()
@@ -99,6 +121,19 @@ public class Login extends Plantilla{
                     submit.setIcon(botonNormal);
                 }
         });
+    }
+
+    public void actualizarTexto(){
+        label.setText(translate("Usuario"));
+        submit.setText(translate("Aceptar"));
+    }
+
+    public void actualizarVista(){
+        super.actualizarVista();
+        label.setForeground(colorLabel);
+        submit.setForeground(colorLetraBoton);
+        submit.setIcon(botonNormal);
+        atras.setIcon(botonAtras);
     }
 }
 

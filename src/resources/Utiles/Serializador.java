@@ -14,7 +14,7 @@ public class Serializador {
         }
     }
     public static <A> A deserialize(String nombreFichero) {
-        System.out.println("DeSerializing...");
+        System.out.println("Deserializando...");
         try {
             FileInputStream fis = new FileInputStream(nombreFichero) ;
             ObjectInputStream iis = new ObjectInputStream(fis) ;
