@@ -6,15 +6,15 @@ import java.awt.*;
 import java.io.File;
 
 public class Plantilla extends JPanel {
-    protected Color colorFondo;
-    protected Color colorLetraBoton;
-    protected Color colorLabel;
-    protected ImageIcon botonNormal;
-    protected ImageIcon botonPulsado;
-    protected ImageIcon botonHover;
-    protected ImageIcon botonAtras;
-    protected ImageIcon botonNivel;
-    protected ImageIcon botonNivelPulsado;
+    protected static Color colorFondo;
+    protected static Color colorLetraBoton;
+    protected static Color colorLabel;
+    protected static ImageIcon botonNormal;
+    protected static ImageIcon botonPulsado;
+    protected static ImageIcon botonHover;
+    protected static ImageIcon botonAtras;
+    protected static ImageIcon botonNivel;
+    protected static ImageIcon botonNivelPulsado;
     protected Clip sonidoBoton;
 
     public Plantilla(){
@@ -45,7 +45,12 @@ public class Plantilla extends JPanel {
         botonNivelPulsado = new ImageIcon("src/resources/Imagenes/red_button07.png");
     }
     public void daltonicos1(){
-        //rellenar con cosas de dltonicos
+        //rellenar con cosas de daltonicos
+    }
+
+    public void setIdioma()
+    {
+        //rellenar con cosas de idioma
     }
 
 }
