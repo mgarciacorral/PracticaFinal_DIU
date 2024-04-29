@@ -11,9 +11,7 @@ public class Configuracion  extends Plantilla
     private JLabel label = new JLabel("Configuracion");
     private JButton atras = new JButton();
     private JPanel panelBotones = new JPanel();
-    private JPanel panelIdioma = new JPanel();
     private JButton[] botones = new JButton[4];
-    private JButton[] botonesIdioma = new JButton[4];
     private boolean sonido = true;
     public Configuracion()
     {
@@ -24,7 +22,7 @@ public class Configuracion  extends Plantilla
         atras.setBorderPainted(false);
         atras.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
 
-        label.setFont(new Font("Showcard Gothic", Font.BOLD, 60));
+        label.setFont(new Font("Showcard Gothic", Font.BOLD, 45));
         label.setForeground(colorLabel);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
@@ -33,7 +31,7 @@ public class Configuracion  extends Plantilla
         panelLabel.add(label, BorderLayout.CENTER);
         panelLabel.add(atras, BorderLayout.WEST);
         panelLabel.setBackground(colorFondo);
-        panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
+        panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 70, 0));
 
         add(panelLabel, BorderLayout.NORTH);
         panelBotones.setLayout(new GridLayout(4,1));
@@ -74,6 +72,7 @@ public class Configuracion  extends Plantilla
 
             }
         });
+
         botones[2].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
@@ -81,16 +80,12 @@ public class Configuracion  extends Plantilla
             }
         });
 
-
         atras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
                 cl.show(ControladorGeneral.instancia.getContentPane(), "MenuPrincipal");
             }
         });
-
-
-
     }
     public void animacionPulsar(int i)
     {
@@ -118,5 +113,14 @@ public class Configuracion  extends Plantilla
             }
         });
 
+    }
+
+    public void actualizarTexto()
+    {
+        label.setText(translate("Configuracion"));
+        botones[0].setText(translate("Sonido"));
+        botones[1].setText(translate("Daltónico"));
+        botones[2].setText(translate("Idioma"));
+        botones[3].setText(translate("Predeterminado"));
     }
 }

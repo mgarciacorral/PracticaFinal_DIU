@@ -49,6 +49,14 @@ public class Plantilla extends JPanel {
         //rellenar con cosas de daltonicos
     }
 
+    protected String translate(String key){
+        return ControladorGeneral.translate(key);
+    }
+
+    public void actualizarTexto(){
+        //rellenar con cosas de actualizar texto en hijos
+    }
+
 
 
 }

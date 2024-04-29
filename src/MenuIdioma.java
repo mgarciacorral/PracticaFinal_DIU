@@ -11,30 +11,38 @@ public class MenuIdioma extends Plantilla{
     private JButton[] botonesIdioma = new JButton[4];
     private JLabel label = new JLabel("Selector Idioma");
     private JButton atras = new JButton();
+    private JButton botonActivo;
     public MenuIdioma()
     {
         setLayout(new BorderLayout());
         panelLabel.setLayout(new BorderLayout());
+
         atras.setIcon(botonAtras);
         atras.setContentAreaFilled(false);
         atras.setBorderPainted(false);
         atras.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
-        label.setFont(new Font("Showcard Gothic", Font.BOLD, 60));
+
+        label.setFont(new Font("Showcard Gothic", Font.BOLD, 40));
         label.setForeground(colorLabel);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
+
         panelLabel.add(atras, BorderLayout.WEST);
-        panelLabel.add(label, BorderLayout.EAST);
+        panelLabel.add(label, BorderLayout.CENTER);
         panelLabel.setOpaque(false);
+        panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
+
         add(panelLabel, BorderLayout.NORTH);
 
         panelIdioma.setLayout(new GridLayout(4,1));
         panelIdioma.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         panelIdioma.setOpaque(false);
+
         botonesIdioma[0] = new JButton("Español");
         botonesIdioma[1] = new JButton("Ingles");
         botonesIdioma[2] = new JButton("Portugués");
         botonesIdioma[3] = new JButton("Gallego");
+
         for (int i = 0; i < botonesIdioma.length; i++) {
             botonesIdioma[i].setFont(new Font("Showcard Gothic", Font.BOLD, 15));
             botonesIdioma[i].setForeground(colorLetraBoton);
@@ -46,20 +54,43 @@ public class MenuIdioma extends Plantilla{
             animacionPulsar(i);
             panelIdioma.add(botonesIdioma[i], CENTER_ALIGNMENT);
         }
+
+        botonActivo = botonesIdioma[0];
+        botonActivo.setEnabled(false);
+
         panelIdioma.setBorder(BorderFactory.createEmptyBorder(0, botonNormal.getIconWidth()+50, 0, botonNormal.getIconWidth()+50));
         add(panelIdioma, BorderLayout.CENTER);
+
         botonesIdioma[0].addActionListener(e -> {
             ControladorGeneral.idioma = "es";
+            ControladorGeneral.instancia.actualizarTexto();
+            botonActivo.setEnabled(true);
+            botonActivo = botonesIdioma[0];
+            botonActivo.setEnabled(false);
+
         });
         botonesIdioma[1].addActionListener(e -> {
             ControladorGeneral.idioma = "en";
+            ControladorGeneral.instancia.actualizarTexto();
+            botonActivo.setEnabled(true);
+            botonActivo = botonesIdioma[1];
+            botonActivo.setEnabled(false);
         });
         botonesIdioma[2].addActionListener(e -> {
             ControladorGeneral.idioma = "pt";
+            ControladorGeneral.instancia.actualizarTexto();
+            botonActivo.setEnabled(true);
+            botonActivo = botonesIdioma[2];
+            botonActivo.setEnabled(false);
         });
         botonesIdioma[3].addActionListener(e -> {
             ControladorGeneral.idioma = "gl";
-            });
+            ControladorGeneral.instancia.actualizarTexto();
+            botonActivo.setEnabled(true);
+            botonActivo = botonesIdioma[3];
+            botonActivo.setEnabled(false);
+        });
+
         atras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
@@ -67,6 +98,16 @@ public class MenuIdioma extends Plantilla{
             }
         });
     }
+
+    public void actualizarTexto()
+    {
+        label.setText(translate("Selector Idioma"));
+        botonesIdioma[0].setText(translate("Español"));
+        botonesIdioma[1].setText(translate("Ingles"));
+        botonesIdioma[2].setText(translate("Portugués"));
+        botonesIdioma[3].setText(translate("Gallego"));
+    }
+
     public void animacionPulsar(int i)
     {
         botonesIdioma[i].addMouseListener(new MouseAdapter() {
@@ -92,7 +133,5 @@ public class MenuIdioma extends Plantilla{
                 botonesIdioma[i].setIcon(botonNormal);
             }
         });
-
     }
-
 }

@@ -21,10 +21,10 @@ public class Menu extends Plantilla{
         panelBoton.setLayout(new GridLayout(4,1));
         panelBoton.setAlignmentX(CENTER_ALIGNMENT);
 
-        botones[0] = new JButton("Jugar");
-        botones[1] = new JButton("Ranking");
-        botones[2] = new JButton("Configuracion");
-        botones[3] = new JButton("Salir");
+        botones[0] = new JButton(translate("Jugar"));
+        botones[1] = new JButton(translate("Ranking"));
+        botones[2] = new JButton(translate("Configuracion"));
+        botones[3] = new JButton(translate("Salir"));
 
 
         add(Box.createHorizontalGlue());
@@ -102,6 +102,13 @@ public class Menu extends Plantilla{
                 botones[i].setIcon(botonNormal);
             }
         });
+    }
+
+    public void actualizarTexto(){
+        botones[0].setText(translate("Jugar"));
+        botones[1].setText(translate("Ranking"));
+        botones[2].setText(translate("Configuracion"));
+        botones[3].setText(translate("Salir"));
     }
 
 }

@@ -6,11 +6,13 @@ import java.awt.event.ActionListener;
 public class Ranking extends Plantilla
 {
     private JPanel panelLabel = new JPanel();
-    private JLabel label = new JLabel("Ranking");
+    private JLabel label = new JLabel();
     private JButton atras = new JButton();
     public Ranking()
     {
         setLayout(new BorderLayout());
+
+        label.setText(translate("Ranking"));
 
         atras.setIcon(botonAtras);
         atras.setContentAreaFilled(false);
@@ -36,5 +38,10 @@ public class Ranking extends Plantilla
             }
         });
 
+    }
+
+    public void actualizarTexto()
+    {
+        label.setText(translate("Ranking"));
     }
 }

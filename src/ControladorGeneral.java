@@ -1,16 +1,27 @@
-import com.sun.java.accessibility.util.Translator;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControladorGeneral extends JFrame {
     static ControladorGeneral instancia = null;
     static String idioma = "es";
     private Clip musicaFondo;
+    static Map<String, String> espanolIngles = new HashMap<>();
+    static Map<String, String> espanolGallego = new HashMap<>();
+    static Map<String, String> espanolPortugues = new HashMap<>();
+    private Menu menuPrincipal;
+    private MenuNiveles menuNiveles;
+    private Ranking ranking = new Ranking();
+    private Configuracion configuracion;
+    private MenuIdioma menuIdioma;
+
+
+
     public ControladorGeneral(){
         instancia = this;
         setTitle("BreakOut");
@@ -30,12 +41,13 @@ public class ControladorGeneral extends JFrame {
 
         startMusica();
 
+        setIdiomas();
 
-        Menu menuPrincipal = new Menu();
-        MenuNiveles menuNiveles = new MenuNiveles();
-        Ranking ranking = new Ranking();
-        Configuracion configuracion = new Configuracion();
-        MenuIdioma menuIdioma = new MenuIdioma();
+        menuPrincipal = new Menu();
+        menuNiveles = new MenuNiveles();
+        ranking = new Ranking();
+        configuracion = new Configuracion();
+        menuIdioma = new MenuIdioma();
 
         add(menuPrincipal, "MenuPrincipal");
         add(menuNiveles, "MenuNiveles");
@@ -45,6 +57,16 @@ public class ControladorGeneral extends JFrame {
 
         setVisible(true);
     }
+
+    public void actualizarTexto()
+    {
+        menuPrincipal.actualizarTexto();
+        menuNiveles.actualizarTexto();
+        ranking.actualizarTexto();
+        configuracion.actualizarTexto();
+        menuIdioma.actualizarTexto();
+    }
+
     public void startMusica(){
         new Thread(new Runnable() {
             public void run() {
@@ -56,8 +78,82 @@ public class ControladorGeneral extends JFrame {
     public void stopMusica(){
         musicaFondo.stop();
     }
-    public static String translate(String key){
-        return Translator.getString(key, idioma);
+
+    private void setIdiomas()
+    {
+        espanolIngles.put("Jugar", "Play");
+        espanolIngles.put("Ranking", "Ranking");
+        espanolIngles.put("Configuracion", "Settings");
+        espanolIngles.put("Salir", "Exit");
+        espanolIngles.put("Niveles", "Levels");
+        espanolIngles.put("Sonido", "Sound");
+        espanolIngles.put("On", "On");
+        espanolIngles.put("Off", "Off");
+        espanolIngles.put("Idioma", "Language");
+        espanolIngles.put("Predeterminado", "Default");
+        espanolIngles.put("Selector Idioma", "Language Selector");
+        espanolIngles.put("Español", "Spanish");
+        espanolIngles.put("Ingles", "English");
+        espanolIngles.put("Portugués", "Portuguese");
+        espanolIngles.put("Gallego", "Galician");
+        espanolIngles.put("Daltonico", "Colorblind");
+
+        espanolPortugues.put("Jugar", "Jogar");
+        espanolPortugues.put("Ranking", "Classificação");
+        espanolPortugues.put("Configuracion", "Contexto");
+        espanolPortugues.put("Salir", "Sair");
+        espanolPortugues.put("Niveles", "Níveis");
+        espanolPortugues.put("Sonido", "Som");
+        espanolPortugues.put("On", "On");
+        espanolPortugues.put("Off", "Off");
+        espanolPortugues.put("Idioma", "Linguagem");
+        espanolPortugues.put("Predeterminado", "Predeterminado");
+        espanolPortugues.put("Selector Idioma", "Seletor de Idioma");
+        espanolPortugues.put("Español", "Espanhol");
+        espanolPortugues.put("Ingles", "Inglês");
+        espanolPortugues.put("Portugués", "Português");
+        espanolPortugues.put("Gallego", "Galego");
+        espanolPortugues.put("Daltonico", "Daltonico");
+
+        espanolGallego.put("Jugar", "Xogar");
+        espanolGallego.put("Ranking", "Clasificacion");
+        espanolGallego.put("Configuracion", "Configuración");
+        espanolGallego.put("Salir", "Saia");
+        espanolGallego.put("Niveles", "Niveis");
+        espanolGallego.put("Sonido", "Son");
+        espanolGallego.put("On", "On");
+        espanolGallego.put("Off", "Off");
+        espanolGallego.put("Idioma", "Lingua");
+        espanolGallego.put("Predeterminado", "Predeterminado");
+        espanolGallego.put("Selector Idioma", "Selector de Lingua");
+        espanolGallego.put("Español", "Español");
+        espanolGallego.put("Ingles", "Ingles");
+        espanolGallego.put("Portugués", "Portugués");
+        espanolGallego.put("Gallego", "Galego");
+        espanolGallego.put("Daltonico", "Daltonico");
     }
 
+    public static String translate(String key){
+        if(idioma.equals("en")){
+            if(espanolIngles.get(key) == null){
+                return key;
+            }
+            return espanolIngles.get(key);
+        }
+        else if(idioma.equals("pt")){
+            if(espanolPortugues.get(key) == null){
+                return key;
+            }
+            return espanolPortugues.get(key);
+        }
+        else if(idioma.equals("gl")){
+            if(espanolGallego.get(key) == null){
+                return key;
+            }
+            return espanolGallego.get(key);
+        }
+        else{
+            return key;
+        }
+    }
 }

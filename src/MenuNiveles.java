@@ -79,4 +79,9 @@ public class MenuNiveles extends Plantilla{
         });
     }
 
+    public void actualizarTexto()
+    {
+        label.setText(translate("Niveles"));
+    }
+
 }
