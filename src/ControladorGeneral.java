@@ -1,3 +1,5 @@
+import resources.Utiles.Serializador;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -9,20 +11,27 @@ import java.util.Map;
 
 public class ControladorGeneral extends JFrame {
     static ControladorGeneral instancia = null;
-    static String idioma = "es";
+    static String idioma;
     private Clip musicaFondo;
     static Map<String, String> espanolIngles = new HashMap<>();
     static Map<String, String> espanolGallego = new HashMap<>();
     static Map<String, String> espanolPortugues = new HashMap<>();
     private Menu menuPrincipal;
     private MenuNiveles menuNiveles;
-    private Ranking ranking = new Ranking();
+    private Ranking ranking;
     private Configuracion configuracion;
     private MenuIdioma menuIdioma;
-
-
+    private DatosSerialiazados datos;
 
     public ControladorGeneral(){
+        datos = Serializador.deserialize("data.dat");
+        if(datos == null)
+        {
+            datos = DatosSerialiazados.getInstancia();
+        }
+
+        idioma = datos.getIdioma();
+
         instancia = this;
         setTitle("BreakOut");
         setIconImage(new ImageIcon("src/resources/Imagenes/logo2.png").getImage());
@@ -39,7 +48,9 @@ public class ControladorGeneral extends JFrame {
             e.printStackTrace();
         }
 
-        startMusica();
+        if (datos.getSonido()) {
+            startMusica();
+        }
 
         setIdiomas();
 
@@ -65,6 +76,11 @@ public class ControladorGeneral extends JFrame {
         ranking.actualizarTexto();
         configuracion.actualizarTexto();
         menuIdioma.actualizarTexto();
+    }
+
+    public void actualizarBotonesIdiomas()
+    {
+        menuIdioma.actualizarBotones();
     }
 
     public void startMusica(){

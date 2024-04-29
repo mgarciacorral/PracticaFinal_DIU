@@ -1,3 +1,5 @@
+import resources.Utiles.Serializador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -72,6 +74,7 @@ public class Menu extends Plantilla{
 
         botones[3].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Serializador.serialize(DatosSerialiazados.getInstancia(), "data.dat");
                 System.exit(0);
             }
         });
