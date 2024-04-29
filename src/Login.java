@@ -24,7 +24,8 @@ public class Login extends Plantilla{
         atras.setIcon(botonAtras);
         atras.setContentAreaFilled(false);
         atras.setBorderPainted(false);
-        atras.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
+        atras.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
+        atras.setVerticalAlignment(SwingConstants.TOP);
         panelAtras.add(atras, BorderLayout.WEST);
         add(panelAtras);
 
