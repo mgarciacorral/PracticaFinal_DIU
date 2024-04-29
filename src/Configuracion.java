@@ -103,11 +103,15 @@ public class Configuracion  extends Plantilla
                 sonido = true;
                 botones[0].setText(translate("Sonido: On"));
                 DatosSerialiazados.getInstancia().setSonido(true);
+                DatosSerialiazados.getInstancia().setModoDaltonico("desactivado");
                 ControladorGeneral.instancia.startMusica();
                 DatosSerialiazados.getInstancia().setIdioma("es");
                 ControladorGeneral.idioma = "es";
                 ControladorGeneral.instancia.actualizarTexto();
                 ControladorGeneral.instancia.actualizarBotones();
+                ControladorGeneral.modoDaltonico = "desactivado";
+                setModoDaltonico();
+                ControladorGeneral.instancia.actualizarVista();
             }
         });
 

@@ -67,7 +67,7 @@ public class Plantilla extends JPanel {
     {
         colorFondo = Color.decode("#475C8D");
         colorLetraBoton = Color.decode("#404040");
-        colorLabel = Color.decode("#FFCC00");
+        colorLabel = Color.WHITE;
         botonNormal = new ImageIcon("src/resources/Imagenes/yellow_button02.png");
         botonPulsado = new ImageIcon("src/resources/Imagenes/yellow_button03.png");
         botonHover = new ImageIcon("src/resources/Imagenes/yellow_button00.png");
@@ -77,11 +77,27 @@ public class Plantilla extends JPanel {
     }
 
     public void setProtanopia() {
-
+        colorFondo = Color.WHITE;
+        colorLetraBoton = Color.decode("#404040");
+        colorLabel = Color.decode("#475C8D");
+        botonNormal = new ImageIcon("src/resources/Imagenes/yellow_button02.png");
+        botonPulsado = new ImageIcon("src/resources/Imagenes/yellow_button03.png");
+        botonHover = new ImageIcon("src/resources/Imagenes/yellow_button00.png");
+        botonAtras = new ImageIcon("src/resources/Imagenes/yellow_sliderLeft.png");
+        botonNivel = new ImageIcon("src/resources/Imagenes/yellow_button09.png");
+        botonNivelPulsado = new ImageIcon("src/resources/Imagenes/yellow_button10.png");
     }
 
     public void setTritanopia() {
-
+        colorFondo = Color.decode("#475C8D");
+        colorLetraBoton = Color.decode("#404040");
+        colorLabel = Color.decode("#FFCC00");
+        botonNormal = new ImageIcon("src/resources/Imagenes/yellow_button02.png");
+        botonPulsado = new ImageIcon("src/resources/Imagenes/yellow_button03.png");
+        botonHover = new ImageIcon("src/resources/Imagenes/yellow_button00.png");
+        botonAtras = new ImageIcon("src/resources/Imagenes/yellow_sliderLeft.png");
+        botonNivel = new ImageIcon("src/resources/Imagenes/yellow_button09.png");
+        botonNivelPulsado = new ImageIcon("src/resources/Imagenes/yellow_button10.png");
     }
 
     protected String translate(String key){
