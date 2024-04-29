@@ -17,6 +17,7 @@ public class Plantilla extends JPanel {
     protected static ImageIcon botonNivelPulsado;
     protected Clip sonidoBoton;
 
+
     public Plantilla(){
         modoNormal();
 
@@ -48,9 +49,6 @@ public class Plantilla extends JPanel {
         //rellenar con cosas de daltonicos
     }
 
-    public void setIdioma()
-    {
-        //rellenar con cosas de idioma
-    }
+
 
 }

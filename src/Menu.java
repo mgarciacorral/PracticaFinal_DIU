@@ -26,6 +26,7 @@ public class Menu extends Plantilla{
         botones[2] = new JButton("Configuracion");
         botones[3] = new JButton("Salir");
 
+
         add(Box.createHorizontalGlue());
         add(logo, BorderLayout.NORTH);
 
