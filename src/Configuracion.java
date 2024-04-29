@@ -12,7 +12,7 @@ public class Configuracion  extends Plantilla
     private JButton atras = new JButton();
     private JPanel panelBotones = new JPanel();
     private JButton[] botones = new JButton[4];
-    private boolean sonido = DatosSerialiazados.getInstancia().getSonido();
+    private boolean sonido;
     public Configuracion()
     {
         setLayout(new BorderLayout());
@@ -30,15 +30,24 @@ public class Configuracion  extends Plantilla
         panelLabel.setLayout(new BorderLayout());
         panelLabel.add(label, BorderLayout.CENTER);
         panelLabel.add(atras, BorderLayout.WEST);
-        panelLabel.setBackground(colorFondo);
+        panelLabel.setOpaque(false);
         panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 70, 0));
 
         add(panelLabel, BorderLayout.NORTH);
         panelBotones.setLayout(new GridLayout(4,1));
         panelBotones.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         panelBotones.setOpaque(false);
-        botones[0] = new JButton(translate("Sonido: On"));
-        botones[1] = new JButton(translate("Daltónico"));
+
+        sonido = DatosSerialiazados.getInstancia().getSonido();
+        if(sonido)
+        {
+            botones[0] = new JButton(translate("Sonido: On"));
+        }
+        else
+        {
+            botones[0] = new JButton(translate("Sonido: Off"));
+        }
+        botones[1] = new JButton(translate("Daltonismo"));
         botones[2] = new JButton(translate("Idioma"));
         botones[3] = new JButton(translate("Predeterminado"));
         for (int i = 0; i < botones.length; i++) {
@@ -54,11 +63,6 @@ public class Configuracion  extends Plantilla
         }
         panelBotones.setBorder(BorderFactory.createEmptyBorder(0, botonNormal.getIconWidth()+50, 0, botonNormal.getIconWidth()+50));
         add(panelBotones, BorderLayout.CENTER);
-
-        if(!sonido)
-        {
-            botones[0].setText("Sonido: Off");
-        }
 
         botones[0].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -80,6 +84,13 @@ public class Configuracion  extends Plantilla
             }
         });
 
+        botones[1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
+                cl.show(ControladorGeneral.instancia.getContentPane(), "MenuDaltonicos");
+            }
+        });
+
         botones[2].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
@@ -96,7 +107,7 @@ public class Configuracion  extends Plantilla
                 DatosSerialiazados.getInstancia().setIdioma("es");
                 ControladorGeneral.idioma = "es";
                 ControladorGeneral.instancia.actualizarTexto();
-                ControladorGeneral.instancia.actualizarBotonesIdiomas();
+                ControladorGeneral.instancia.actualizarBotones();
             }
         });
 
@@ -106,6 +117,17 @@ public class Configuracion  extends Plantilla
                 cl.show(ControladorGeneral.instancia.getContentPane(), "MenuPrincipal");
             }
         });
+    }
+
+    public void actualizarVista()
+    {
+        super.actualizarVista();
+        for (int i = 0; i < botones.length; i++) {
+            botones[i].setForeground(colorLetraBoton);
+            botones[i].setIcon(botonNormal);
+        }
+        label.setForeground(colorLabel);
+        atras.setIcon(botonAtras);
     }
     public void animacionPulsar(int i)
     {
@@ -143,7 +165,7 @@ public class Configuracion  extends Plantilla
         else
         {botones[0].setText(translate("Sonido: Off"));}
 
-        botones[1].setText(translate("Daltónico"));
+        botones[1].setText(translate("Daltonismo"));
         botones[2].setText(translate("Idioma"));
         botones[3].setText(translate("Predeterminado"));
     }

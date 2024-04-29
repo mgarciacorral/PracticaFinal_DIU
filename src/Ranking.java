@@ -27,7 +27,7 @@ public class Ranking extends Plantilla
         panelLabel.setLayout(new BorderLayout());
         panelLabel.add(label, BorderLayout.CENTER);
         panelLabel.add(atras, BorderLayout.WEST);
-        panelLabel.setBackground(colorFondo);
+        panelLabel.setOpaque(false);
         panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 
         add(panelLabel, BorderLayout.NORTH);
@@ -38,6 +38,13 @@ public class Ranking extends Plantilla
             }
         });
 
+    }
+
+    public void actualizarVista()
+    {
+        super.actualizarVista();
+        label.setForeground(colorLabel);
+        atras.setIcon(botonAtras);
     }
 
     public void actualizarTexto()

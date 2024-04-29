@@ -19,8 +19,7 @@ public class Plantilla extends JPanel {
 
 
     public Plantilla(){
-        modoNormal();
-
+        setModoDaltonico();
         setSize(700, 800);
         setBackground(colorFondo);
 
@@ -33,7 +32,25 @@ public class Plantilla extends JPanel {
         }
     }
 
-    public void modoNormal()
+    public void setModoDaltonico()
+    {
+        switch (ControladorGeneral.modoDaltonico) {
+            case "deuteranopia":
+                setDeuteranopia();
+                break;
+            case "protanopia":
+                setProtanopia();
+                break;
+            case "tritanopia":
+                setTritanopia();
+                break;
+            default:
+                setDesactivado();
+                break;
+        }
+    }
+
+    public void setDesactivado()
     {
         colorFondo = Color.decode("#475C8D");
         colorLetraBoton = Color.decode("#404040");
@@ -45,8 +62,26 @@ public class Plantilla extends JPanel {
         botonNivel = new ImageIcon("src/resources/Imagenes/red_button06.png");
         botonNivelPulsado = new ImageIcon("src/resources/Imagenes/red_button07.png");
     }
-    public void daltonicos1(){
-        //rellenar con cosas de daltonicos
+
+    public void setDeuteranopia()
+    {
+        colorFondo = Color.decode("#475C8D");
+        colorLetraBoton = Color.decode("#404040");
+        colorLabel = Color.decode("#FFCC00");
+        botonNormal = new ImageIcon("src/resources/Imagenes/yellow_button02.png");
+        botonPulsado = new ImageIcon("src/resources/Imagenes/yellow_button03.png");
+        botonHover = new ImageIcon("src/resources/Imagenes/yellow_button00.png");
+        botonAtras = new ImageIcon("src/resources/Imagenes/yellow_sliderLeft.png");
+        botonNivel = new ImageIcon("src/resources/Imagenes/yellow_button09.png");
+        botonNivelPulsado = new ImageIcon("src/resources/Imagenes/yellow_button10.png");
+    }
+
+    public void setProtanopia() {
+
+    }
+
+    public void setTritanopia() {
+
     }
 
     protected String translate(String key){
@@ -55,6 +90,11 @@ public class Plantilla extends JPanel {
 
     public void actualizarTexto(){
         //rellenar con cosas de actualizar texto en hijos
+    }
+
+    public void actualizarVista(){
+        //rellenar con cosas de actualizar vista en hijos
+        setBackground(colorFondo);
     }
 
 

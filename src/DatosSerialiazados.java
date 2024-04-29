@@ -4,12 +4,14 @@ public class DatosSerialiazados implements Serializable
 {
     private static DatosSerialiazados instancia;
     private String idioma;
+    private String modoDaltonico;
     private boolean sonido;
 
     private DatosSerialiazados()
     {
         idioma = "es";
         sonido = true;
+        modoDaltonico = "desactivado";
     }
 
     public static DatosSerialiazados getInstancia()
@@ -19,6 +21,11 @@ public class DatosSerialiazados implements Serializable
             instancia = new DatosSerialiazados();
         }
         return instancia;
+    }
+
+    public static void setInstancia(DatosSerialiazados instancia)
+    {
+        DatosSerialiazados.instancia = instancia;
     }
 
     public String getIdioma()
@@ -39,5 +46,15 @@ public class DatosSerialiazados implements Serializable
     public void setSonido(boolean sonido)
     {
         this.sonido = sonido;
+    }
+
+    public String getModoDaltonico()
+    {
+        return modoDaltonico;
+    }
+
+    public void setModoDaltonico(String modoDaltonico)
+    {
+        this.modoDaltonico = modoDaltonico;
     }
 }

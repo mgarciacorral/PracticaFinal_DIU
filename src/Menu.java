@@ -80,6 +80,16 @@ public class Menu extends Plantilla{
         });
     }
 
+    public void actualizarVista()
+    {
+        super.actualizarVista();
+        for(int i=0; i<botones.length; i++){
+
+            botones[i].setForeground(colorLetraBoton);
+            botones[i].setIcon(botonNormal);
+        }
+    }
+
     public void animacionPulsar(int i)
     {
         botones[i].addMouseListener(new MouseAdapter() {
@@ -113,5 +123,4 @@ public class Menu extends Plantilla{
         botones[2].setText(translate("Configuracion"));
         botones[3].setText(translate("Salir"));
     }
-
 }

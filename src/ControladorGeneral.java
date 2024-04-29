@@ -12,6 +12,7 @@ import java.util.Map;
 public class ControladorGeneral extends JFrame {
     static ControladorGeneral instancia = null;
     static String idioma;
+    static String modoDaltonico;
     private Clip musicaFondo;
     static Map<String, String> espanolIngles = new HashMap<>();
     static Map<String, String> espanolGallego = new HashMap<>();
@@ -21,18 +22,27 @@ public class ControladorGeneral extends JFrame {
     private Ranking ranking;
     private Configuracion configuracion;
     private MenuIdioma menuIdioma;
+    private MenuDaltonicos menuDaltonicos;
     private DatosSerialiazados datos;
 
     public ControladorGeneral(){
-        datos = Serializador.deserialize("data.dat");
+        instancia = this;
+        datos.setInstancia(Serializador.deserialize("data.dat"));
         if(datos == null)
         {
             datos = DatosSerialiazados.getInstancia();
         }
 
         idioma = datos.getIdioma();
+        modoDaltonico = datos.getModoDaltonico();
 
-        instancia = this;
+        menuPrincipal = new Menu();
+        menuNiveles = new MenuNiveles();
+        ranking = new Ranking();
+        configuracion = new Configuracion();
+        menuIdioma = new MenuIdioma();
+        menuDaltonicos = new MenuDaltonicos();
+
         setTitle("BreakOut");
         setIconImage(new ImageIcon("src/resources/Imagenes/logo2.png").getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,17 +64,12 @@ public class ControladorGeneral extends JFrame {
 
         setIdiomas();
 
-        menuPrincipal = new Menu();
-        menuNiveles = new MenuNiveles();
-        ranking = new Ranking();
-        configuracion = new Configuracion();
-        menuIdioma = new MenuIdioma();
-
         add(menuPrincipal, "MenuPrincipal");
         add(menuNiveles, "MenuNiveles");
         add(ranking, "Ranking");
         add(configuracion, "Configuracion");
         add(menuIdioma, "MenuIdioma");
+        add(menuDaltonicos, "MenuDaltonicos");
 
         setVisible(true);
     }
@@ -76,11 +81,23 @@ public class ControladorGeneral extends JFrame {
         ranking.actualizarTexto();
         configuracion.actualizarTexto();
         menuIdioma.actualizarTexto();
+        menuDaltonicos.actualizarTexto();
     }
 
-    public void actualizarBotonesIdiomas()
+    public void actualizarVista()
+    {
+        menuPrincipal.actualizarVista();
+        menuNiveles.actualizarVista();
+        ranking.actualizarVista();
+        configuracion.actualizarVista();
+        menuIdioma.actualizarVista();
+        menuDaltonicos.actualizarVista();
+    }
+
+    public void actualizarBotones()
     {
         menuIdioma.actualizarBotones();
+        menuDaltonicos.actualizarBotones();
     }
 
     public void startMusica(){
@@ -113,6 +130,11 @@ public class ControladorGeneral extends JFrame {
         espanolIngles.put("Portugués", "Portuguese");
         espanolIngles.put("Gallego", "Galician");
         espanolIngles.put("Daltonico", "Colorblind");
+        espanolIngles.put("Desactivado", "Disabled");
+        espanolIngles.put("Deuteranopia", "Deuteranopia");
+        espanolIngles.put("Protanopia", "Protanopia");
+        espanolIngles.put("Tritanopia", "Tritanopia");
+        espanolIngles.put("Daltonismo", "Colorblindness");
 
         espanolPortugues.put("Jugar", "Jogar");
         espanolPortugues.put("Ranking", "Classificação");
@@ -130,6 +152,11 @@ public class ControladorGeneral extends JFrame {
         espanolPortugues.put("Portugués", "Português");
         espanolPortugues.put("Gallego", "Galego");
         espanolPortugues.put("Daltonico", "Daltonico");
+        espanolPortugues.put("Desactivado", "Desativado");
+        espanolPortugues.put("Deuteranopia", "Deuteranopia");
+        espanolPortugues.put("Protanopia", "Protanopia");
+        espanolPortugues.put("Tritanopia", "Tritanopia");
+        espanolPortugues.put("Daltonismo", "Daltonismo");
 
         espanolGallego.put("Jugar", "Xogar");
         espanolGallego.put("Ranking", "Clasificacion");
@@ -147,6 +174,11 @@ public class ControladorGeneral extends JFrame {
         espanolGallego.put("Portugués", "Portugués");
         espanolGallego.put("Gallego", "Galego");
         espanolGallego.put("Daltonico", "Daltonico");
+        espanolGallego.put("Desactivado", "Desactivado");
+        espanolGallego.put("Deuteranopia", "Deuteranopia");
+        espanolGallego.put("Protanopia", "Protanopia");
+        espanolGallego.put("Tritanopia", "Tritanopia");
+        espanolGallego.put("Daltonismo", "Daltonismo");
     }
 
     public static String translate(String key){
@@ -170,6 +202,26 @@ public class ControladorGeneral extends JFrame {
         }
         else{
             return key;
+        }
+    }
+
+    public void cambiarModoDaltonico()
+    {
+        if(modoDaltonico.equals("deuteranopia"))
+        {
+            menuDaltonicos.setDeuteranopia();
+        }
+        else if(modoDaltonico.equals("protanopia"))
+        {
+            menuDaltonicos.setProtanopia();
+        }
+        else if(modoDaltonico.equals("tritanopia"))
+        {
+            menuDaltonicos.setTritanopia();
+        }
+        else
+        {
+            menuDaltonicos.setDesactivado();
         }
     }
 }

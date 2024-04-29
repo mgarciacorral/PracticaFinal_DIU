@@ -18,7 +18,7 @@ public class MenuNiveles extends Plantilla{
     public MenuNiveles(){
         botones = new JButton[16];
         panelBoton.setLayout(new GridLayout(4,4));
-        panelBoton.setBackground(colorFondo);
+        panelBoton.setOpaque(false);
         panelBoton.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         setLayout(new BorderLayout());
 
@@ -53,11 +53,22 @@ public class MenuNiveles extends Plantilla{
         label.setForeground(colorLabel);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
-        panelLabel.setBackground(colorFondo);
+        panelLabel.setOpaque(false);
         panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
 
         add(panelBoton, BorderLayout.CENTER);
         add(panelLabel, BorderLayout.NORTH);
+    }
+
+    public void actualizarVista()
+    {
+        super.actualizarVista();
+        label.setForeground(colorLabel);
+        for(int i=0; i<botones.length;i++){
+            botones[i].setForeground(colorLetraBoton);
+            botones[i].setIcon(botonNivel);
+        }
+        atras.setIcon(botonAtras);
     }
 
     public void animacionPulsar(int i)

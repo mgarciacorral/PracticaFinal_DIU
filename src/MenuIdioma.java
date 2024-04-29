@@ -102,6 +102,17 @@ public class MenuIdioma extends Plantilla{
         });
     }
 
+    public void actualizarVista()
+    {
+        super.actualizarVista();
+        for (int i = 0; i < botonesIdioma.length; i++) {
+            botonesIdioma[i].setForeground(colorLetraBoton);
+            botonesIdioma[i].setIcon(botonNormal);
+        }
+        label.setForeground(colorLabel);
+        atras.setIcon(botonAtras);
+    }
+
     public void actualizarTexto()
     {
         label.setText(translate("Selector Idioma"));
@@ -136,6 +147,7 @@ public class MenuIdioma extends Plantilla{
         }
         botonActivo.setEnabled(false);
     }
+
     public void animacionPulsar(int i)
     {
         botonesIdioma[i].addMouseListener(new MouseAdapter() {
