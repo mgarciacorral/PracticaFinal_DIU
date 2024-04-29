@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class DatosSerialiazados implements Serializable
 {
@@ -6,6 +7,7 @@ public class DatosSerialiazados implements Serializable
     private String idioma;
     private String modoDaltonico;
     private boolean sonido;
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
 
     private DatosSerialiazados()
     {

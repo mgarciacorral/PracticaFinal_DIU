@@ -23,6 +23,7 @@ public class ControladorGeneral extends JFrame {
     private Configuracion configuracion;
     private MenuIdioma menuIdioma;
     private MenuDaltonicos menuDaltonicos;
+    private Login login;
     private DatosSerialiazados datos;
 
     public ControladorGeneral(){
@@ -39,6 +40,7 @@ public class ControladorGeneral extends JFrame {
         setIdiomas();
 
         menuPrincipal = new Menu();
+        login = new Login();
         menuNiveles = new MenuNiveles();
         ranking = new Ranking();
         configuracion = new Configuracion();
@@ -71,6 +73,7 @@ public class ControladorGeneral extends JFrame {
         add(configuracion, "Configuracion");
         add(menuIdioma, "MenuIdioma");
         add(menuDaltonicos, "MenuDaltonicos");
+        add(login, "Login");
 
         setVisible(true);
     }
