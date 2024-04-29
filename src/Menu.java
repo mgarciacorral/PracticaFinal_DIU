@@ -24,7 +24,6 @@ public class Menu extends Plantilla{
         panelBoton.setAlignmentX(CENTER_ALIGNMENT);
 
         botones[0] = new JButton(translate("Jugar"));
-        System.out.println(translate("Jugar"));
         botones[1] = new JButton(translate("Ranking"));
         botones[2] = new JButton(translate("Configuracion"));
         botones[3] = new JButton(translate("Salir"));

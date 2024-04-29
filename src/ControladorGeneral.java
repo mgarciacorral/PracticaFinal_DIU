@@ -36,6 +36,8 @@ public class ControladorGeneral extends JFrame {
         idioma = datos.getIdioma();
         modoDaltonico = datos.getModoDaltonico();
 
+        setIdiomas();
+
         menuPrincipal = new Menu();
         menuNiveles = new MenuNiveles();
         ranking = new Ranking();
@@ -61,8 +63,6 @@ public class ControladorGeneral extends JFrame {
         if (datos.getSonido()) {
             startMusica();
         }
-
-        setIdiomas();
 
         add(menuPrincipal, "MenuPrincipal");
         add(menuNiveles, "MenuNiveles");
