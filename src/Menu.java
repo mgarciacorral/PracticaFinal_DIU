@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 
 public class Menu extends Plantilla{
     private JLabel logo = new JLabel();
@@ -54,7 +53,7 @@ public class Menu extends Plantilla{
         botones[0].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
-                cl.show(ControladorGeneral.instancia.getContentPane(), "MenuNiveles");
+                cl.show(ControladorGeneral.instancia.getContentPane(), "Login");
             }
         });
 

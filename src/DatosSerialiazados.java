@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class DatosSerialiazados implements Serializable
 {
@@ -6,9 +7,11 @@ public class DatosSerialiazados implements Serializable
     private String idioma;
     private String modoDaltonico;
     private boolean sonido;
+    private ArrayList<Usuario> usuarios;
 
     private DatosSerialiazados()
     {
+        usuarios = new ArrayList<>();
         idioma = "es";
         sonido = true;
         modoDaltonico = "desactivado";
@@ -56,5 +59,10 @@ public class DatosSerialiazados implements Serializable
     public void setModoDaltonico(String modoDaltonico)
     {
         this.modoDaltonico = modoDaltonico;
+    }
+
+    public ArrayList<Usuario> getUsuarios()
+    {
+        return usuarios;
     }
 }
