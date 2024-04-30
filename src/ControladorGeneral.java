@@ -142,6 +142,7 @@ public class ControladorGeneral extends JFrame {
         espanolIngles.put("Daltonismo", "Colorblindness");
         espanolIngles.put("Usuario", "User");
         espanolIngles.put("Aceptar", "Accept");
+        espanolIngles.put("No hay datos", "No data");
 
         espanolPortugues.put("Jugar", "Jogar");
         espanolPortugues.put("Ranking", "Classificação");
@@ -166,6 +167,7 @@ public class ControladorGeneral extends JFrame {
         espanolPortugues.put("Daltonismo", "Daltonismo");
         espanolPortugues.put("Usuario", "Usuário");
         espanolPortugues.put("Aceptar", "Aceitar");
+        espanolPortugues.put("No hay datos", "Não há dados");
 
         espanolGallego.put("Jugar", "Xogar");
         espanolGallego.put("Ranking", "Clasificacion");
@@ -190,6 +192,7 @@ public class ControladorGeneral extends JFrame {
         espanolGallego.put("Daltonismo", "Daltonismo");
         espanolGallego.put("Usuario", "Usuario");
         espanolGallego.put("Aceptar", "Aceptar");
+        espanolGallego.put("No hay datos", "Non hai datos");
     }
 
     public static String translate(String key){
