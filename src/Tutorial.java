@@ -9,7 +9,6 @@ public class Tutorial extends Plantilla{
     private JButton atras = new JButton();
     private JTabbedPane panelTexto = new JTabbedPane();
     private JTextArea[] textArea = new JTextArea[3];
-    private JButton botonActivo = new JButton();
 
     public Tutorial(){
         setLayout(new BorderLayout());
@@ -34,24 +33,25 @@ public class Tutorial extends Plantilla{
 
         for (int i = 0; i < textArea.length; i++) {
             textArea[i] = new JTextArea();
-            textArea[i].setText("Tutorial");
             textArea[i].setFont(new Font("Showcard Gothic", Font.BOLD, 30));
             textArea[i].setForeground(colorLetraBoton);
             textArea[i].setOpaque(true);
             textArea[i].setEditable(false);
             textArea[i].setLineWrap(false);
             textArea[i].setWrapStyleWord(true);
-            textArea[i].setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
+            textArea[i].setBorder(BorderFactory.createEmptyBorder(50, 50, 0, 50));
             textArea[i].setBackground(colorFondo);
-
         }
+
+        actualizarTexto();
+
         panelTexto.addTab(translate("Como Jugar"), textArea[0]);
         panelTexto.addTab(translate("Bonificadores"), textArea[1]);
         panelTexto.addTab(translate("Creditos"), textArea[2]);
+        panelTexto.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 
-        panelTexto.setBackground(colorFondo); //AQUI HAY QUE PONER OTRO COLOR PARA QUE QUEDE BONITO, ES EL COLOR DE LAS PESTAÑAS NO SELECCIONADAS
+        panelTexto.setBackground(Color.GRAY);
         add(panelTexto, BorderLayout.CENTER);
-
 
         atras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -61,11 +61,19 @@ public class Tutorial extends Plantilla{
         });
     }
 
-
+    public void actualizarVista()
+    {
+        super.actualizarVista();
+        for (int i = 0; i < textArea.length; i++) {
+            textArea[i].setForeground(colorLetraBoton);
+            textArea[i].setBackground(colorFondo);
+        }
+        label.setForeground(colorLabel);
+        atras.setIcon(botonAtras);
+    }
 
     public void actualizarTexto()
     {
-
         label.setText(translate("Tutorial"));
         textArea[0].setText(translate("Como Jugar"));
         textArea[1].setText(translate("Bonificadores"));

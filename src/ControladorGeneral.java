@@ -101,6 +101,7 @@ public class ControladorGeneral extends JFrame {
         menuIdioma.actualizarVista();
         menuDaltonicos.actualizarVista();
         login.actualizarVista();
+        tutorial.actualizarVista();
     }
 
     public void actualizarBotones()
