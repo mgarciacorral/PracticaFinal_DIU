@@ -31,4 +31,8 @@ public class Usuario implements Serializable {
     {
         this.niveles = niveles;
     }
+    public void setPuntuacion(int nivel, int puntuacion)
+    {
+        puntuaciones[nivel] = puntuacion;
+    }
 }
