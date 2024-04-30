@@ -35,7 +35,7 @@ public class Tutorial extends Plantilla{
         for (int i = 0; i < textArea.length; i++) {
             textArea[i] = new JTextArea();
             textArea[i].setText("Tutorial");
-            textArea[i].setFont(new Font("Showcard Gothic", Font.BOLD, 15));
+            textArea[i].setFont(new Font("Showcard Gothic", Font.BOLD, 30));
             textArea[i].setForeground(colorLetraBoton);
             textArea[i].setOpaque(true);
             textArea[i].setEditable(false);
@@ -43,12 +43,14 @@ public class Tutorial extends Plantilla{
             textArea[i].setWrapStyleWord(true);
             textArea[i].setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
             textArea[i].setBackground(colorFondo);
-            panelTexto.addTab("Tutorial "+(i+1), textArea[i]);
+
         }
+        panelTexto.addTab(translate("Como Jugar"), textArea[0]);
+        panelTexto.addTab(translate("Bonificadores"), textArea[1]);
+        panelTexto.addTab(translate("Creditos"), textArea[2]);
+
         panelTexto.setBackground(colorFondo); //AQUI HAY QUE PONER OTRO COLOR PARA QUE QUEDE BONITO, ES EL COLOR DE LAS PESTAÑAS NO SELECCIONADAS
         add(panelTexto, BorderLayout.CENTER);
-
-
 
 
         atras.addActionListener(new ActionListener() {
