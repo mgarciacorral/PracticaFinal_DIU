@@ -87,8 +87,8 @@ public class Login extends Plantilla{
                 if(usuario.getText().length() > 0){
                     Usuario user = new Usuario();
                     user.setNombre(usuario.getText());
-                    DatosSerialiazados.getInstancia().getUsuarios().add(user);
                     ControladorGeneral.instancia.getMenuNiveles().setUser(user);
+                    DatosSerialiazados.getInstancia().getUsuarios().add(user);
                     ControladorGeneral.instancia.getMenuNiveles().activarNiveles();
                     CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
                     cl.show(ControladorGeneral.instancia.getContentPane(), "MenuNiveles");

@@ -106,7 +106,11 @@ public class MenuNiveles extends Plantilla{
     }
 
     public void setUser(Usuario user){
-        this.user = user;
+        if(DatosSerialiazados.getInstancia().getUsuarios().contains(user)) {
+            this.user = DatosSerialiazados.getInstancia().getUsuarios().get(DatosSerialiazados.getInstancia().getUsuarios().indexOf(user));
+        }else{
+            this.user = user;
+        }
     }
 
 }
