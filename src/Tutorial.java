@@ -65,7 +65,11 @@ public class Tutorial extends Plantilla{
 
     public void actualizarTexto()
     {
+
         label.setText(translate("Tutorial"));
+        textArea[0].setText(translate("Como Jugar"));
+        textArea[1].setText(translate("Bonificadores"));
+        textArea[2].setText(translate("Creditos"));
     }
 
 }

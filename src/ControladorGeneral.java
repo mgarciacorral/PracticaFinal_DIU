@@ -89,6 +89,7 @@ public class ControladorGeneral extends JFrame {
         menuIdioma.actualizarTexto();
         menuDaltonicos.actualizarTexto();
         login.actualizarTexto();
+        tutorial.actualizarTexto();
     }
 
     public void actualizarVista()
@@ -146,6 +147,10 @@ public class ControladorGeneral extends JFrame {
         espanolIngles.put("Usuario", "User");
         espanolIngles.put("Aceptar", "Accept");
         espanolIngles.put("No hay datos", "No data");
+        espanolIngles.put("Tutorial", "Tutorial");
+        espanolIngles.put("Como Jugar", "How to Play");
+        espanolIngles.put("Bonificadores", "Boosters");
+        espanolIngles.put("Creditos", "Credits");
 
         espanolPortugues.put("Jugar", "Jogar");
         espanolPortugues.put("Ranking", "Classificação");
@@ -171,6 +176,10 @@ public class ControladorGeneral extends JFrame {
         espanolPortugues.put("Usuario", "Usuário");
         espanolPortugues.put("Aceptar", "Aceitar");
         espanolPortugues.put("No hay datos", "Não há dados");
+        espanolPortugues.put("Tutorial", "Tutorial");
+        espanolPortugues.put("Como Jugar", "Como Jogar");
+        espanolPortugues.put("Bonificadores", "Bônus");
+        espanolPortugues.put("Creditos", "Créditos");
 
         espanolGallego.put("Jugar", "Xogar");
         espanolGallego.put("Ranking", "Clasificacion");
@@ -196,6 +205,10 @@ public class ControladorGeneral extends JFrame {
         espanolGallego.put("Usuario", "Usuario");
         espanolGallego.put("Aceptar", "Aceptar");
         espanolGallego.put("No hay datos", "Non hai datos");
+        espanolGallego.put("Tutorial", "Tutorial");
+        espanolGallego.put("Como Jugar", "Como Xogar");
+        espanolGallego.put("Bonificadores", "Bonificadores");
+        espanolGallego.put("Creditos", "Créditos");
     }
 
     public static String translate(String key){
