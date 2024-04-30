@@ -25,6 +25,7 @@ public class ControladorGeneral extends JFrame {
     private MenuDaltonicos menuDaltonicos;
     private Login login;
     private DatosSerialiazados datos;
+    private Tutorial tutorial;
 
     public ControladorGeneral(){
         instancia = this;
@@ -46,6 +47,7 @@ public class ControladorGeneral extends JFrame {
         configuracion = new Configuracion();
         menuIdioma = new MenuIdioma();
         menuDaltonicos = new MenuDaltonicos();
+        tutorial = new Tutorial();
 
         setTitle("BreakOut");
         setIconImage(new ImageIcon("src/resources/Imagenes/logo2.png").getImage());
@@ -73,6 +75,7 @@ public class ControladorGeneral extends JFrame {
         add(menuIdioma, "MenuIdioma");
         add(menuDaltonicos, "MenuDaltonicos");
         add(login, "Login");
+        add(tutorial, "Tutorial");
 
         setVisible(true);
     }
