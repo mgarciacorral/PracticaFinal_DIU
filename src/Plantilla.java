@@ -9,6 +9,7 @@ public class Plantilla extends JPanel {
     protected static Color colorFondo;
     protected static Color colorLetraBoton;
     protected static Color colorLabel;
+    protected static Color colorTexto;
     protected static ImageIcon botonNormal;
     protected static ImageIcon botonPulsado;
     protected static ImageIcon botonHover;
@@ -55,6 +56,7 @@ public class Plantilla extends JPanel {
         colorFondo = Color.decode("#475C8D");
         colorLetraBoton = Color.decode("#404040");
         colorLabel = Color.decode("#74CD4F");
+        colorTexto = Color.WHITE;
         botonNormal = new ImageIcon("src/resources/Imagenes/red_button01.png");
         botonPulsado = new ImageIcon("src/resources/Imagenes/red_button02.png");
         botonHover = new ImageIcon("src/resources/Imagenes/red_button11.png");
@@ -68,6 +70,7 @@ public class Plantilla extends JPanel {
         colorFondo = Color.decode("#475C8D");
         colorLetraBoton = Color.decode("#404040");
         colorLabel = Color.WHITE;
+        colorTexto = Color.WHITE;
         botonNormal = new ImageIcon("src/resources/Imagenes/yellow_button02.png");
         botonPulsado = new ImageIcon("src/resources/Imagenes/yellow_button03.png");
         botonHover = new ImageIcon("src/resources/Imagenes/yellow_button00.png");
@@ -80,6 +83,7 @@ public class Plantilla extends JPanel {
         colorFondo = Color.WHITE;
         colorLetraBoton = Color.decode("#404040");
         colorLabel = Color.decode("#475C8D");
+        colorTexto = Color.GRAY;
         botonNormal = new ImageIcon("src/resources/Imagenes/yellow_button02.png");
         botonPulsado = new ImageIcon("src/resources/Imagenes/yellow_button03.png");
         botonHover = new ImageIcon("src/resources/Imagenes/yellow_button00.png");

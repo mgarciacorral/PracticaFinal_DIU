@@ -50,7 +50,7 @@ public class Configuracion  extends Plantilla
         botones[1] = new JButton(translate("Daltonismo"));
         botones[2] = new JButton(translate("Idioma"));
         botones[3] = new JButton(translate("Predeterminado"));
-        botones[4] = new JButton(translate("Tutorial"));
+        botones[4] = new JButton(translate("Ayuda"));
         for (int i = 0; i < botones.length; i++) {
             botones[i].setFont(new Font("Showcard Gothic", Font.BOLD, 15));
             botones[i].setForeground(colorLetraBoton);
@@ -180,5 +180,6 @@ public class Configuracion  extends Plantilla
         botones[1].setText(translate("Daltonismo"));
         botones[2].setText(translate("Idioma"));
         botones[3].setText(translate("Predeterminado"));
+        botones[4].setText(translate("Ayuda"));
     }
 }
