@@ -130,8 +130,7 @@ public class Ranking extends Plantilla
                 JLabel label = new JLabel();
                 label.setText((i + 1) + ". " + user.getNombre() + " - " + user.getPuntuacion(nivel));
                 label.setFont(new Font("Showcard Gothic", Font.BOLD, 30));
-                label.setForeground(colorLetraBoton);
-                label.setBackground(Color.WHITE);
+                label.setForeground(colorTexto);
                 label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
                 label.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panelRanking.add(label);
@@ -142,8 +141,7 @@ public class Ranking extends Plantilla
             JLabel label = new JLabel();
             label.setText(translate("No hay datos"));
             label.setFont(new Font("Showcard Gothic", Font.BOLD, 30));
-            label.setForeground(colorLetraBoton);
-            label.setBackground(Color.WHITE);
+            label.setForeground(colorTexto);
             label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             panelRanking.add(label);
