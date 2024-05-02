@@ -11,7 +11,7 @@ public class Configuracion  extends Plantilla
     private JLabel label = new JLabel("Configuracion");
     private JButton atras = new JButton();
     private JPanel panelBotones = new JPanel();
-    private JButton[] botones = new JButton[4];
+    private JButton[] botones = new JButton[5];
     private boolean sonido;
     public Configuracion()
     {
@@ -34,7 +34,7 @@ public class Configuracion  extends Plantilla
         panelLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 70, 0));
 
         add(panelLabel, BorderLayout.NORTH);
-        panelBotones.setLayout(new GridLayout(4,1));
+        panelBotones.setLayout(new GridLayout(5,1));
         panelBotones.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         panelBotones.setOpaque(false);
 
@@ -50,6 +50,7 @@ public class Configuracion  extends Plantilla
         botones[1] = new JButton(translate("Daltonismo"));
         botones[2] = new JButton(translate("Idioma"));
         botones[3] = new JButton(translate("Predeterminado"));
+        botones[4] = new JButton(translate("Ayuda"));
         for (int i = 0; i < botones.length; i++) {
             botones[i].setFont(new Font("Showcard Gothic", Font.BOLD, 15));
             botones[i].setForeground(colorLetraBoton);
@@ -115,6 +116,13 @@ public class Configuracion  extends Plantilla
             }
         });
 
+        botones[4].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
+                cl.show(ControladorGeneral.instancia.getContentPane(), "Tutorial");
+            }
+        });
+
         atras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
@@ -172,5 +180,6 @@ public class Configuracion  extends Plantilla
         botones[1].setText(translate("Daltonismo"));
         botones[2].setText(translate("Idioma"));
         botones[3].setText(translate("Predeterminado"));
+        botones[4].setText(translate("Ayuda"));
     }
 }
