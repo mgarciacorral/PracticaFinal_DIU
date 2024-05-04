@@ -14,7 +14,7 @@ public class DatosSerialiazados implements Serializable
         usuarios = new ArrayList<>();
         idioma = "es";
         sonido = true;
-        modoDaltonico = "desactivado";
+        modoDaltonico = "";
     }
 
     public static DatosSerialiazados getInstancia()
@@ -26,9 +26,9 @@ public class DatosSerialiazados implements Serializable
         return instancia;
     }
 
-    public static void setInstancia(DatosSerialiazados instancia)
+    public static void setInstancia(DatosSerialiazados inst)
     {
-        DatosSerialiazados.instancia = instancia;
+        instancia = inst;
     }
 
     public String getIdioma()

@@ -5,35 +5,31 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 public class Ranking extends Plantilla
 {
     private JPanel panelLabel = new JPanel();
-    private JLabel label = new JLabel();
-    private JButton atras = new JButton();
+    private VistaLabel label;
+    private VistaBotonAtras atras;
     private JPanel panelRanking = new JPanel();
     private JPanel niveles = new JPanel();
-    private JButton[] botones = new JButton[16];
+    private VistaBotonNivel[] botones = new VistaBotonNivel[16];
     private JPanel contenedor = new JPanel();
     private ArrayList<Usuario> users;
     private boolean mostrandoRanking = false;
 
-    public Ranking()
+    public Ranking(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr)
     {
+        super(mDalt, mIdiomas);
         setLayout(new BorderLayout());
 
         actualizarInfo();
 
-        label.setText(translate("Ranking"));
+        atras = new VistaBotonAtras(mDalt);
 
-        atras.setIcon(botonAtras);
-        atras.setContentAreaFilled(false);
-        atras.setBorderPainted(false);
-        atras.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
-
-        label.setFont(new Font("Showcard Gothic", Font.BOLD, 60));
-        label.setForeground(colorLabel);
-        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label = new VistaLabel(mDalt, mIdiomas, "Ranking");
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 45));
 
         panelLabel.setLayout(new BorderLayout());
@@ -51,16 +47,8 @@ public class Ranking extends Plantilla
         niveles.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         for(int i=0; i<botones.length;i++){
-            botones[i] = new JButton();
-            botones[i].setText(String.valueOf(i+1));
-            botones[i].setFont(new Font("Showcard Gothic", Font.BOLD, 30));
-            botones[i].setForeground(colorLetraBoton);
-            botones[i].setHorizontalTextPosition(SwingConstants.CENTER);
-            botones[i].setContentAreaFilled(false);
-            botones[i].setBorderPainted(false);
-            botones[i].setIcon(botonNivel);
+            botones[i] = new VistaBotonNivel(mDalt, String.valueOf(i+1));
             niveles.add(botones[i]);
-            animacionPulsar(i);
             botones[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     int nivel = Integer.parseInt(((JButton) e.getSource()).getText()) - 1;
@@ -82,8 +70,7 @@ public class Ranking extends Plantilla
         atras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(!mostrandoRanking){
-                    CardLayout cl = (CardLayout) ControladorGeneral.instancia.getContentPane().getLayout();
-                    cl.show(ControladorGeneral.instancia.getContentPane(), "MenuPrincipal");
+                    mContr.setVistaActual("MenuPrincipal");
                 }
                 else
                 {
@@ -94,22 +81,6 @@ public class Ranking extends Plantilla
             }
         });
 
-    }
-
-    public void actualizarVista()
-    {
-        super.actualizarVista();
-        label.setForeground(colorLabel);
-        atras.setIcon(botonAtras);
-        for(int i=0; i<botones.length;i++){
-            botones[i].setForeground(colorLetraBoton);
-            botones[i].setIcon(botonNivel);
-        }
-    }
-
-    public void actualizarTexto()
-    {
-        label.setText(translate("Ranking"));
     }
 
     public void actualizarInfo()
@@ -123,14 +94,12 @@ public class Ranking extends Plantilla
         int max = users.size() > 10 ? 10 : users.size();
         if (max > 0)
         {
+            users.sort((u1, u2) -> u2.getPuntuacion(nivel) - u1.getPuntuacion(nivel));
             for (int i = 0; i < max; i++)
             {
-                users.sort((u1, u2) -> u2.getPuntuacion(nivel) - u1.getPuntuacion(nivel));
-                Usuario user = users.get(i);
-                JLabel label = new JLabel();
-                label.setText((i + 1) + ". " + user.getNombre() + " - " + user.getPuntuacion(nivel));
+                VistaLabel label = new VistaLabel(mDalt, mIdiomas, (i + 1) + ". " + users.get(i).getNombre() + " - " + users.get(i).getPuntuacion(nivel));
                 label.setFont(new Font("Showcard Gothic", Font.BOLD, 30));
-                label.setForeground(colorTexto);
+                label.setForeground(mDalt.getColorLetraBoton());
                 label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
                 label.setAlignmentX(Component.CENTER_ALIGNMENT);
                 panelRanking.add(label);
@@ -138,32 +107,10 @@ public class Ranking extends Plantilla
         }
         else
         {
-            JLabel label = new JLabel();
-            label.setText(translate("No hay datos"));
-            label.setFont(new Font("Showcard Gothic", Font.BOLD, 30));
-            label.setForeground(colorTexto);
-            label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+            VistaLabel label = new VistaLabel(mDalt, mIdiomas, mIdiomas.translate("No hay datos"));
+            label.setForeground(mDalt.getColorLetraBoton());
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             panelRanking.add(label);
         }
-    }
-
-    public void animacionPulsar(int i)
-    {
-        botones[i].addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                botones[i].setIcon(botonNivelPulsado);
-                new Thread(new Runnable() {
-                    public void run() {
-                        sonidoBoton.setFramePosition(0);
-                        sonidoBoton.start();
-                    }
-                }).start();
-            }
-
-            public void mouseReleased(MouseEvent e) {
-                botones[i].setIcon(botonNivel);
-            }
-        });
     }
 }

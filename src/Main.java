@@ -7,8 +7,5 @@ public class Main {
                 new ControladorGeneral();
             }
         });
-
-       /* Controlador controlador = new Controlador();
-        controlador.configControlador();*/
     }
 }
