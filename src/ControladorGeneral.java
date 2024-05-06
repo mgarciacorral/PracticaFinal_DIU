@@ -62,7 +62,7 @@ public class ControladorGeneral extends JFrame implements Observer {
         add(menuDaltonicos, "MenuDaltonicos");
         add(login, "Login");
         add(tutorial, "Tutorial");
-        add(nivel, "Nivel");
+
 
         setVisible(true);
     }

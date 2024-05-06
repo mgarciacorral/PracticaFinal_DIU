@@ -27,7 +27,13 @@ public class ControladorNivel extends JFrame {
 
         modelo.addObserver(vista0);
 
+        setTitle("Break out");
         setSize(700, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
+        setBackground(java.awt.Color.BLACK);
 
         setImages();
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(new byte[0]).getImage(), new Point(), "invisibleCursor"));
@@ -35,6 +41,7 @@ public class ControladorNivel extends JFrame {
         canvas = new DrawCanvas();
         canvas.setOpaque(false);
         this.add(canvas);
+        pack();
 
         modelo.setBarH(bar.getIconHeight());
         modelo.setBarW(bar.getIconWidth());
@@ -70,7 +77,7 @@ public class ControladorNivel extends JFrame {
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
                     if(parao)
                     {
-                        mContr.setVistaActual("MenuPrincipal");
+                        System.exit(0);
                     }else
                     {
                         modelo.getJuego().stop();
@@ -145,7 +152,7 @@ public class ControladorNivel extends JFrame {
 
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.setColor(mDalt.getColorFondo());
+            //g.setColor(mDalt.getColorFondo());
             g.fillRect(0, 0, 700, 50);
 
             for(int i = 0; i < modelo.getBalls().size(); i++){
@@ -169,7 +176,7 @@ public class ControladorNivel extends JFrame {
             int x = (getWidth() - metrics.stringWidth(modelo.getTexto())) / 2;
             int y = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
             g.drawString(modelo.getTexto(), x, y);
-            g.setColor(mDalt.getColorTexto());
+            //g.setColor(mDalt.getColorTexto());
             g.drawString("Puntos: " + puntos, 500, 30);
         }
     }
