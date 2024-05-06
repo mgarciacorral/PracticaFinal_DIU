@@ -48,7 +48,7 @@ public class ControladorGeneral extends JFrame implements Observer {
         menuDaltonicos = new MenuDaltonicos(mDalt, mIdioma, mContr);
         tutorial = new Tutorial(mDalt, mIdioma, mContr);
         nivel = new ControladorNivel(mDalt, mIdioma, mContr);
-
+//f
         mContr.setMn(menuNiveles);
         mContr.setNivel(nivel);
         mDalt.setModoDaltonico(datos.getModoDaltonico());
