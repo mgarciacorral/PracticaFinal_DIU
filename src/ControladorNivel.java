@@ -72,7 +72,7 @@ public class ControladorNivel extends JFrame {
                         modelo.startGame();
                     }
 
-                    if (!parao)
+                    if (modelo.getGameStarted() && modelo.getVidas() == 0)
                     {
                         modelo.init();
                     }
