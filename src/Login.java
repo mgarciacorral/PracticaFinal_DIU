@@ -72,12 +72,25 @@ public class Login extends Plantilla{
         submit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(usuario.getText().length() > 0){
-                    Usuario user = new Usuario();
-                    user.setNombre(usuario.getText());
-                    mContr.getMenuNiveles().setUser(user);
-                    DatosSerialiazados.getInstancia().getUsuarios().add(user);
-                    mContr.getMenuNiveles().activarNiveles();
-                    mContr.setVistaActual("MenuNiveles");
+                    boolean encontrado = false;
+                    for (Usuario user : DatosSerialiazados.getInstancia().getUsuarios()) {
+                        if(user.getNombre().equals(usuario.getText())){
+                            encontrado = true;
+                            mContr.getMenuNiveles().setUser(user);
+                            mContr.getMenuNiveles().activarNiveles();
+                            mContr.setVistaActual("MenuNiveles");
+                        }
+                    }
+
+                    if(!encontrado)
+                    {
+                        Usuario user = new Usuario();
+                        user.setNombre(usuario.getText());
+                        mContr.getMenuNiveles().setUser(user);
+                        DatosSerialiazados.getInstancia().getUsuarios().add(user);
+                        mContr.getMenuNiveles().activarNiveles();
+                        mContr.setVistaActual("MenuNiveles");
+                    }
                 }
             }
         });

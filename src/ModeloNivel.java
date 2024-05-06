@@ -18,10 +18,14 @@ public class ModeloNivel extends Observable {
     private boolean gameStarted = false;
     private Rectangle barRect = new Rectangle(250, 600, 100, 20);
     private int vidas = 3;
+    private int numNv;
     private boolean gameOver = false;
     private Nivel nivel;
+    private Usuario user;
 
-    public ModeloNivel(Nivel nivel){
+    public ModeloNivel(Nivel nivel, Usuario user, int numNv){
+        this.numNv = numNv;
+        this.user = user;
         this.nivel = nivel;
     }
 
@@ -39,10 +43,6 @@ public class ModeloNivel extends Observable {
 
     public String getTexto(){
         return texto;
-    }
-
-    public Timer getJuego(){
-        return juego;
     }
 
     public void setBarX(int barX){
@@ -94,6 +94,15 @@ public class ModeloNivel extends Observable {
         notifyObservers();
     }
 
+    public int numLadrillos(){
+        int num = 0;
+        for (int i = 0; i < nivel.ladrillos.size(); i++){
+            if(nivel.ladrillos.get(i).refuerzo != -1){
+                num++;
+            }
+        }
+        return num;
+    }
     public void crearPelota(){
         balls.add(new Ball());
     }
@@ -134,7 +143,8 @@ public class ModeloNivel extends Observable {
                             juego.stop();
                             vidas--;
                             if(vidas == 0){
-                                texto = "No te quedan vidas <Enter> para reiniciar";
+                                texto = "No te quedan vidas <Enter> para volver al menu";
+                                gameStarted = false;
                                 gameOver = true;
                             }else{
                                 texto = "Pulsa <Enter> para continuar";
@@ -170,26 +180,44 @@ public class ModeloNivel extends Observable {
                     for(int j = 0; j < nivel.ladrillos.size(); j++){
                         if(balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectXUp) || balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectXDown)){
                             balls.get(i).speedY = Math.abs(balls.get(i).speedY) + 1;
-                            if(nivel.ladrillos.get(j).refuerzo == 1){
-                                nivel.ladrillos.get(j).refuerzo = 0;
-                            }else{
-                                nivel.eliminarLadrillo(j);
-                                puntos += 10;
-                            }
+                            comprobarChoque(i, j);
                         }
                         else if(balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYLeft) || balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYRight)){
                             balls.get(i).speedX = -balls.get(i).speedX;
-                            if(nivel.ladrillos.get(j).refuerzo == 1){
-                                nivel.ladrillos.get(j).refuerzo = 0;
-                            }else{
-                                nivel.eliminarLadrillo(j);
-                            }
+                            comprobarChoque(i, j);
                         }
                     }
                 }
             }
         });
-
         juego.start();
+    }
+
+    public void comprobarChoque(int i, int j)
+    {
+        if(nivel.ladrillos.get(i).refuerzo != -1)
+        {
+            puntos += 10;
+            if(nivel.restarVidaLadrillo(j)){
+                if(numLadrillos() == 0){
+                    texto = "¡¡Has ganado!! <Enter> para volver al menu";
+                    juego.stop();
+                    if(user.getNiveles() == numNv){
+                        user.setNiveles(user.getNiveles() + 1);
+                    }
+                    if(puntos > user.getPuntuacion(numNv-1)){
+                        user.setPuntuacion(numNv-1, puntos);
+                    }
+                    setChanged();
+                    notifyObservers();
+                    gameStarted = false;
+                    gameOver = true;
+                }
+            }
+        }
+    }
+
+    public boolean getGameOver(){
+        return gameOver;
     }
 }

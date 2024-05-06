@@ -1,15 +1,19 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 public class ControladorNivel extends JFrame {
-
+    private Clip musicaFondo;
     private VistaNivel vista0;
     private ModeloNivel modelo;
     private Nivel nivel;
-    private ImageIcon ball, bar, ladrillo;
+    private ImageIcon ball, bar;
     private ArrayList<ImageIcon> vidas = new ArrayList<ImageIcon>();
     private DrawCanvas canvas;
     private boolean parao = false;
@@ -17,17 +21,21 @@ public class ControladorNivel extends JFrame {
     private ModeloDaltonicos mDalt;
     private ModeloIdiomas mIdioma;
     private ModeloControladorGeneral mContr;
+    private Usuario user;
 
-    public ControladorNivel(String nivel, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
+    public ControladorNivel(int nv, Usuario user, String nivel, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
+        this.user = user;
         this.mDalt = mDalt;
         this.mIdioma = mIdioma;
         this.mContr = mContr;
-        confControladorNivel(nivel);
+        setMusicaFondo();
+        controlarMusica();
+        confControladorNivel(nivel, nv);
     }
 
-    public void confControladorNivel(String bloques){
-        nivel = new Nivel(bloques);
-        modelo  = new ModeloNivel(nivel);
+    public void confControladorNivel(String bloques, int numNv){
+        nivel = new Nivel(bloques, mDalt);
+        modelo  = new ModeloNivel(nivel, user, numNv);
         vista0 = new VistaNivel(this, modelo);
 
         modelo.addObserver(vista0);
@@ -75,6 +83,18 @@ public class ControladorNivel extends JFrame {
                         parao = false;
                     }
 
+                    if(modelo.getGameOver())
+                    {
+                        mContr.setVisible(true);
+                        mContr.getMenuNiveles().activarNiveles();
+                        if(DatosSerialiazados.getInstancia().getSonido())
+                        {
+                            mContr.musicaOn();
+                        }
+                        musicaFondo.stop();
+                        dispose();
+                    }
+
                     if(!modelo.getGameStarted()){
                         modelo.startGame();
                     }
@@ -85,6 +105,12 @@ public class ControladorNivel extends JFrame {
                         if(parao)
                         {
                             mContr.setVisible(true);
+                            mContr.getMenuNiveles().activarNiveles();
+                            if(DatosSerialiazados.getInstancia().getSonido())
+                            {
+                                mContr.musicaOn();
+                            }
+                            musicaFondo.stop();
                             dispose();
                         }else
                         {
@@ -94,6 +120,12 @@ public class ControladorNivel extends JFrame {
                     }else
                     {
                         mContr.setVisible(true);
+                        mContr.getMenuNiveles().activarNiveles();
+                        if(DatosSerialiazados.getInstancia().getSonido())
+                        {
+                            mContr.musicaOn();
+                        }
+                        musicaFondo.stop();
                         dispose();
                     }
                 }
@@ -107,7 +139,6 @@ public class ControladorNivel extends JFrame {
                     modelo.startGame();
                 }
             }
-
         });
 
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -122,14 +153,12 @@ public class ControladorNivel extends JFrame {
     }
 
     public void setImages(){
-        ball = new ImageIcon("src/ball.png");
-        bar = new ImageIcon(getClass().getResource("/resources/Imagenes/grey_button03.png"));
-        ball = new ImageIcon(getClass().getResource("/resources/Imagenes/grey_circle.png"));
-        ladrillo = new ImageIcon(getClass().getResource("/resources/Imagenes/blue_button03.png"));
+        bar = mDalt.getBarra();
+        ball = mDalt.getBola();
 
-        vidas.add(new ImageIcon(getClass().getResource("/resources/Imagenes/corazon.png")));
-        vidas.add(new ImageIcon(getClass().getResource("/resources/Imagenes/corazon.png")));
-        vidas.add(new ImageIcon(getClass().getResource("/resources/Imagenes/corazon.png")));
+        vidas.add(mDalt.getCorazon());
+        vidas.add(mDalt.getCorazon());
+        vidas.add(mDalt.getCorazon());
 
         Image scaleImage = vidas.get(0).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         vidas.set(0, new ImageIcon(scaleImage));
@@ -139,18 +168,10 @@ public class ControladorNivel extends JFrame {
 
         scaleImage = vidas.get(2).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         vidas.set(2, new ImageIcon(scaleImage));
-
-        scaleImage = ladrillo.getImage().getScaledInstance(117, 28, Image.SCALE_DEFAULT);
-        ladrillo = new ImageIcon(scaleImage);
-
     }
 
     public void setPuntos(int puntos){
         this.puntos = puntos;
-    }
-
-    public int getPuntos(){
-        return puntos;
     }
 
 
@@ -172,7 +193,7 @@ public class ControladorNivel extends JFrame {
             bar.paintIcon(this, g, modelo.getBarX(), 600);
 
             for(int i = 0; i < nivel.ladrillos.size(); i++){
-                ladrillo.paintIcon(this, g, nivel.ladrillos.get(i).ladrilloX, nivel.ladrillos.get(i).ladrilloY);
+                nivel.ladrillos.get(i).getLadrilloImg().paintIcon(this, g, nivel.ladrillos.get(i).ladrilloX, nivel.ladrillos.get(i).ladrilloY);
             }
 
 
@@ -191,7 +212,33 @@ public class ControladorNivel extends JFrame {
         }
     }
 
+    public void setMusicaFondo()
+    {
+        try
+        {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/resources/Sonidos/musicaEpica.wav").getAbsoluteFile());
+            musicaFondo = AudioSystem.getClip();
+            musicaFondo.open(audioInputStream);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-
-
+    public void controlarMusica()
+    {
+        if(DatosSerialiazados.getInstancia().getSonido())
+        {
+            new Thread(new Runnable() {
+                public void run() {
+                    musicaFondo.loop(Clip.LOOP_CONTINUOUSLY);
+                    musicaFondo.start();
+                }
+            }).start();
+        }
+        else
+        {
+            musicaFondo.stop();
+        }
+    }
 }

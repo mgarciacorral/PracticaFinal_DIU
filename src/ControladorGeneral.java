@@ -78,5 +78,4 @@ public class ControladorGeneral extends JFrame implements Observer {
             setVisible(false);
         }
     }
-
 }

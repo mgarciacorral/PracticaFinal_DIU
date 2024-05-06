@@ -70,17 +70,26 @@ public class ModeloControladorGeneral extends Observable
     {
         if(DatosSerialiazados.getInstancia().getSonido())
         {
-            new Thread(new Runnable() {
-                public void run() {
-                    musicaFondo.loop(Clip.LOOP_CONTINUOUSLY);
-                    musicaFondo.start();
-                }
-            }).start();
+            musicaOn();
         }
         else
         {
-            musicaFondo.stop();
+            musicaOff();
         }
+    }
+
+    public void musicaOn()
+    {
+        new Thread(new Runnable() {
+            public void run() {
+                musicaFondo.loop(Clip.LOOP_CONTINUOUSLY);
+                musicaFondo.start();
+            }
+        }).start();
+    }
+
+    public void musicaOff() {
+        musicaFondo.stop();
     }
 
     public void setMn(MenuNiveles mn)

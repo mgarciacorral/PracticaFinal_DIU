@@ -18,7 +18,7 @@ public class MenuNiveles extends Plantilla {
     private JPanel panelLabel = new JPanel();
     private VistaLabel label;
     private Usuario user;
-    private String[] confNivel = {"11111111111111111111111000000000000011111111111", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
+    private String[] confNivel = {"1", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
 
     public MenuNiveles(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr){
         super(mDalt, mIdiomas);
@@ -34,8 +34,12 @@ public class MenuNiveles extends Plantilla {
             panelBoton.add(botones[i]);
             botones[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new ControladorNivel(confNivel[Integer.parseInt(((VistaBotonNivel)e.getSource()).getText()) - 1], mDalt, mIdiomas, mContr);
+                    new ControladorNivel(Integer.parseInt(((VistaBotonNivel)e.getSource()).getText()), user, confNivel[Integer.parseInt(((VistaBotonNivel)e.getSource()).getText()) - 1], mDalt, mIdiomas, mContr);
                     mContr.setVisible(false);
+                    if(DatosSerialiazados.getInstancia().getSonido())
+                    {
+                        mContr.musicaOff();
+                    }
                 }
             });
         }
