@@ -7,34 +7,72 @@ import java.util.Observable;
 
 public class ModeloNivel extends Observable {
 
-    public int barX = 250;
-    public int barW, barH;
+    private int barX = 250;
+    private int barW, barH;
+    private ArrayList <Ball> balls = new ArrayList<>();
+    private Timer juego;
+    private int puntos = 0;
+    private int initialSpeedX = 4;
+    private int initialSpeedY = -4;
+    private String texto = "Pulsa <Enter> para comenzar";
+    private boolean gameStarted = false;
+    private Rectangle barRect = new Rectangle(250, 600, 100, 20);
+    private int vidas = 3;
+    private boolean gameOver = false;
+    private Nivel nivel;
 
-    ArrayList <Ball> balls = new ArrayList<>();
-
-    public Timer juego;
-    public int initialSpeedX = 4;
-    public int initialSpeedY = -4;
-
-
-    String texto = "Pulsa <Enter> para comenzar";
-    public boolean gameStarted = false;
-
-    public Rectangle barRect = new Rectangle(250, 600, 100, 20);
-
-    public int vidas = 3;
-    public boolean gameOver = false;
-
-    public Nivel nivel;
     public ModeloNivel(Nivel nivel){
         this.nivel = nivel;
     }
 
+    public int getVidas(){
+        return vidas;
+    }
+
+    public int getPuntos(){
+        return puntos;
+    }
+
+    public boolean getGameStarted(){
+        return gameStarted;
+    }
+
+    public String getTexto(){
+        return texto;
+    }
+
+    public Timer getJuego(){
+        return juego;
+    }
 
     public void setBarX(int barX){
         this.barX = barX;
         setChanged();
         notifyObservers();
+    }
+
+    public  ArrayList <Ball> getBalls(){
+        return balls;
+    }
+
+    public int getBarX(){
+        return barX;
+    }
+
+    public void setBarW(int barW){
+        this.barW = barW;
+    }
+
+    public void setBarH(int barH){
+        this.barH = barH;
+    }
+
+    public int getBarW(){
+        return barW;
+    }
+
+    public int getBarH(){
+        return barH;
     }
 
     public void startGame(){
@@ -57,9 +95,6 @@ public class ModeloNivel extends Observable {
     public void eliminarPelota(int indice){
         balls.remove(indice);
     }
-
-
-
 
     public void init() {
         juego = new Timer(5, new ActionListener() {
@@ -133,6 +168,7 @@ public class ModeloNivel extends Observable {
                                 nivel.ladrillos.get(j).refuerzo = 0;
                             }else{
                                 nivel.eliminarLadrillo(j);
+                                puntos += 10;
                             }
                         }
                        /* if(balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYLeft) || balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYRight)){

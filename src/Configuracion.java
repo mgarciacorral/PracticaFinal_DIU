@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -108,6 +105,14 @@ public class Configuracion  extends Plantilla
         atras.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mContr.setVistaActual("MenuPrincipal");
+            }
+        });
+
+        addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    atras.doClick();
+                }
             }
         });
     }

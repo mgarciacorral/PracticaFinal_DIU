@@ -4,7 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class ControladorNivel extends Plantilla {
+public class ControladorNivel extends JFrame {
 
     private VistaNivel vista0;
     private ModeloNivel modelo;
@@ -14,6 +14,7 @@ public class ControladorNivel extends Plantilla {
     private DrawCanvas canvas;
     private ModeloControladorGeneral mContr;
     private boolean parao = false;
+    private int puntos = 0;
 
     public ControladorNivel(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr){
         super(mDalt, mIdiomas);
@@ -34,30 +35,31 @@ public class ControladorNivel extends Plantilla {
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(new byte[0]).getImage(), new Point(), "invisibleCursor"));
 
         canvas = new DrawCanvas();
+        canvas.setOpaque(false);
         this.add(canvas);
 
-        modelo.barH = bar.getIconHeight();
-        modelo.barW = bar.getIconWidth();
+        modelo.setBarH(bar.getIconHeight());
+        modelo.setBarW(bar.getIconWidth());
 
-        for(int i = 0; i < modelo.balls.size(); i++){
-            modelo.balls.get(i).ballW = ball.getIconWidth();
-            modelo.balls.get(i).ballH = ball.getIconHeight();
+        for(int i = 0; i < modelo.getBalls().size(); i++){
+            modelo.getBalls().get(i).ballW = ball.getIconWidth();
+            modelo.getBalls().get(i).ballH = ball.getIconHeight();
         }
 
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_LEFT){
-                    if(modelo.barX > 0 && modelo.gameStarted){
-                        modelo.setBarX(modelo.barX - 10);
+                    if(modelo.getBarX() > 0 && modelo.getGameStarted()){
+                        modelo.setBarX(modelo.getBarX() - 10);
                     }
                 }
-                if(e.getKeyCode() == KeyEvent.VK_RIGHT && modelo.gameStarted){
-                    if(modelo.barX < 510){
-                        modelo.setBarX(modelo.barX + 10);
+                if(e.getKeyCode() == KeyEvent.VK_RIGHT && modelo.getGameStarted()){
+                    if(modelo.getBarX() < 510){
+                        modelo.setBarX(modelo.getBarX() + 10);
                     }
                 }
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    if(!modelo.gameStarted){
+                    if(!modelo.getGameStarted()){
                         modelo.startGame();
                     }
 
@@ -73,7 +75,7 @@ public class ControladorNivel extends Plantilla {
                         mContr.setVistaActual("MenuPrincipal");
                     }else
                     {
-                        modelo.juego.stop();
+                        modelo.getJuego().stop();
                         parao = true;
                     }
                 }
@@ -86,7 +88,7 @@ public class ControladorNivel extends Plantilla {
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if(!modelo.gameStarted){
+                if(!modelo.getGameStarted()){
                     modelo.startGame();
                 }
             }
@@ -95,7 +97,7 @@ public class ControladorNivel extends Plantilla {
 
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                if(evt.getX() > 100 && evt.getX() < 610 && modelo.gameStarted){
+                if(evt.getX() > 100 && evt.getX() < 610 && modelo.getGameStarted()){
                     int x = evt.getX();
                     modelo.setBarX(x-100);
                 }
@@ -128,6 +130,14 @@ public class ControladorNivel extends Plantilla {
 
     }
 
+    public void setPuntos(int puntos){
+        this.puntos = puntos;
+    }
+
+    public int getPuntos(){
+        return puntos;
+    }
+
 
     class DrawCanvas extends JPanel {
         public DrawCanvas() {
@@ -137,31 +147,32 @@ public class ControladorNivel extends Plantilla {
 
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            this.setBackground(Color.black);
-            g.setColor(Color.white);
+            g.setColor(mDalt.getColorFondo());
             g.fillRect(0, 0, 700, 50);
 
-            for(int i = 0; i < modelo.balls.size(); i++){
-                ball.paintIcon(this, g, modelo.balls.get(i).ballX, modelo.balls.get(i).ballY);
+            for(int i = 0; i < modelo.getBalls().size(); i++){
+                ball.paintIcon(this, g, modelo.getBalls().get(i).ballX, modelo.getBalls().get(i).ballY);
             }
 
-            bar.paintIcon(this, g, modelo.barX, 600);
+            bar.paintIcon(this, g, modelo.getBarX(), 600);
 
             for(int i = 0; i < nivel.ladrillos.size(); i++){
                 ladrillo.paintIcon(this, g, nivel.ladrillos.get(i).ladrilloX, nivel.ladrillos.get(i).ladrilloY);
             }
 
 
-            for(int i = 0; i < modelo.vidas; i++){
+            for(int i = 0; i < modelo.getVidas(); i++){
                 vidas.get(i).paintIcon(this, g, 0 + (i * 50), 0);
             }
 
             g.setFont(new Font("Arial", Font.BOLD, 20));
 
             FontMetrics metrics = g.getFontMetrics();
-            int x = (getWidth() - metrics.stringWidth(modelo.texto)) / 2;
+            int x = (getWidth() - metrics.stringWidth(modelo.getTexto())) / 2;
             int y = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
-            g.drawString(modelo.texto, x, y);
+            g.drawString(modelo.getTexto(), x, y);
+            g.setColor(mDalt.getColorTexto());
+            g.drawString("Puntos: " + puntos, 500, 30);
         }
     }
 
