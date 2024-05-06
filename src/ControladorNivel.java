@@ -32,6 +32,7 @@ public class ControladorNivel extends JFrame {
 
         modelo.addObserver(vista0);
 
+        setIconImage(new ImageIcon("src/resources/Imagenes/logo2.png").getImage());
         setTitle("Break out");
         setSize(700, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,13 +69,14 @@ public class ControladorNivel extends JFrame {
                     }
                 }
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    if(!modelo.getGameStarted()){
-                        modelo.startGame();
+                    if (modelo.getGameStarted() && parao)
+                    {
+                        modelo.continuar();
+                        parao = false;
                     }
 
-                    if (modelo.getGameStarted() && modelo.getVidas() == 0)
-                    {
-                        modelo.init();
+                    if(!modelo.getGameStarted()){
+                        modelo.startGame();
                     }
                 }
 
@@ -86,14 +88,14 @@ public class ControladorNivel extends JFrame {
                             dispose();
                         }else
                         {
-                            modelo.getJuego().stop();
+                            modelo.pauseGame();
                             parao = true;
                         }
+                    }else
+                    {
+                        mContr.setVisible(true);
+                        dispose();
                     }
-                }
-
-                if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                    modelo.crearPelota();
                 }
             }
 
@@ -183,8 +185,8 @@ public class ControladorNivel extends JFrame {
             FontMetrics metrics = g.getFontMetrics();
             int x = (getWidth() - metrics.stringWidth(modelo.getTexto())) / 2;
             int y = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
-            g.drawString(modelo.getTexto(), x, y);
             g.setColor(mDalt.getColorTexto());
+            g.drawString(modelo.getTexto(), x, y);
             g.drawString("Puntos: " + puntos, 500, 30);
         }
     }

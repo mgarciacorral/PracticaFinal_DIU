@@ -14,7 +14,7 @@ public class ModeloNivel extends Observable {
     private int puntos = 0;
     private int initialSpeedX = 4;
     private int initialSpeedY = -4;
-    private String texto = "Pulsa <Enter> para comenzar";
+    private String texto = "Pulsa <Enter> para comenzar o <Esc> para salir";
     private boolean gameStarted = false;
     private Rectangle barRect = new Rectangle(250, 600, 100, 20);
     private int vidas = 3;
@@ -67,14 +67,6 @@ public class ModeloNivel extends Observable {
         this.barH = barH;
     }
 
-    public int getBarW(){
-        return barW;
-    }
-
-    public int getBarH(){
-        return barH;
-    }
-
     public void startGame(){
         texto = "";
         crearPelota();
@@ -84,6 +76,20 @@ public class ModeloNivel extends Observable {
             gameOver = false;
         }
         this.init();
+        setChanged();
+        notifyObservers();
+    }
+
+    public void pauseGame(){
+        juego.stop();
+        texto = "Pulsa <Enter> para continuar o <Esc> para salir";
+        setChanged();
+        notifyObservers();
+    }
+
+    public void continuar(){
+        juego.start();
+        texto = "";
         setChanged();
         notifyObservers();
     }
@@ -171,14 +177,14 @@ public class ModeloNivel extends Observable {
                                 puntos += 10;
                             }
                         }
-                       /* if(balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYLeft) || balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYRight)){
+                        else if(balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYLeft) || balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYRight)){
                             balls.get(i).speedX = -balls.get(i).speedX;
                             if(nivel.ladrillos.get(j).refuerzo == 1){
                                 nivel.ladrillos.get(j).refuerzo = 0;
                             }else{
                                 nivel.eliminarLadrillo(j);
                             }
-                        }*/
+                        }
                     }
                 }
             }
@@ -186,9 +192,4 @@ public class ModeloNivel extends Observable {
 
         juego.start();
     }
-
-    public void paraJuego(){
-        juego.stop();
-    }
-
 }
