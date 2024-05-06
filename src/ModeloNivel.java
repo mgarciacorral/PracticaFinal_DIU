@@ -96,8 +96,8 @@ public class ModeloNivel extends Observable {
 
     public int numLadrillos(){
         int num = 0;
-        for (int i = 0; i < nivel.ladrillos.size(); i++){
-            if(nivel.ladrillos.get(i).refuerzo != -1){
+        for (Ladrillo ladrillo : nivel.getLadrillos()) {
+            if(ladrillo.refuerzo != -1){
                 num++;
             }
         }
@@ -107,37 +107,26 @@ public class ModeloNivel extends Observable {
         balls.add(new Ball());
     }
 
-    public void eliminarPelota(int indice){
-        balls.remove(indice);
-    }
-
     public void init() {
         juego = new Timer(5, new ActionListener() {
-
-            @Override
             public void actionPerformed(ActionEvent e){
+                barRect.setBounds(barX, 600, barW, barH);
 
-                for(int i = 0; i < balls.size(); i++){
-                    balls.get(i).move();
-                    setChanged();
-                    notifyObservers();
-                }
-                for(int i = 0; i < balls.size(); i++){
-                    if(balls.get(i).ballX < 0 || balls.get(i).ballX > 660){
-                        balls.get(i).speedX = -balls.get(i).speedX;
+                for (Ball ball : balls) {
+                    ball.move();
+                    //comprueba choque con paredes
+                    if (ball.ballX < 0 || ball.ballX > 660) {
+                        ball.speedX = -ball.speedX;
                     }
-                }
 
-                for(int i = 0; i < balls.size(); i++){
-                    if(balls.get(i).ballY < 50 || balls.get(i).ballY == 49){
-                        balls.get(i).speedY = Math.abs(balls.get(i).speedY) + 1;
+                    if (ball.ballY < 50 || ball.ballY == 49) {
+                        ball.speedY = Math.abs(ball.speedY) + 1;
                     }
-                }
 
-                for(int i = 0; i < balls.size(); i++){
-                    if(balls.get(i).ballY > 800){
+                    //comprueba q la bola no ha caido
+                    if(ball.ballY > 800){
                         if(balls.size() != 1){
-                            eliminarPelota(i);
+                            balls.remove(ball);
                         }else{
                             gameStarted = false;
                             juego.stop();
@@ -150,52 +139,48 @@ public class ModeloNivel extends Observable {
                                 texto = "Pulsa <Enter> para continuar";
                             }
                             juego.stop();
-                            setChanged();
-                            notifyObservers();
                         }
                     }
-                }
 
-                barRect.setBounds(barX, 600, barW, barH);
-
-                for(int i = 0; i < balls.size(); i++){
-                    if(balls.get(i).ballRect.intersects(barRect)){
-                        int midPointBallX = balls.get(i).ballX + balls.get(i).ballW/2;
-                        int midPointBarX = barX + barW/2;
-                        if(midPointBallX < midPointBarX){
+                    //comprueba choque con barra
+                    if (ball.ballRect.intersects(barRect)) {
+                        int midPointBallX = ball.ballX + ball.ballW / 2;
+                        int midPointBarX = barX + barW / 2;
+                        if (midPointBallX < midPointBarX) {
                             float colisionPoint = 2 * (midPointBallX - barX);
                             float speedMultiplier = colisionPoint / 100;
-                            balls.get(i).speedY = -Math.abs(initialSpeedY * speedMultiplier);
-                            balls.get(i).speedX = -(initialSpeedX * (1-speedMultiplier));
-                        }else if(midPointBallX > midPointBarX){
+                            ball.speedY = -Math.abs(initialSpeedY * speedMultiplier);
+                            ball.speedX = -(initialSpeedX * (1 - speedMultiplier));
+                        } else if (midPointBallX > midPointBarX) {
                             float colisionPoint = 2 * (midPointBallX - midPointBarX);
                             float speedMultiplier = (100 - colisionPoint) / 100;
-                            balls.get(i).speedY = -Math.abs(initialSpeedY * speedMultiplier);
-                            balls.get(i).speedX = initialSpeedX * (1 - speedMultiplier);
+                            ball.speedY = -Math.abs(initialSpeedY * speedMultiplier);
+                            ball.speedX = initialSpeedX * (1 - speedMultiplier);
                         }
                     }
-                }
 
-                for(int i = 0; i < balls.size(); i++){
-                    for(int j = 0; j < nivel.ladrillos.size(); j++){
-                        if(balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectXUp) || balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectXDown)){
-                            balls.get(i).speedY = Math.abs(balls.get(i).speedY) + 1;
-                            comprobarChoque(i, j);
-                        }
-                        else if(balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYLeft) || balls.get(i).ballRect.intersects(nivel.ladrillos.get(j).ladrilloRectYRight)){
-                            balls.get(i).speedX = -balls.get(i).speedX;
-                            comprobarChoque(i, j);
+                    //comprueba choque con ladrillos
+                    for(int j = 0; j < nivel.getLadrillos().size(); j++){
+                        if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXUp) || ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXDown)){
+                            ball.speedY = Math.abs(ball.speedY) + 1;
+                            comprobarChoque(j);
+                        }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYLeft) || ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYRight)){
+                            ball.speedX = -ball.speedX;
+                            comprobarChoque(j);
                         }
                     }
+                    setChanged();
+                    notifyObservers();
                 }
             }
         });
         juego.start();
     }
 
-    public void comprobarChoque(int i, int j)
+    //en caso de choque con ladrillo se comprueba si es destruido y si se ha ganado
+    public void comprobarChoque(int j)
     {
-        if(nivel.ladrillos.get(i).refuerzo != -1)
+        if(nivel.getLadrillos().get(j).refuerzo != -1)
         {
             puntos += 10;
             if(nivel.restarVidaLadrillo(j)){
@@ -208,8 +193,6 @@ public class ModeloNivel extends Observable {
                     if(puntos > user.getPuntuacion(numNv-1)){
                         user.setPuntuacion(numNv-1, puntos);
                     }
-                    setChanged();
-                    notifyObservers();
                     gameStarted = false;
                     gameOver = true;
                 }

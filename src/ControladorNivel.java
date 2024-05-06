@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class ControladorNivel extends JFrame {
     private Clip musicaFondo;
-    private VistaNivel vista0;
-    private ModeloNivel modelo;
+    private VistaNivel vNivel;
+    private ModeloNivel mNivel;
     private Nivel nivel;
     private ImageIcon ball, bar;
     private ArrayList<ImageIcon> vidas = new ArrayList<ImageIcon>();
@@ -35,10 +35,10 @@ public class ControladorNivel extends JFrame {
 
     public void confControladorNivel(String bloques, int numNv){
         nivel = new Nivel(bloques, mDalt);
-        modelo  = new ModeloNivel(nivel, user, numNv);
-        vista0 = new VistaNivel(this, modelo);
+        mNivel = new ModeloNivel(nivel, user, numNv);
+        vNivel = new VistaNivel(this, mNivel);
 
-        modelo.addObserver(vista0);
+        mNivel.addObserver(vNivel);
 
         setIconImage(new ImageIcon("src/resources/Imagenes/logo2.png").getImage());
         setTitle("Break out");
@@ -53,37 +53,36 @@ public class ControladorNivel extends JFrame {
 
         canvas = new DrawCanvas();
         canvas.setOpaque(false);
-        this.add(canvas);
-        pack();
+        add(canvas);
 
-        modelo.setBarH(bar.getIconHeight());
-        modelo.setBarW(bar.getIconWidth());
+        mNivel.setBarH(bar.getIconHeight());
+        mNivel.setBarW(bar.getIconWidth());
 
-        for(int i = 0; i < modelo.getBalls().size(); i++){
-            modelo.getBalls().get(i).ballW = ball.getIconWidth();
-            modelo.getBalls().get(i).ballH = ball.getIconHeight();
+        for(int i = 0; i < mNivel.getBalls().size(); i++){
+            mNivel.getBalls().get(i).ballW = ball.getIconWidth();
+            mNivel.getBalls().get(i).ballH = ball.getIconHeight();
         }
 
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_LEFT){
-                    if(modelo.getBarX() > 0 && modelo.getGameStarted()){
-                        modelo.setBarX(modelo.getBarX() - 10);
+                    if(mNivel.getBarX() > 0 && mNivel.getGameStarted()){
+                        mNivel.setBarX(mNivel.getBarX() - 10);
                     }
                 }
-                if(e.getKeyCode() == KeyEvent.VK_RIGHT && modelo.getGameStarted()){
-                    if(modelo.getBarX() < 510){
-                        modelo.setBarX(modelo.getBarX() + 10);
+                if(e.getKeyCode() == KeyEvent.VK_RIGHT && mNivel.getGameStarted()){
+                    if(mNivel.getBarX() < 510){
+                        mNivel.setBarX(mNivel.getBarX() + 10);
                     }
                 }
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    if (modelo.getGameStarted() && parao)
+                    if (mNivel.getGameStarted() && parao)
                     {
-                        modelo.continuar();
+                        mNivel.continuar();
                         parao = false;
                     }
 
-                    if(modelo.getGameOver())
+                    if(mNivel.getGameOver())
                     {
                         mContr.setVisible(true);
                         mContr.getMenuNiveles().activarNiveles();
@@ -95,13 +94,13 @@ public class ControladorNivel extends JFrame {
                         dispose();
                     }
 
-                    if(!modelo.getGameStarted()){
-                        modelo.startGame();
+                    if(!mNivel.getGameStarted()){
+                        mNivel.startGame();
                     }
                 }
 
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-                    if(modelo.getGameStarted()){
+                    if(mNivel.getGameStarted()){
                         if(parao)
                         {
                             mContr.setVisible(true);
@@ -114,7 +113,7 @@ public class ControladorNivel extends JFrame {
                             dispose();
                         }else
                         {
-                            modelo.pauseGame();
+                            mNivel.pauseGame();
                             parao = true;
                         }
                     }else
@@ -135,17 +134,17 @@ public class ControladorNivel extends JFrame {
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if(!modelo.getGameStarted()){
-                    modelo.startGame();
+                if(!mNivel.getGameStarted()){
+                    mNivel.startGame();
                 }
             }
         });
 
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                if(evt.getX() > 100 && evt.getX() < 610 && modelo.getGameStarted()){
+                if(evt.getX() > 100 && evt.getX() < 610 && mNivel.getGameStarted()){
                     int x = evt.getX();
-                    modelo.setBarX(x-100);
+                    mNivel.setBarX(x-100);
                 }
             }
         });
@@ -186,28 +185,27 @@ public class ControladorNivel extends JFrame {
             g.setColor(mDalt.getColorFondo());
             g.fillRect(0, 0, 700, 50);
 
-            for(int i = 0; i < modelo.getBalls().size(); i++){
-                ball.paintIcon(this, g, modelo.getBalls().get(i).ballX, modelo.getBalls().get(i).ballY);
+            bar.paintIcon(this, g, mNivel.getBarX(), 600);
+
+            for(int i = 0; i < mNivel.getBalls().size(); i++){
+                ball.paintIcon(this, g, mNivel.getBalls().get(i).ballX, mNivel.getBalls().get(i).ballY);
             }
 
-            bar.paintIcon(this, g, modelo.getBarX(), 600);
-
-            for(int i = 0; i < nivel.ladrillos.size(); i++){
-                nivel.ladrillos.get(i).getLadrilloImg().paintIcon(this, g, nivel.ladrillos.get(i).ladrilloX, nivel.ladrillos.get(i).ladrilloY);
+            for(Ladrillo ladrillo : nivel.getLadrillos()){
+                ladrillo.getLadrilloImg().paintIcon(this, g, ladrillo.ladrilloX, ladrillo.ladrilloY);
             }
 
-
-            for(int i = 0; i < modelo.getVidas(); i++){
+            for(int i = 0; i < mNivel.getVidas(); i++){
                 vidas.get(i).paintIcon(this, g, 0 + (i * 50), 0);
             }
 
             g.setFont(new Font("Arial", Font.BOLD, 20));
 
             FontMetrics metrics = g.getFontMetrics();
-            int x = (getWidth() - metrics.stringWidth(modelo.getTexto())) / 2;
+            int x = (getWidth() - metrics.stringWidth(mNivel.getTexto())) / 2;
             int y = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
             g.setColor(mDalt.getColorTexto());
-            g.drawString(modelo.getTexto(), x, y);
+            g.drawString(mNivel.getTexto(), x, y);
             g.drawString("Puntos: " + puntos, 500, 30);
         }
     }
