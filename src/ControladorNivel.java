@@ -16,10 +16,8 @@ public class ControladorNivel extends JFrame {
     private boolean parao = false;
     private int puntos = 0;
 
-    public ControladorNivel(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr){
-        super(mDalt, mIdiomas);
-        this.mContr = mContr;
-        confControladorNivel("");
+    public ControladorNivel(String nivel){
+        confControladorNivel(nivel);
     }
 
     public void confControladorNivel(String bloques){
