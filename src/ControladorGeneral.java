@@ -48,7 +48,6 @@ public class ControladorGeneral extends JFrame implements Observer {
         menuDaltonicos = new MenuDaltonicos(mDalt, mIdioma, mContr);
         tutorial = new Tutorial(mDalt, mIdioma, mContr);
 
-//f
         mContr.setMn(menuNiveles);
         mContr.setNivel(nivel);
         mDalt.setModoDaltonico(datos.getModoDaltonico());
@@ -63,7 +62,6 @@ public class ControladorGeneral extends JFrame implements Observer {
         add(login, "Login");
         add(tutorial, "Tutorial");
 
-
         setVisible(true);
     }
 
@@ -71,6 +69,14 @@ public class ControladorGeneral extends JFrame implements Observer {
     {
         CardLayout cl = (CardLayout) getContentPane().getLayout();
         cl.show(getContentPane(), mContr.getVistaActual());
+        if(mContr.getVisible())
+        {
+            setVisible(true);
+        }
+        else
+        {
+            setVisible(false);
+        }
     }
 
 }

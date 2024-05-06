@@ -10,6 +10,7 @@ public class ModeloControladorGeneral extends Observable
     private String vistaActual;
     private MenuNiveles mn;
     private ControladorNivel nivel;
+    private boolean visible = true;
 
     public ModeloControladorGeneral(){
         setMusicaFondo();
@@ -20,6 +21,17 @@ public class ModeloControladorGeneral extends Observable
     {
         setChanged();
         notifyObservers();
+    }
+
+    public void setVisible(boolean visible)
+    {
+        this.visible = visible;
+        notificar();
+    }
+
+    public boolean getVisible()
+    {
+        return visible;
     }
 
     public void setVistaActual(String vista)

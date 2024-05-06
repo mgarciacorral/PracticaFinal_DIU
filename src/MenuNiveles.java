@@ -34,7 +34,8 @@ public class MenuNiveles extends Plantilla {
             panelBoton.add(botones[i]);
             botones[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new ControladorNivel(confNivel[Integer.parseInt(((VistaBotonNivel)e.getSource()).getText())]);
+                    new ControladorNivel(confNivel[Integer.parseInt(((VistaBotonNivel)e.getSource()).getText())], mDalt, mIdiomas, mContr);
+                    mContr.setVisible(false);
                 }
             });
         }

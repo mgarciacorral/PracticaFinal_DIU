@@ -12,11 +12,16 @@ public class ControladorNivel extends JFrame {
     private ImageIcon ball, bar, ladrillo;
     private ArrayList<ImageIcon> vidas = new ArrayList<ImageIcon>();
     private DrawCanvas canvas;
-    private ModeloControladorGeneral mContr;
     private boolean parao = false;
     private int puntos = 0;
+    private ModeloDaltonicos mDalt;
+    private ModeloIdiomas mIdioma;
+    private ModeloControladorGeneral mContr;
 
-    public ControladorNivel(String nivel){
+    public ControladorNivel(String nivel, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
+        this.mDalt = mDalt;
+        this.mIdioma = mIdioma;
+        this.mContr = mContr;
         confControladorNivel(nivel);
     }
 
@@ -32,8 +37,7 @@ public class ControladorNivel extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
-        setVisible(true);
-        setBackground(java.awt.Color.BLACK);
+        getContentPane().setBackground(mDalt.getColorFondo());
 
         setImages();
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(new byte[0]).getImage(), new Point(), "invisibleCursor"));
@@ -75,15 +79,19 @@ public class ControladorNivel extends JFrame {
                 }
 
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-                    if(parao)
-                    {
-                        System.exit(0);
-                    }else
-                    {
-                        modelo.getJuego().stop();
-                        parao = true;
+                    if(modelo.getGameStarted()){
+                        if(parao)
+                        {
+                            mContr.setVisible(true);
+                            dispose();
+                        }else
+                        {
+                            modelo.getJuego().stop();
+                            parao = true;
+                        }
                     }
                 }
+
                 if(e.getKeyCode() == KeyEvent.VK_SPACE){
                     modelo.crearPelota();
                 }
@@ -108,7 +116,7 @@ public class ControladorNivel extends JFrame {
                 }
             }
         });
-
+        setVisible(true);
     }
 
     public void setImages(){
@@ -152,7 +160,7 @@ public class ControladorNivel extends JFrame {
 
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            //g.setColor(mDalt.getColorFondo());
+            g.setColor(mDalt.getColorFondo());
             g.fillRect(0, 0, 700, 50);
 
             for(int i = 0; i < modelo.getBalls().size(); i++){
@@ -176,7 +184,7 @@ public class ControladorNivel extends JFrame {
             int x = (getWidth() - metrics.stringWidth(modelo.getTexto())) / 2;
             int y = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
             g.drawString(modelo.getTexto(), x, y);
-            //g.setColor(mDalt.getColorTexto());
+            g.setColor(mDalt.getColorTexto());
             g.drawString("Puntos: " + puntos, 500, 30);
         }
     }
