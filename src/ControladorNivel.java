@@ -4,38 +4,37 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class ControladorNivel extends JFrame {
+public class ControladorNivel extends Plantilla {
 
-    Vista0 vista0;
-    ModeloNivel modelo;
-    Nivel nivel;
+    private VistaNivel vista0;
+    private ModeloNivel modelo;
+    private Nivel nivel;
     private ImageIcon ball, bar, ladrillo;
     private ArrayList<ImageIcon> vidas = new ArrayList<ImageIcon>();
     private DrawCanvas canvas;
-    private Font fuente;
+    private ModeloControladorGeneral mContr;
+    private boolean parao = false;
 
+    public ControladorNivel(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr){
+        super(mDalt, mIdiomas);
+        this.mContr = mContr;
+        confControladorNivel("");
+    }
 
-    public ControladorNivel(String bloques){
+    public void confControladorNivel(String bloques){
         nivel = new Nivel(bloques);
         modelo  = new ModeloNivel(nivel);
-        vista0 = new Vista0(this, modelo);
+        vista0 = new VistaNivel(this, modelo);
 
         modelo.addObserver(vista0);
 
-        setTitle("Break out");
         setSize(700, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
-        setBackground(Color.BLACK);
 
         setImages();
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(new byte[0]).getImage(), new Point(), "invisibleCursor"));
 
         canvas = new DrawCanvas();
         this.add(canvas);
-        pack();
 
         modelo.barH = bar.getIconHeight();
         modelo.barW = bar.getIconWidth();
@@ -61,9 +60,22 @@ public class ControladorNivel extends JFrame {
                     if(!modelo.gameStarted){
                         modelo.startGame();
                     }
+
+                    if (!parao)
+                    {
+                        modelo.init();
+                    }
                 }
+
                 if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-                    System.exit(0);
+                    if(parao)
+                    {
+                        mContr.setVistaActual("MenuPrincipal");
+                    }else
+                    {
+                        modelo.juego.stop();
+                        parao = true;
+                    }
                 }
                 if(e.getKeyCode() == KeyEvent.VK_SPACE){
                     modelo.crearPelota();

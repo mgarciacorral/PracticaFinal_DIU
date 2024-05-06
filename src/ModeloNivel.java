@@ -13,8 +13,8 @@ public class ModeloNivel extends Observable {
     ArrayList <Ball> balls = new ArrayList<>();
 
     public Timer juego;
-    public int initialSpeedX = 2;
-    public int initialSpeedY = -2;
+    public int initialSpeedX = 4;
+    public int initialSpeedY = -4;
 
 
     String texto = "Pulsa <Enter> para comenzar";
@@ -62,7 +62,7 @@ public class ModeloNivel extends Observable {
 
 
     public void init() {
-        juego = new Timer(0, new ActionListener() {
+        juego = new Timer(5, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e){
@@ -149,6 +149,10 @@ public class ModeloNivel extends Observable {
         });
 
         juego.start();
+    }
+
+    public void paraJuego(){
+        juego.stop();
     }
 
 }

@@ -9,6 +9,7 @@ public class ModeloControladorGeneral extends Observable
     private Clip musicaFondo;
     private String vistaActual;
     private MenuNiveles mn;
+    private ControladorNivel nivel;
 
     public ModeloControladorGeneral(){
         setMusicaFondo();
@@ -43,6 +44,14 @@ public class ModeloControladorGeneral extends Observable
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setNivel(ControladorNivel nivel) {
+        this.nivel = nivel;
+    }
+
+    public ControladorNivel getNivel() {
+        return nivel;
     }
 
     public void controlarMusica()

@@ -1,12 +1,12 @@
 import java.util.Observable;
 import java.util.Observer;
 
-public class Vista0 implements Observer {
+public class VistaNivel implements Observer {
 
     ControladorNivel controlador;
     ModeloNivel modelo;
 
-    public Vista0(ControladorNivel controlador, ModeloNivel modelo) {
+    public VistaNivel(ControladorNivel controlador, ModeloNivel modelo) {
         this.controlador = controlador;
         this.modelo = modelo;
     }
