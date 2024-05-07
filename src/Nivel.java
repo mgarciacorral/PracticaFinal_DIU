@@ -1,21 +1,14 @@
 import java.util.ArrayList;
 
 public class Nivel {
-
-    /************************/
-    /* 0 no hay ladrillo    */
-    /* 1 ladrillo normal    */
-    /* 2 ladrillo reforzado */
-    /************************/
-
-    public String nivel;
+    public String semilla;
     private ArrayList<Ladrillo> ladrillos = new ArrayList<>();
     private ModeloDaltonicos mDalt;
 
 
-    public Nivel(String nivel, ModeloDaltonicos mDalt){
+    public Nivel(String semilla, ModeloDaltonicos mDalt){
         this.mDalt = mDalt;
-        this.nivel = nivel;
+        this.semilla = semilla;
         configNivel();
     }
 
@@ -26,12 +19,12 @@ public class Nivel {
     public void configNivel(){
         int row = 0;
         int col = 0;
-        for(int i = 0; i < nivel.length(); i++){
+        for(int i = 0; i < semilla.length(); i++){
             if(col == 6){
                 col = 0;
                 row++;
             }
-            switch(nivel.charAt(i)) {
+            switch(semilla.charAt(i)) {
                 case '1':
                     ladrillos.add(new Ladrillo(col * 117, (row * 28) + 50, 117, 28, 0, mDalt));
                     col++;

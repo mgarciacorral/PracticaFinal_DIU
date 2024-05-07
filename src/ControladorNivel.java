@@ -23,18 +23,18 @@ public class ControladorNivel extends JFrame {
     private ModeloControladorGeneral mContr;
     private Usuario user;
 
-    public ControladorNivel(int nv, Usuario user, String nivel, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
+    public ControladorNivel(int numNv, Usuario user, String semilla, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
         this.user = user;
         this.mDalt = mDalt;
         this.mIdioma = mIdioma;
         this.mContr = mContr;
         setMusicaFondo();
         controlarMusica();
-        confControladorNivel(nivel, nv);
+        confControladorNivel(semilla, numNv);
     }
 
-    public void confControladorNivel(String bloques, int numNv){
-        nivel = new Nivel(bloques, mDalt);
+    public void confControladorNivel(String semilla, int numNv){
+        nivel = new Nivel(semilla, mDalt);
         mNivel = new ModeloNivel(nivel, user, numNv);
         vNivel = new VistaNivel(this, mNivel);
 
