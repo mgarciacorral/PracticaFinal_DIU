@@ -11,13 +11,12 @@ public class ModeloNivel extends Observable {
 
     private int barX = 250;
     private int barW, barH;
-    private String masPuntos = "";
     private ArrayList <Ball> balls = new ArrayList<>();
     private Timer juego;
     private int puntos = 0;
     private int initialSpeedX = 4;
     private int initialSpeedY = -4;
-    private String texto = "Pulsa <Enter> para comenzar o <Esc> para salir";
+    private String texto;
     private boolean gameStarted = false;
     private Rectangle barRect = new Rectangle(250, 600, 100, 20);
     private int vidas = 3;
@@ -25,9 +24,12 @@ public class ModeloNivel extends Observable {
     private boolean gameOver = false;
     private Nivel nivel;
     private Usuario user;
+    private ModeloIdiomas mIdioma;
 
-    public ModeloNivel(Nivel nivel, Usuario user, int numNv){
+    public ModeloNivel(Nivel nivel, Usuario user, int numNv, ModeloIdiomas mIdioma){
         this.numNv = numNv;
+        this.mIdioma = mIdioma;
+        mIdioma.translate("Pulsa <Enter> para lanzar la bola o <Esc> para salir");
         this.user = user;
         this.nivel = nivel;
     }
@@ -85,7 +87,7 @@ public class ModeloNivel extends Observable {
 
     public void pauseGame(){
         juego.stop();
-        texto = "Pulsa <Enter> para continuar o <Esc> para salir";
+        texto = mIdioma.translate("Pulsa <Enter> para lanzar la bola o <Esc> para salir");
         setChanged();
         notifyObservers();
     }
@@ -135,11 +137,11 @@ public class ModeloNivel extends Observable {
                             juego.stop();
                             vidas--;
                             if(vidas == 0){
-                                texto = "No te quedan vidas <Enter> para volver al menu";
+                                texto = mIdioma.translate("¡¡Has perdido!! <Enter> para volver al menu");
                                 gameStarted = false;
                                 gameOver = true;
                             }else{
-                                texto = "Pulsa <Enter> para continuar";
+                                texto = mIdioma.translate("Pulsa <Enter> para lanzar la bola o <Esc> para salir");
                             }
                             juego.stop();
                         }
@@ -202,7 +204,7 @@ public class ModeloNivel extends Observable {
             puntos += 10;
             if(nivel.restarVidaLadrillo(j)){
                 if(numLadrillos() == 0){
-                    texto = "¡¡Has ganado!! <Enter> para volver al menu";
+                    texto = mIdioma.translate("¡¡Has ganado!! <Enter> para volver al menu");
                     juego.stop();
                     if(user.getNiveles() == numNv){
                         user.setNiveles(user.getNiveles() + 1);

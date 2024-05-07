@@ -39,7 +39,7 @@ public class ControladorNivel extends JFrame {
 
     public void confControladorNivel(String semilla, int numNv){
         nivel = new Nivel(semilla, mDalt);
-        mNivel = new ModeloNivel(nivel, user, numNv);
+        mNivel = new ModeloNivel(nivel, user, numNv, mIdioma);
         vNivel = new VistaNivel(this, mNivel);
 
         mNivel.addObserver(vNivel);
@@ -221,7 +221,7 @@ public class ControladorNivel extends JFrame {
             int y = ((getHeight() - metrics.getHeight()) / 2) + metrics.getAscent();
             g.setColor(mDalt.getColorTexto());
             g.drawString(mNivel.getTexto(), x, y);
-            g.drawString("Puntos: " + puntos, 500, 30);
+            g.drawString(mIdioma.translate("Puntos: ") + puntos, 500, 30);
             for(Ladrillo ladrillo : nivel.getLadrillos()){
                 if(ladrillo.getChocado())
                 {
