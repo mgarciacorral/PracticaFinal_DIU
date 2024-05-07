@@ -18,7 +18,7 @@ public class MenuNiveles extends Plantilla {
     private JPanel panelLabel = new JPanel();
     private VistaLabel label;
     private Usuario user;
-    private String[] confNivel = {"1", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
+    private String[] confNivel = {"110011002200110011002200110011", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
 
     public MenuNiveles(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr){
         super(mDalt, mIdiomas);

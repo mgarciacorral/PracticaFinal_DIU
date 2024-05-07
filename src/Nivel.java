@@ -9,7 +9,7 @@ public class Nivel {
     /************************/
 
     public String nivel;
-    public ArrayList<Ladrillo> ladrillos = new ArrayList<>();
+    private ArrayList<Ladrillo> ladrillos = new ArrayList<>();
     private ModeloDaltonicos mDalt;
 
 
@@ -17,6 +17,10 @@ public class Nivel {
         this.mDalt = mDalt;
         this.nivel = nivel;
         configNivel();
+    }
+
+    public ArrayList<Ladrillo> getLadrillos(){
+        return ladrillos;
     }
 
     public void configNivel(){

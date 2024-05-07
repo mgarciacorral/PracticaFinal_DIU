@@ -7,8 +7,8 @@ public class Ball {
     public int ballW, ballH;
 
     public float speedX, speedY;
-    public int intialSpeedX = 3;
-    public int intialSpeedY = -3;
+    public int intialSpeedX = 4;
+    public int intialSpeedY = -4;
 
     public Rectangle ballRect = new Rectangle(250, 600, 36, 36);
 

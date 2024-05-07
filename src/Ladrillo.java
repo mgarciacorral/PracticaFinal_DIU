@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Ladrillo {
+public class Ladrillo extends Rectangle{
 
     public int ladrilloX, ladrilloY;
     public int ladrilloW, ladrilloH;
@@ -66,6 +66,4 @@ public class Ladrillo {
         ladrilloRectYLeft = new Rectangle(ladrilloX, ladrilloY + 3, 6, 23);
         ladrilloRectYRight = new Rectangle(ladrilloX + 114, ladrilloY + 3, 6, 23);
     }
-
-
 }
