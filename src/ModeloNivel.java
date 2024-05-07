@@ -1,3 +1,5 @@
+import com.sun.jdi.VMCannotBeModifiedException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +11,7 @@ public class ModeloNivel extends Observable {
 
     private int barX = 250;
     private int barW, barH;
+    private String masPuntos = "";
     private ArrayList <Ball> balls = new ArrayList<>();
     private Timer juego;
     private int puntos = 0;
@@ -163,23 +166,23 @@ public class ModeloNivel extends Observable {
                     for(int j = 0; j < nivel.getLadrillos().size(); j++){
                         if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXUp))
                         {
+                            mostrarMasPuntos(j);
                             ball.speedY = -6;
-                            ball.sonidoChoque();
                             comprobarChoque(j);
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXDown))
                         {
+                            mostrarMasPuntos(j);
                             ball.speedY = 6;
-                            ball.sonidoChoque();
                             comprobarChoque(j);
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYLeft))
                         {
+                            mostrarMasPuntos(j);
                             ball.speedX = -6;
-                            ball.sonidoChoque();
                             comprobarChoque(j);
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYRight))
                         {
+                            mostrarMasPuntos(j);
                             ball.speedX = 6;
-                            ball.sonidoChoque();
                             comprobarChoque(j);
                         }
                     }
@@ -216,5 +219,20 @@ public class ModeloNivel extends Observable {
 
     public boolean getGameOver(){
         return gameOver;
+    }
+
+    public void mostrarMasPuntos(int i)
+    {
+        new Thread(new Runnable() {
+            public void run() {
+                nivel.getLadrillos().get(i).setChocado(true);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                nivel.getLadrillos().get(i).setChocado(false);
+            }
+        }).start();
     }
 }

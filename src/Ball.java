@@ -18,30 +18,11 @@ public class Ball {
     public Ball(){
         speedX = intialSpeedX;
         speedY = intialSpeedY;
-        setSonidoChoque();
     }
 
     public void move(){
         ballX += speedX;
         ballY += speedY;
         ballRect.setLocation(ballX, ballY);
-    }
-
-    public void setSonidoChoque()
-    {
-        try
-        {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/resources/Sonidos/musicaFondo.wav").getAbsoluteFile());
-            choqueSonido = AudioSystem.getClip();
-            choqueSonido.open(audioInputStream);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sonidoChoque()
-    {
-        choqueSonido.start();
     }
 }

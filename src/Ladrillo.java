@@ -10,6 +10,7 @@ public class Ladrillo extends Rectangle{
     public Rectangle ladrilloRectYLeft, ladrilloRectYRight;
     private ImageIcon ladrilloImg;
     private ModeloDaltonicos mDalt;
+    private boolean chocado = false;
 
 
     public Ladrillo(int ladrilloX, int ladrilloY, int ladrilloW, int ladrilloH, int refuerzo, ModeloDaltonicos mDalt){
@@ -65,5 +66,13 @@ public class Ladrillo extends Rectangle{
         ladrilloRectXDown = new Rectangle(ladrilloX + 6, ladrilloY + 27, 105 , 1);
         ladrilloRectYLeft = new Rectangle(ladrilloX, ladrilloY + 3, 6, 23);
         ladrilloRectYRight = new Rectangle(ladrilloX + 114, ladrilloY + 3, 6, 23);
+    }
+
+    public boolean getChocado(){
+        return chocado;
+    }
+
+    public void setChocado(boolean chocado){
+        this.chocado = chocado;
     }
 }

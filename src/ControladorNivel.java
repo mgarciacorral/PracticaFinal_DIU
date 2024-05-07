@@ -222,6 +222,12 @@ public class ControladorNivel extends JFrame {
             g.setColor(mDalt.getColorTexto());
             g.drawString(mNivel.getTexto(), x, y);
             g.drawString("Puntos: " + puntos, 500, 30);
+            for(Ladrillo ladrillo : nivel.getLadrillos()){
+                if(ladrillo.getChocado())
+                {
+                    g.drawString("+10", ladrillo.ladrilloX, ladrillo.ladrilloY);
+                }
+            }
         }
     }
 
