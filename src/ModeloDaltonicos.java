@@ -71,6 +71,7 @@ public class ModeloDaltonicos extends Observable {
         corazon = new ImageIcon("src/resources/Imagenes/corazon.png");
         barra = new ImageIcon("src/resources/Imagenes/grey_button03.png");
         bola = new ImageIcon("src/resources/Imagenes/grey_circle.png");
+
         DatosSerialiazados.getInstancia().setModoDaltonico("desactivado");
     }
 

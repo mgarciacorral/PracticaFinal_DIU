@@ -61,8 +61,8 @@ public class Ladrillo extends Rectangle{
     }
 
     public void setRectangle(){
-        ladrilloRectXUp = new Rectangle(ladrilloX + 6, ladrilloY, 105 , 3);
-        ladrilloRectXDown = new Rectangle(ladrilloX + 6, ladrilloY + 25, 105 , 3);
+        ladrilloRectXUp = new Rectangle(ladrilloX + 6, ladrilloY, 105 , 1);
+        ladrilloRectXDown = new Rectangle(ladrilloX + 6, ladrilloY + 27, 105 , 1);
         ladrilloRectYLeft = new Rectangle(ladrilloX, ladrilloY + 3, 6, 23);
         ladrilloRectYRight = new Rectangle(ladrilloX + 114, ladrilloY + 3, 6, 23);
     }
