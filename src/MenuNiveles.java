@@ -10,7 +10,7 @@ public class MenuNiveles extends Plantilla {
     private JPanel panelLabel = new JPanel();
     private VistaLabel label;
     private Usuario user;
-    private String[] semillasNiveles = {"110011002200110011002200110011", "444440444440444440444440444440444440444440444440444440444440444440", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
+    private String[] semillasNiveles = {"110011002200110011002200110011", "454545454545454545454545", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
 
     public MenuNiveles(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr){
         super(mDalt, mIdiomas);

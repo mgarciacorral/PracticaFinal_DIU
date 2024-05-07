@@ -21,6 +21,7 @@ public class ModeloDaltonicos extends Observable {
     private ImageIcon ladrilloUB;
     private ImageIcon corazon;
     private ImageIcon bola;
+    private ImageIcon[] buffs = new ImageIcon[3];
 
     public ModeloDaltonicos(){
         setModoDaltonico(DatosSerialiazados.getInstancia().getModoDaltonico());
@@ -71,6 +72,9 @@ public class ModeloDaltonicos extends Observable {
         corazon = new ImageIcon("src/resources/Imagenes/corazon.png");
         barra = new ImageIcon("src/resources/Imagenes/grey_button03.png");
         bola = new ImageIcon("src/resources/Imagenes/grey_circle.png");
+        buffs[0] = new ImageIcon("src/resources/Imagenes/blue_circle.png");
+        buffs[1] = new ImageIcon("src/resources/Imagenes/green_circle.png");
+        buffs[2] = new ImageIcon("src/resources/Imagenes/red_circle.png");
 
         DatosSerialiazados.getInstancia().setModoDaltonico("desactivado");
     }
@@ -95,6 +99,10 @@ public class ModeloDaltonicos extends Observable {
         corazon = new ImageIcon("src/resources/Imagenes/corazon.png");
         barra = new ImageIcon("src/resources/Imagenes/grey_button03.png");
         bola = new ImageIcon("src/resources/Imagenes/grey_circle.png");
+        buffs[0] = new ImageIcon("src/resources/Imagenes/blue_circle.png");
+        buffs[1] = new ImageIcon("src/resources/Imagenes/green_circle.png");
+        buffs[2] = new ImageIcon("src/resources/Imagenes/red_circle.png");
+
         DatosSerialiazados.getInstancia().setModoDaltonico("deuteranopia");
     }
 
@@ -117,6 +125,10 @@ public class ModeloDaltonicos extends Observable {
         corazon = new ImageIcon("src/resources/Imagenes/corazon.png");
         barra = new ImageIcon("src/resources/Imagenes/blue_button00.png");
         bola = new ImageIcon("src/resources/Imagenes/yellow_circle.png");
+        buffs[0] = new ImageIcon("src/resources/Imagenes/blue_circle.png");
+        buffs[1] = new ImageIcon("src/resources/Imagenes/green_circle.png");
+        buffs[2] = new ImageIcon("src/resources/Imagenes/red_circle.png");
+
         DatosSerialiazados.getInstancia().setModoDaltonico("protanopia");
     }
 
@@ -138,6 +150,10 @@ public class ModeloDaltonicos extends Observable {
         corazon = new ImageIcon("src/resources/Imagenes/corazon.png");
         barra = new ImageIcon("src/resources/Imagenes/grey_button03.png");
         bola = new ImageIcon("src/resources/Imagenes/grey_circle.png");
+        buffs[0] = new ImageIcon("src/resources/Imagenes/blue_circle.png");
+        buffs[1] = new ImageIcon("src/resources/Imagenes/green_circle.png");
+        buffs[2] = new ImageIcon("src/resources/Imagenes/red_circle.png");
+
         DatosSerialiazados.getInstancia().setModoDaltonico("tritanopia");
     }
 
@@ -211,5 +227,9 @@ public class ModeloDaltonicos extends Observable {
 
     public ImageIcon getBola() {
         return bola;
+    }
+
+    public ImageIcon getBuff(int i) {
+        return buffs[i];
     }
 }

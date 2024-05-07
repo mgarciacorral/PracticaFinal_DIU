@@ -39,7 +39,7 @@ public class ControladorNivel extends JFrame {
 
     public void confControladorNivel(String semilla, int numNv){
         nivel = new Nivel(semilla, mDalt);
-        mNivel = new ModeloNivel(nivel, user, numNv, mIdioma);
+        mNivel = new ModeloNivel(nivel, user, numNv, mIdioma, mDalt);
         vNivel = new VistaNivel(this, mNivel);
 
         mNivel.addObserver(vNivel);
@@ -212,6 +212,10 @@ public class ControladorNivel extends JFrame {
 
             for(int i = 0; i < mNivel.getVidas(); i++){
                 vidas.get(i).paintIcon(this, g, 0 + (i * 50), 0);
+            }
+
+            for(Buff buff : mNivel.getBuffs()){
+                buff.paintIcon(this, g, buff.getBallX(), buff.getBallY());
             }
 
             g.setFont(new Font("Arial", Font.BOLD, 20));
