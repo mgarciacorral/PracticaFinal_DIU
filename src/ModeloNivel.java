@@ -108,7 +108,7 @@ public class ModeloNivel extends Observable {
     }
 
     public void init() {
-        juego = new Timer(5, new ActionListener() {
+        juego = new Timer(2, new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 barRect.setBounds(barX, 600, barW, barH);
 
@@ -161,11 +161,25 @@ public class ModeloNivel extends Observable {
 
                     //comprueba choque con ladrillos
                     for(int j = 0; j < nivel.getLadrillos().size(); j++){
-                        if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXUp) || ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXDown)){
-                            ball.speedY = Math.abs(ball.speedY) + 1;
+                        if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXUp))
+                        {
+                            ball.speedY = -(ball.speedY + 1);
+                            ball.sonidoChoque();
                             comprobarChoque(j);
-                        }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYLeft) || ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYRight)){
-                            ball.speedX = -ball.speedX;
+                        }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXDown))
+                        {
+                            ball.speedY = Math.abs(ball.speedY + 1);
+                            ball.sonidoChoque();
+                            comprobarChoque(j);
+                        }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYLeft))
+                        {
+                            ball.speedX = -(ball.speedX + 1);
+                            ball.sonidoChoque();
+                            comprobarChoque(j);
+                        }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYRight))
+                        {
+                            ball.speedX = Math.abs(ball.speedX + 1);
+                            ball.sonidoChoque();
                             comprobarChoque(j);
                         }
                     }
