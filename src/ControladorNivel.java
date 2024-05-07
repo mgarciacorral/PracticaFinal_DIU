@@ -3,6 +3,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -13,6 +15,7 @@ public class ControladorNivel extends JFrame {
     private VistaNivel vNivel;
     private ModeloNivel mNivel;
     private Nivel nivel;
+    private Timer moverBarraDerecha, moverBarraIzquierda;
     private ImageIcon ball, bar;
     private ArrayList<ImageIcon> vidas = new ArrayList<ImageIcon>();
     private DrawCanvas canvas;
@@ -23,18 +26,19 @@ public class ControladorNivel extends JFrame {
     private ModeloControladorGeneral mContr;
     private Usuario user;
 
-    public ControladorNivel(int nv, Usuario user, String nivel, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
+    public ControladorNivel(int numNv, Usuario user, String semilla, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
         this.user = user;
         this.mDalt = mDalt;
         this.mIdioma = mIdioma;
         this.mContr = mContr;
         setMusicaFondo();
         controlarMusica();
-        confControladorNivel(nivel, nv);
+        setTimers();
+        confControladorNivel(semilla, numNv);
     }
 
-    public void confControladorNivel(String bloques, int numNv){
-        nivel = new Nivel(bloques, mDalt);
+    public void confControladorNivel(String semilla, int numNv){
+        nivel = new Nivel(semilla, mDalt);
         mNivel = new ModeloNivel(nivel, user, numNv);
         vNivel = new VistaNivel(this, mNivel);
 
@@ -66,13 +70,13 @@ public class ControladorNivel extends JFrame {
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_LEFT){
-                    if(mNivel.getBarX() > 0 && mNivel.getGameStarted()){
-                        mNivel.setBarX(mNivel.getBarX() - 10);
+                    if(mNivel.getBarX() > -50 && mNivel.getGameStarted()){
+                        moverBarraIzquierda.start();
                     }
                 }
                 if(e.getKeyCode() == KeyEvent.VK_RIGHT && mNivel.getGameStarted()){
-                    if(mNivel.getBarX() < 510){
-                        mNivel.setBarX(mNivel.getBarX() + 10);
+                    if(mNivel.getBarX() < 560){
+                        moverBarraDerecha.start();
                     }
                 }
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
@@ -130,6 +134,17 @@ public class ControladorNivel extends JFrame {
                 }
             }
 
+        });
+
+        addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_LEFT){
+                    moverBarraIzquierda.stop();
+                }
+                if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+                    moverBarraDerecha.stop();
+                }
+            }
         });
 
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -238,5 +253,30 @@ public class ControladorNivel extends JFrame {
         {
             musicaFondo.stop();
         }
+    }
+
+    public void setTimers()
+    {
+        moverBarraDerecha = new Timer(10, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(mNivel.getBarX() < 560){
+                    mNivel.setBarX(mNivel.getBarX() + 10);
+                }
+                else{
+                    ((Timer)e.getSource()).stop();
+                }
+            }
+        });
+
+        moverBarraIzquierda = new Timer(10, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(mNivel.getBarX() > -50){
+                    mNivel.setBarX(mNivel.getBarX() - 10);
+                }
+                else{
+                    ((Timer)e.getSource()).stop();
+                }
+            }
+        });
     }
 }

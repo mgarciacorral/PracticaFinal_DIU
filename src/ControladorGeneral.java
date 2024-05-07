@@ -17,7 +17,7 @@ public class ControladorGeneral extends JFrame implements Observer {
     private ModeloDaltonicos mDalt;
     private ModeloIdiomas mIdioma;
     private ModeloControladorGeneral mContr;
-    private ControladorNivel nivel;
+
 
     public ControladorGeneral(){
         setTitle("BreakOut");
@@ -49,7 +49,6 @@ public class ControladorGeneral extends JFrame implements Observer {
         tutorial = new Tutorial(mDalt, mIdioma, mContr);
 
         mContr.setMn(menuNiveles);
-        mContr.setNivel(nivel);
         mDalt.setModoDaltonico(datos.getModoDaltonico());
         mIdioma.setIdioma(datos.getIdioma());
 

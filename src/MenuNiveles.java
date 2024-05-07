@@ -1,15 +1,7 @@
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.Observable;
-import java.util.Observer;
 
 public class MenuNiveles extends Plantilla {
     private VistaBotonNivel[] botones = new VistaBotonNivel[16];
@@ -18,7 +10,7 @@ public class MenuNiveles extends Plantilla {
     private JPanel panelLabel = new JPanel();
     private VistaLabel label;
     private Usuario user;
-    private String[] confNivel = {"110011002200110011002200110011", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
+    private String[] semillasNiveles = {"110011002200110011002200110011", "444440444440444440444440444440444440444440444440444440444440444440", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
 
     public MenuNiveles(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr){
         super(mDalt, mIdiomas);
@@ -34,7 +26,7 @@ public class MenuNiveles extends Plantilla {
             panelBoton.add(botones[i]);
             botones[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    new ControladorNivel(Integer.parseInt(((VistaBotonNivel)e.getSource()).getText()), user, confNivel[Integer.parseInt(((VistaBotonNivel)e.getSource()).getText()) - 1], mDalt, mIdiomas, mContr);
+                    new ControladorNivel(Integer.parseInt(((VistaBotonNivel)e.getSource()).getText()), user, semillasNiveles[Integer.parseInt(((VistaBotonNivel)e.getSource()).getText()) - 1], mDalt, mIdiomas, mContr);
                     mContr.setVisible(false);
                     if(DatosSerialiazados.getInstancia().getSonido())
                     {
