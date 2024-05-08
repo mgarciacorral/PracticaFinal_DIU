@@ -66,4 +66,16 @@ public class Nivel {
 
         return romper;
     }
+
+    public void buffoLadrillos()
+    {
+        for(Ladrillo ladrillo : ladrillos)
+        {
+            if(ladrillo.refuerzo < 4 && ladrillo.refuerzo != -1)
+            {
+                ladrillo.refuerzo++;
+                ladrillo.setLadrilloImg(ladrillo.refuerzo);
+            }
+        }
+    }
 }

@@ -5,14 +5,12 @@ import java.util.Observer;
 
 class VistaNivel extends JPanel implements Observer {
     private ModeloNivel mNivel;
-    private ControladorNivel contNivel;
     private ModeloDaltonicos mDalt;
     private ModeloIdiomas mIdioma;
     private ImageIcon bar;
     private ArrayList<ImageIcon> vidas = new ArrayList<ImageIcon>();
 
-    public VistaNivel(ControladorNivel contNivel, ModeloNivel mNivel, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma) {
-        this.contNivel = contNivel;
+    public VistaNivel(ModeloNivel mNivel, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma) {
         this.mNivel = mNivel;
         this.mDalt = mDalt;
         this.mIdioma = mIdioma;
@@ -28,6 +26,7 @@ class VistaNivel extends JPanel implements Observer {
         g.setColor(mDalt.getColorFondo());
         g.fillRect(0, 0, 700, 50);
 
+        bar = mDalt.getBarra();
         bar.paintIcon(this, g, mNivel.getBarX(), 600);
 
         for(Ball ball : mNivel.getBalls()){

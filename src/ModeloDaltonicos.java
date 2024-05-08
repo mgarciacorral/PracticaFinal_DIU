@@ -232,4 +232,8 @@ public class ModeloDaltonicos extends Observable {
     public ImageIcon getBuff(int i) {
         return buffs[i];
     }
+
+    public void setBarra(ImageIcon barra) {
+        this.barra = barra;
+    }
 }

@@ -11,7 +11,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ControladorNivel extends JFrame {
-    private Clip musicaFondo;
     private ModeloNivel mNivel;
     private Nivel nivel;
     private Timer moverBarraDerecha, moverBarraIzquierda;
@@ -28,8 +27,6 @@ public class ControladorNivel extends JFrame {
         this.mDalt = mDalt;
         this.mIdioma = mIdioma;
         this.mContr = mContr;
-        setMusicaFondo();
-        controlarMusica();
         setTimers();
         confControladorNivel(semilla, numNv);
     }
@@ -48,7 +45,7 @@ public class ControladorNivel extends JFrame {
 
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(new byte[0]).getImage(), new Point(), "invisibleCursor"));
 
-        canvas = new VistaNivel(this, mNivel, mDalt, mIdioma);
+        canvas = new VistaNivel(mNivel, mDalt, mIdioma);
         mNivel.addObserver(canvas);
         canvas.setOpaque(false);
         add(canvas);
@@ -80,7 +77,7 @@ public class ControladorNivel extends JFrame {
                         {
                             mContr.musicaOn();
                         }
-                        musicaFondo.stop();
+                        mNivel.stopMusic();
                         dispose();
                     }
 
@@ -99,7 +96,7 @@ public class ControladorNivel extends JFrame {
                             {
                                 mContr.musicaOn();
                             }
-                            musicaFondo.stop();
+                            mNivel.stopMusic();
                             dispose();
                         }else
                         {
@@ -114,7 +111,7 @@ public class ControladorNivel extends JFrame {
                         {
                             mContr.musicaOn();
                         }
-                        musicaFondo.stop();
+                        mNivel.stopMusic();
                         dispose();
                     }
                 }
@@ -150,36 +147,6 @@ public class ControladorNivel extends JFrame {
             }
         });
         setVisible(true);
-    }
-
-    public void setMusicaFondo()
-    {
-        try
-        {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/resources/Sonidos/musicaEpica.wav").getAbsoluteFile());
-            musicaFondo = AudioSystem.getClip();
-            musicaFondo.open(audioInputStream);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void controlarMusica()
-    {
-        if(DatosSerialiazados.getInstancia().getSonido())
-        {
-            new Thread(new Runnable() {
-                public void run() {
-                    musicaFondo.loop(Clip.LOOP_CONTINUOUSLY);
-                    musicaFondo.start();
-                }
-            }).start();
-        }
-        else
-        {
-            musicaFondo.stop();
-        }
     }
 
     public void setTimers()
