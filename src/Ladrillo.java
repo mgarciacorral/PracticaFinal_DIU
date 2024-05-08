@@ -11,6 +11,7 @@ public class Ladrillo extends Rectangle{
     private ImageIcon ladrilloImg;
     private ModeloDaltonicos mDalt;
     private boolean chocado = false;
+    private boolean mostrandoPuntos = false;
 
 
     public Ladrillo(int ladrilloX, int ladrilloY, int ladrilloW, int ladrilloH, int refuerzo, ModeloDaltonicos mDalt){
@@ -59,6 +60,14 @@ public class Ladrillo extends Rectangle{
 
     public ImageIcon getLadrilloImg(){
         return ladrilloImg;
+    }
+
+    public boolean getMostrandoPuntos() {
+        return mostrandoPuntos;
+    }
+
+    public void setMostrandoPuntos(boolean mostrandoPuntos) {
+        this.mostrandoPuntos = mostrandoPuntos;
     }
 
     public void setRectangle(){

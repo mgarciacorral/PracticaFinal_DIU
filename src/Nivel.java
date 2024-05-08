@@ -61,7 +61,6 @@ public class Nivel {
         }
         else
         {
-            ladrillos.remove(indice);
             romper = true;
         }
 

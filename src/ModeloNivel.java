@@ -1,5 +1,3 @@
-import com.sun.jdi.VMCannotBeModifiedException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +12,7 @@ public class ModeloNivel extends Observable {
     private int barW, barH;
     private ArrayList <Ball> balls = new ArrayList<>();
     private ArrayList <Buff> buffs = new ArrayList<>();
+    private ArrayList <Ladrillo> ladrillosGolpeados = new ArrayList<>();
     private Timer juego;
     private int puntos = 0;
     private int initialSpeedX = 4;
@@ -86,8 +85,6 @@ public class ModeloNivel extends Observable {
             gameOver = false;
         }
         this.init();
-        setChanged();
-        notifyObservers();
     }
 
     public void pauseGame(){
@@ -119,7 +116,7 @@ public class ModeloNivel extends Observable {
             public void actionPerformed(ActionEvent e){
                 barRect.setBounds(barX, 600, barW, barH);
                 if(crearPelota){
-                    balls.add(new Ball());
+                    balls.add(new Ball(mDalt));
                     crearPelota = false;
                 }
 
@@ -156,18 +153,22 @@ public class ModeloNivel extends Observable {
                         if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXUp))
                         {
                             ball.speedY = -6;
+                            nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXDown))
                         {
                             ball.speedY = 6;
+                            nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYLeft))
                         {
                             ball.speedX = -6;
+                            nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYRight))
                         {
                             ball.speedX = 6;
+                            nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
                         }
                     }
@@ -212,8 +213,9 @@ public class ModeloNivel extends Observable {
     {
         if(nivel.getLadrillos().get(j).refuerzo != -1)
         {
-            mostrarMasPuntos(j);
             puntos += 10;
+            nivel.getLadrillos().get(j).setChocado(true);
+            ladrillosGolpeados.add(nivel.getLadrillos().get(j));
             if(nivel.restarVidaLadrillo(j)){
                 if(numLadrillos() == 0){
                     texto = mIdioma.translate("¡¡Has ganado!! <Enter> para volver al menu");
@@ -235,31 +237,25 @@ public class ModeloNivel extends Observable {
                     default:
                         break;
                 }
+                nivel.getLadrillos().remove(j);
             }
         }
+    }
+
+    public ArrayList<Ladrillo> getLadrillosGolpeados(){
+        return ladrillosGolpeados;
     }
 
     public boolean getGameOver(){
         return gameOver;
     }
 
-    public void mostrarMasPuntos(int i)
-    {
-        nivel.getLadrillos().get(i).setChocado(true);
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                nivel.getLadrillos().get(i).setChocado(false);
-            }
-        }).start();
-    }
-
     public ArrayList<Buff> getBuffs(){
         return buffs;
+    }
+
+    public ArrayList<Ladrillo> getLadrillos(){
+        return nivel.getLadrillos();
     }
 
     public void setCrearPelota(boolean crearPelota){
