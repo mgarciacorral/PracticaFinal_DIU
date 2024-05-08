@@ -97,12 +97,15 @@ public class Ranking extends Plantilla
             users.sort((u1, u2) -> u2.getPuntuacion(nivel) - u1.getPuntuacion(nivel));
             for (int i = 0; i < max; i++)
             {
-                VistaLabel label = new VistaLabel(mDalt, mIdiomas, (i + 1) + ". " + users.get(i).getNombre() + " - " + users.get(i).getPuntuacion(nivel));
-                label.setFont(new Font("Showcard Gothic", Font.BOLD, 30));
-                label.setForeground(mDalt.getColorLetraBoton());
-                label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-                label.setAlignmentX(Component.CENTER_ALIGNMENT);
-                panelRanking.add(label);
+                if(users.get(i).getPuntuacion(nivel) != 0)
+                {
+                    VistaLabel label = new VistaLabel(mDalt, mIdiomas, (i + 1) + ". " + users.get(i).getNombre() + " - " + users.get(i).getPuntuacion(nivel));
+                    label.setFont(new Font("Showcard Gothic", Font.BOLD, 30));
+                    label.setForeground(mDalt.getColorLetraBoton());
+                    label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+                    label.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    panelRanking.add(label);
+                }
             }
         }
         else
