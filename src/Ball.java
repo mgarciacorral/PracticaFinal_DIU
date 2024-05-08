@@ -16,7 +16,7 @@ public class Ball extends ImageIcon{
     public Rectangle ballRect = new Rectangle(250, 600, 36, 36);
     private ModeloDaltonicos mDalt;
 
-    public Ball(ModeloDaltonicos mDalt){
+    public Ball(ModeloDaltonicos mDalt, int intialSpeedX){
         this.mDalt = mDalt;
         setSkin();
         speedX = intialSpeedX;

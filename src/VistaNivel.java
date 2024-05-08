@@ -42,7 +42,7 @@ class VistaNivel extends JPanel implements Observer {
             vidas.get(i).paintIcon(this, g, 0 + (i * 50), 0);
         }
 
-        for(Buff buff : mNivel.getBuffs()){
+        for(BuffGenerico buff : mNivel.getBuffs()){
             buff.paintIcon(this, g, buff.getBallX(), buff.getBallY());
         }
 
@@ -88,10 +88,8 @@ class VistaNivel extends JPanel implements Observer {
         Image scaleImage = vidas.get(0).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         vidas.set(0, new ImageIcon(scaleImage));
 
-        scaleImage = vidas.get(1).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         vidas.set(1, new ImageIcon(scaleImage));
 
-        scaleImage = vidas.get(2).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         vidas.set(2, new ImageIcon(scaleImage));
     }
 

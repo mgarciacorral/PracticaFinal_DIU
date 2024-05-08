@@ -11,7 +11,7 @@ public class ModeloNivel extends Observable {
     private int barX = 250;
     private int barW, barH;
     private ArrayList <Ball> balls = new ArrayList<>();
-    private ArrayList <Buff> buffs = new ArrayList<>();
+    private ArrayList <BuffGenerico> buffs = new ArrayList<>();
     private ArrayList <Ladrillo> ladrillosGolpeados = new ArrayList<>();
     private Timer juego;
     private int puntos = 0;
@@ -19,7 +19,7 @@ public class ModeloNivel extends Observable {
     private int initialSpeedY = -4;
     private String texto = "";
     private boolean gameStarted = false;
-    private boolean crearPelota = false;
+    private int numCrearPelotas = 0;
     private Rectangle barRect = new Rectangle(250, 600, 100, 20);
     private int vidas = 3;
     private int numNv;
@@ -78,7 +78,7 @@ public class ModeloNivel extends Observable {
 
     public void startGame(){
         texto = "";
-        crearPelota = true;
+        numCrearPelotas = 1;
         gameStarted = true;
         if (gameOver){
             vidas = 3;
@@ -112,16 +112,35 @@ public class ModeloNivel extends Observable {
     }
 
     public void init() {
-        juego = new Timer(2, new ActionListener() {
+        juego = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 barRect.setBounds(barX, 600, barW, barH);
-                if(crearPelota){
-                    balls.add(new Ball(mDalt));
-                    crearPelota = false;
+                for(int i = 0; i < numCrearPelotas; i++){
+                    balls.add(new Ball(mDalt, new Random().nextInt(13) - 6));
                 }
+                numCrearPelotas = 0;
 
                 for (Ball ball : balls) {
                     ball.move();
+
+                    //comprueba q la bola no ha caido
+                    if(ball.ballY > 800){
+                        balls.remove(ball);
+                        if(balls.size() == 0) {
+                            gameStarted = false;
+                            juego.stop();
+                            vidas--;
+                            if (vidas == 0) {
+                                texto = mIdioma.translate("¡¡Has perdido!! <Enter> para volver al menu");
+                                gameStarted = false;
+                                gameOver = true;
+                            } else {
+                                texto = mIdioma.translate("Pulsa <Enter> para lanzar la bola o <Esc> para salir");
+                            }
+                            juego.stop();
+                        }
+                    }
+
                     //comprueba choque con paredes
                     if (ball.ballX < 0 || ball.ballX > 660) {
                         ball.speedX = -ball.speedX;
@@ -172,25 +191,6 @@ public class ModeloNivel extends Observable {
                             comprobarChoque(j);
                         }
                     }
-
-                    //comprueba q la bola no ha caido
-                    if(ball.ballY > 800){
-                        if(balls.size() != 1){
-                            balls.remove(ball);
-                        }else{
-                            gameStarted = false;
-                            juego.stop();
-                            vidas--;
-                            if(vidas == 0){
-                                texto = mIdioma.translate("¡¡Has perdido!! <Enter> para volver al menu");
-                                gameStarted = false;
-                                gameOver = true;
-                            }else{
-                                texto = mIdioma.translate("Pulsa <Enter> para lanzar la bola o <Esc> para salir");
-                            }
-                            juego.stop();
-                        }
-                    }
                 }
 
                 for (int i = 0; i < buffs.size(); i++) {
@@ -217,6 +217,15 @@ public class ModeloNivel extends Observable {
             nivel.getLadrillos().get(j).setChocado(true);
             ladrillosGolpeados.add(nivel.getLadrillos().get(j));
             if(nivel.restarVidaLadrillo(j)){
+                switch(new Random().nextInt(5))
+                {
+                    case 0:
+                        buffs.add(new Buff3BolasMas(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                        break;
+                    default:
+                        break;
+                }
+                nivel.getLadrillos().remove(j);
                 if(numLadrillos() == 0){
                     texto = mIdioma.translate("¡¡Has ganado!! <Enter> para volver al menu");
                     juego.stop();
@@ -229,15 +238,6 @@ public class ModeloNivel extends Observable {
                     gameStarted = false;
                     gameOver = true;
                 }
-                switch(new Random().nextInt(10))
-                {
-                    case 0:
-                        buffs.add(new Buff(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
-                        break;
-                    default:
-                        break;
-                }
-                nivel.getLadrillos().remove(j);
             }
         }
     }
@@ -250,7 +250,7 @@ public class ModeloNivel extends Observable {
         return gameOver;
     }
 
-    public ArrayList<Buff> getBuffs(){
+    public ArrayList<BuffGenerico> getBuffs(){
         return buffs;
     }
 
@@ -258,7 +258,11 @@ public class ModeloNivel extends Observable {
         return nivel.getLadrillos();
     }
 
-    public void setCrearPelota(boolean crearPelota){
-        this.crearPelota = crearPelota;
+    public void setNumCrearPelotas(int numCrearPelotas){
+        this.numCrearPelotas = numCrearPelotas;
+    }
+
+    public int getNumCrearPelotas(){
+        return numCrearPelotas;
     }
 }
