@@ -120,12 +120,10 @@ public class ModeloNivel extends Observable {
                 }
                 numCrearPelotas = 0;
 
-                for (Ball ball : balls) {
-                    ball.move();
-
-                    //comprueba q la bola no ha caido
-                    if(ball.ballY > 800){
-                        balls.remove(ball);
+                for(int i = 0; i < balls.size(); i++){
+                    //comprueba si la bola ha caido
+                    if(balls.get(i).ballY > 800){
+                        balls.remove(i);
                         if(balls.size() == 0) {
                             gameStarted = false;
                             juego.stop();
@@ -140,6 +138,10 @@ public class ModeloNivel extends Observable {
                             juego.stop();
                         }
                     }
+                }
+
+                for (Ball ball : balls) {
+                    ball.move();
 
                     //comprueba choque con paredes
                     if (ball.ballX < 0 || ball.ballX > 660) {

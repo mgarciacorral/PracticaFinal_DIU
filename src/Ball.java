@@ -11,7 +11,7 @@ public class Ball extends ImageIcon{
     public int ballY = 562;
     public int ballW, ballH;
     public float speedX, speedY;
-    public int intialSpeedX = 6;
+    public int intialSpeedX;
     public int intialSpeedY = -6;
     public Rectangle ballRect = new Rectangle(250, 600, 36, 36);
     private ModeloDaltonicos mDalt;
