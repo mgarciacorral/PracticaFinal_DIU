@@ -101,12 +101,15 @@ public class ModeloNivel extends Observable {
     public void pauseGame(){
         juego.stop();
         texto = mIdioma.translate("Pulsa <Enter> para lanzar la bola o <Esc> para salir");
+        musicaFondo.stop();
         setChanged();
         notifyObservers();
     }
 
     public void continuar(){
         texto = "";
+        juego.start();
+        musicaFondo.start();
         setChanged();
         notifyObservers();
     }

@@ -130,14 +130,6 @@ public class ControladorNivel extends JFrame {
             }
         });
 
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if(!mNivel.getGameStarted()){
-                    mNivel.startGame();
-                }
-            }
-        });
-
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 if(evt.getX() > 100 && evt.getX() < 610 && mNivel.getGameStarted()){

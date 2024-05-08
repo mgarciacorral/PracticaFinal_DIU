@@ -74,7 +74,7 @@ public class Login extends Plantilla{
                 if(usuario.getText().length() > 0){
                     boolean encontrado = false;
                     for (Usuario user : DatosSerialiazados.getInstancia().getUsuarios()) {
-                        if(user.getNombre().equals(usuario.getText())){
+                        if(user.getNombre().equalsIgnoreCase(usuario.getText())){
                             encontrado = true;
                             mContr.getMenuNiveles().setUser(user);
                             mContr.getMenuNiveles().activarNiveles();

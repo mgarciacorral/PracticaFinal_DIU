@@ -10,7 +10,7 @@ public class MenuNiveles extends Plantilla {
     private JPanel panelLabel = new JPanel();
     private VistaLabel label;
     private Usuario user;
-    private String[] semillasNiveles = {"110011002200110011002200110011", "020020020020020020020020000000200002011110", "000033003300330000000022002200220000000011001100110000", "210012121121210012121121210012120021211112550055", "330033330033550555220022220022555055110011110011550555", "331133312213120021203302203302120021012210001100550055", "00000003003003443013333102200133331034430030030", "7", "8", "9", "10", "11", "12", "13", "14", "15"};
+    private String[] semillasNiveles = {"110011002200110011002200110011", "020020020020020020020020000000200002011110", "000033003300330000000022002200220000000011001100110000", "210012121121210012121121210012120021211112550055", "330033330033550555220022220022555055110011110011550555", "331133312213120021203302203302120021012210001100550055", "000000030030034430133331002200133331034430030030", "1", "1", "1", "1", "1", "1", "1", "1", "1"};
 
     public MenuNiveles(ModeloDaltonicos mDalt, ModeloIdiomas mIdiomas, ModeloControladorGeneral mContr){
         super(mDalt, mIdiomas);
@@ -58,8 +58,17 @@ public class MenuNiveles extends Plantilla {
 
     public void activarNiveles()
     {
+        desactivarNiveles();
         for (int i = 0; i < user.getNiveles(); i++) {
-            botones[i].setEnabled(true);
+            if(i<16){
+                botones[i].setEnabled(true);
+            }
+        }
+    }
+
+    public void desactivarNiveles(){
+        for (int i = 0; i < botones.length; i++) {
+            botones[i].setEnabled(false);
         }
     }
 
