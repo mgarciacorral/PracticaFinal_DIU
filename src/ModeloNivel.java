@@ -174,11 +174,22 @@ public class ModeloNivel extends Observable {
                             float speedMultiplier = colisionPoint / 100;
                             ball.speedY = -Math.abs(initialSpeedY * speedMultiplier);
                             ball.speedX = -(initialSpeedX * (1 - speedMultiplier));
+                            if(ball.speedY > -3)
+                            {
+                                ball.speedY = -3;
+                            }
                         } else if (midPointBallX > midPointBarX) {
                             float colisionPoint = 2 * (midPointBallX - midPointBarX);
                             float speedMultiplier = (100 - colisionPoint) / 100;
+                            if(speedMultiplier < 0.5){
+                                speedMultiplier += 0.4;
+                            }
                             ball.speedY = -Math.abs(initialSpeedY * speedMultiplier);
                             ball.speedX = initialSpeedX * (1 - speedMultiplier);
+                            if(ball.speedY > -3)
+                            {
+                                ball.speedY = -3;
+                            }
                         }
                         ball.playSound();
                     }
