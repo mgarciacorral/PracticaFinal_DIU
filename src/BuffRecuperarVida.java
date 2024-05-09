@@ -10,6 +10,7 @@ public class BuffRecuperarVida extends BuffGenerico
         if(mNivel.getVidas() < 3)
         {
             mNivel.setVidas(mNivel.getVidas() + 1);
+            playPowerUpSound();
         }
     }
 }

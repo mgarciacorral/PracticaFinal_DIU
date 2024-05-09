@@ -8,5 +8,7 @@ public class Buff3BolasMas extends BuffGenerico
     public void ejecutarAccion()
     {
         mNivel.setNumCrearPelotas(mNivel.getNumCrearPelotas() + 3);
+        playPowerUpSound();
+
     }
 }

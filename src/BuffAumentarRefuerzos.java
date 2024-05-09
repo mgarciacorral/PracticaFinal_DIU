@@ -8,5 +8,6 @@ public class BuffAumentarRefuerzos extends BuffGenerico
     public void ejecutarAccion()
     {
         mNivel.getNivel().buffoLadrillos();
+        playPowerDownSound();
     }
 }

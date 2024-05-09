@@ -12,6 +12,7 @@ public class BuffMusica extends BuffGenerico
             mNivel.setMusicaFondo(1);
             mNivel.controlarMusica();
             mNivel.setBuffMusica(true);
+            playPowerDownSound();
         }
     }
 }

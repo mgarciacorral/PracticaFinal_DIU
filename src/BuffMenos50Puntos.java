@@ -7,5 +7,6 @@ public class BuffMenos50Puntos extends BuffGenerico
 
     public void ejecutarAccion() {
         mNivel.setPuntos(mNivel.getPuntos() - 50);
+        playPowerDownSound();
     }
 }

@@ -29,6 +29,8 @@ public class BuffBarraGrande extends BuffGenerico
                     mNivel.setBuffTamanoBarra(false);
                 }
             }).start();
+
+            playPowerUpSound();
         }
     }
 }

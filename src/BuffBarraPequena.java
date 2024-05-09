@@ -30,5 +30,7 @@ public class BuffBarraPequena extends BuffGenerico
                 }
             }).start();
         }
+
+        playPowerDownSound();
     }
 }

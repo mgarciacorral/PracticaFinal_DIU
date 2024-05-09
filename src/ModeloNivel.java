@@ -180,6 +180,7 @@ public class ModeloNivel extends Observable {
                             ball.speedY = -Math.abs(initialSpeedY * speedMultiplier);
                             ball.speedX = initialSpeedX * (1 - speedMultiplier);
                         }
+                        ball.playSound();
                     }
 
                     //comprueba choque con ladrillos
@@ -189,25 +190,30 @@ public class ModeloNivel extends Observable {
                             ball.speedY = -6;
                             nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
+                            ball.playSound();
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXDown))
                         {
                             ball.speedY = 6;
                             nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
+                            ball.playSound();
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYLeft))
                         {
                             ball.speedX = -6;
                             nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
+                            ball.playSound();
                         }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYRight))
                         {
                             ball.speedX = 6;
                             nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
+                            ball.playSound();
                         }
                     }
                 }
 
+                //comprueba choque con buffs
                 for (int i = 0; i < buffs.size(); i++) {
                     buffs.get(i).move();
                     if(buffs.get(i).getBallRect().intersects(barRect)){
