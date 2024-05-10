@@ -22,6 +22,8 @@ public class ControladorNivel extends JFrame {
     private ModeloControladorGeneral mContr;
     private Usuario user;
 
+    private Robot robot;
+
     public ControladorNivel(int numNv, Usuario user, String semilla, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
         this.user = user;
         this.mDalt = mDalt;
@@ -34,6 +36,11 @@ public class ControladorNivel extends JFrame {
     public void confControladorNivel(String semilla, int numNv){
         nivel = new Nivel(semilla, mDalt);
         mNivel = new ModeloNivel(nivel, user, numNv, mIdioma, mDalt);
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
 
         setIconImage(new ImageIcon("src/resources/Imagenes/logo2.png").getImage());
         setTitle("Break out");
@@ -44,6 +51,7 @@ public class ControladorNivel extends JFrame {
         getContentPane().setBackground(mDalt.getColorFondo());
 
         setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(new byte[0]).getImage(), new Point(), "invisibleCursor"));
+
 
         canvas = new VistaNivel(mNivel, mDalt, mIdioma);
         mNivel.addObserver(canvas);
@@ -133,13 +141,14 @@ public class ControladorNivel extends JFrame {
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 if(evt.getX() > 100 && evt.getX() < 610 && mNivel.getGameStarted()){
-                    int x = evt.getX();
-                    mNivel.setBarX(x-100);
+                        int x = evt.getX();
+                        mNivel.setBarX(x-100);
                 }
             }
         });
         setVisible(true);
     }
+
 
     public void setTimers()
     {
