@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observer;
 
-class VistaNivel extends JPanel implements Observer {
+public class VistaNivel extends JPanel implements Observer {
     private ModeloNivel mNivel;
     private ModeloDaltonicos mDalt;
     private ModeloIdiomas mIdioma;
