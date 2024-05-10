@@ -117,7 +117,7 @@ public class ModeloNivel extends Observable {
     public int numLadrillos(){
         int num = 0;
         for (Ladrillo ladrillo : nivel.getLadrillos()) {
-            if(ladrillo.refuerzo != -1){
+            if(ladrillo.getRefuerzo() != -1){
                 num++;
             }
         }
@@ -135,7 +135,7 @@ public class ModeloNivel extends Observable {
 
                 for(int i = 0; i < balls.size(); i++){
                     //comprueba si la bola ha caido
-                    if(balls.get(i).ballY > 800){
+                    if(balls.get(i).getBallY() > 800){
                         balls.remove(i);
                         if(balls.size() == 0) {
                             gameStarted = false;
@@ -157,26 +157,26 @@ public class ModeloNivel extends Observable {
                     ball.move();
 
                     //comprueba choque con paredes
-                    if (ball.ballX < 0 || ball.ballX > 660) {
-                        ball.speedX = -ball.speedX;
+                    if (ball.getBallX() < 0 || ball.getBallX() > 660) {
+                        ball.setSpeedX(-ball.getSpeedX());;
                     }
 
-                    if (ball.ballY < 50 || ball.ballY == 49) {
-                        ball.speedY = Math.abs(ball.speedY) + 1;
+                    if (ball.getBallY() < 50 || ball.getBallY() == 49) {
+                        ball.setSpeedY(Math.abs(ball.getSpeedY()) + 1);
                     }
 
                     //comprueba choque con barra
-                    if (ball.ballRect.intersects(barRect)) {
-                        int midPointBallX = ball.ballX + ball.ballW / 2;
+                    if (ball.getBallRect().intersects(barRect)) {
+                        int midPointBallX = ball.getBallX() + ball.getBallW() / 2;
                         int midPointBarX = barX + barW / 2;
                         if (midPointBallX < midPointBarX) {
                             float colisionPoint = 2 * (midPointBallX - barX);
                             float speedMultiplier = colisionPoint / 100;
-                            ball.speedY = -Math.abs(initialSpeedY * speedMultiplier);
-                            ball.speedX = -(initialSpeedX * (1 - speedMultiplier));
-                            if(ball.speedY > -3)
+                            ball.setSpeedY(-Math.abs(initialSpeedY * speedMultiplier));
+                            ball.setSpeedX(-(initialSpeedX * (1 - speedMultiplier)));
+                            if(ball.getBallY() > -3)
                             {
-                                ball.speedY = -3;
+                                ball.setSpeedY(-3);
                             }
                         } else if (midPointBallX > midPointBarX) {
                             float colisionPoint = 2 * (midPointBallX - midPointBarX);
@@ -184,11 +184,11 @@ public class ModeloNivel extends Observable {
                             if(speedMultiplier < 0.5){
                                 speedMultiplier += 0.4;
                             }
-                            ball.speedY = -Math.abs(initialSpeedY * speedMultiplier);
-                            ball.speedX = initialSpeedX * (1 - speedMultiplier);
-                            if(ball.speedY > -3)
+                            ball.setSpeedY(-Math.abs(initialSpeedY * speedMultiplier));
+                            ball.setSpeedX(initialSpeedX * (1 - speedMultiplier));
+                            if(ball.getSpeedY() > -3)
                             {
-                                ball.speedY = -3;
+                                ball.setSpeedY(-3);
                             }
                         }
                         ball.playSound();
@@ -196,27 +196,27 @@ public class ModeloNivel extends Observable {
 
                     //comprueba choque con ladrillos
                     for(int j = 0; j < nivel.getLadrillos().size(); j++){
-                        if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXUp))
+                        if(ball.getBallRect().intersects(nivel.getLadrillos().get(j).getLadrilloRectXUp()))
                         {
-                            ball.speedY = -6;
+                            ball.setSpeedY(-6);
                             nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
                             ball.playSound();
-                        }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectXDown))
+                        }else if(ball.getBallRect().intersects(nivel.getLadrillos().get(j).getLadrilloRectXDown()))
                         {
-                            ball.speedY = 6;
+                            ball.setSpeedY(6);
                             nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
                             ball.playSound();
-                        }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYLeft))
+                        }else if(ball.getBallRect().intersects(nivel.getLadrillos().get(j).getLadrilloRectYLeft()))
                         {
-                            ball.speedX = -6;
+                            ball.setSpeedX(-6);
                             nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
                             ball.playSound();
-                        }else if(ball.ballRect.intersects(nivel.getLadrillos().get(j).ladrilloRectYRight))
+                        }else if(ball.getBallRect().intersects(nivel.getLadrillos().get(j).getLadrilloRectYRight()))
                         {
-                            ball.speedX = 6;
+                            ball.setSpeedX(6);
                             nivel.getLadrillos().get(j).setChocado(true);
                             comprobarChoque(j);
                             ball.playSound();
@@ -243,7 +243,7 @@ public class ModeloNivel extends Observable {
     //en caso de choque con ladrillo se comprueba si es destruido y si se ha ganado
     public void comprobarChoque(int j)
     {
-        if(nivel.getLadrillos().get(j).refuerzo != -1)
+        if(nivel.getLadrillos().get(j).getRefuerzo() != -1)
         {
             puntos += 10;
             nivel.getLadrillos().get(j).setChocado(true);
@@ -254,37 +254,37 @@ public class ModeloNivel extends Observable {
                     case 0:
                         if(!buffTamanoBarra)
                         {
-                            buffs.add(new BuffBarraGrande(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                            buffs.add(new BuffBarraGrande(nivel.getLadrillos().get(j).getLadrilloX(), nivel.getLadrillos().get(j).getLadrilloY(), mDalt, this));
                         }
                         break;
                     case 1:
                         if(!buffTamanoBarra)
                         {
-                            buffs.add(new BuffBarraPequena(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                            buffs.add(new BuffBarraPequena(nivel.getLadrillos().get(j).getLadrilloX(), nivel.getLadrillos().get(j).getLadrilloY(), mDalt, this));
                         }
                         break;
                     case 2:
                         if(!buffMusica)
                         {
-                            buffs.add(new BuffMusica(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                            buffs.add(new BuffMusica(nivel.getLadrillos().get(j).getLadrilloX(), nivel.getLadrillos().get(j).getLadrilloY(), mDalt, this));
                         }
                         break;
                     case 3:
-                        buffs.add(new Buff3BolasMas(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                        buffs.add(new Buff3BolasMas(nivel.getLadrillos().get(j).getLadrilloX(), nivel.getLadrillos().get(j).getLadrilloY(), mDalt, this));
                         break;
                     case 4:
-                        buffs.add(new BuffMas50Puntos(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                        buffs.add(new BuffMas50Puntos(nivel.getLadrillos().get(j).getLadrilloX(), nivel.getLadrillos().get(j).getLadrilloY(), mDalt, this));
                         break;
                     case 5:
-                        buffs.add(new BuffMenos50Puntos(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                        buffs.add(new BuffMenos50Puntos(nivel.getLadrillos().get(j).getLadrilloX(), nivel.getLadrillos().get(j).getLadrilloY(), mDalt, this));
                         break;
                     case 6:
-                        buffs.add(new BuffAumentarRefuerzos(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                        buffs.add(new BuffAumentarRefuerzos(nivel.getLadrillos().get(j).getLadrilloX(), nivel.getLadrillos().get(j).getLadrilloY(), mDalt, this));
                         break;
                     case 7:
                         if(vidas < 3)
                         {
-                            buffs.add(new BuffRecuperarVida(nivel.getLadrillos().get(j).ladrilloX, nivel.getLadrillos().get(j).ladrilloY, mDalt, this));
+                            buffs.add(new BuffRecuperarVida(nivel.getLadrillos().get(j).getLadrilloX(), nivel.getLadrillos().get(j).getLadrilloY(), mDalt, this));
                         }
                         break;
                     default:

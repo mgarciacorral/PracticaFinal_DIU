@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Nivel {
-    public String semilla;
+    private String semilla;
     private ArrayList<Ladrillo> ladrillos = new ArrayList<>();
     private ModeloDaltonicos mDalt;
 
@@ -54,10 +54,10 @@ public class Nivel {
 
     public boolean restarVidaLadrillo(int indice){
         boolean romper = false;
-        if(ladrillos.get(indice).refuerzo != 0)
+        if(ladrillos.get(indice).getRefuerzo() != 0)
         {
-            ladrillos.get(indice).refuerzo--;
-            ladrillos.get(indice).setLadrilloImg(ladrillos.get(indice).refuerzo);
+            ladrillos.get(indice).setRefuerzo(ladrillos.get(indice).getRefuerzo() - 1);
+            ladrillos.get(indice).setLadrilloImg(ladrillos.get(indice).getRefuerzo());
         }
         else
         {
@@ -71,10 +71,10 @@ public class Nivel {
     {
         for(Ladrillo ladrillo : ladrillos)
         {
-            if(ladrillo.refuerzo < 4 && ladrillo.refuerzo != -1)
+            if(ladrillo.getRefuerzo() < 4 && ladrillo.getRefuerzo() != -1)
             {
-                ladrillo.refuerzo++;
-                ladrillo.setLadrilloImg(ladrillo.refuerzo);
+                ladrillo.setRefuerzo(ladrillo.getRefuerzo() + 1);
+                ladrillo.setLadrilloImg(ladrillo.getRefuerzo());
             }
         }
     }

@@ -30,11 +30,11 @@ public class VistaNivel extends JPanel implements Observer {
         bar.paintIcon(this, g, mNivel.getBarX(), 600);
 
         for(Ball ball : mNivel.getBalls()){
-            ball.paintIcon(this, g, ball.ballX, ball.ballY);
+            ball.paintIcon(this, g, ball.getBallX(), ball.getBallY());
         }
 
         for(Ladrillo ladrillo : mNivel.getLadrillos()){
-            ladrillo.getLadrilloImg().paintIcon(this, g, ladrillo.ladrilloX, ladrillo.ladrilloY);
+            ladrillo.getLadrilloImg().paintIcon(this, g, ladrillo.getLadrilloX(), ladrillo.getLadrilloY());
         }
 
         for(int i = 0; i < mNivel.getVidas(); i++){
@@ -56,7 +56,7 @@ public class VistaNivel extends JPanel implements Observer {
         for(Ladrillo ladrillo : mNivel.getLadrillosGolpeados()){
             if(ladrillo.getChocado())
             {
-                g.drawString("+10", ladrillo.ladrilloX, ladrillo.ladrilloY);
+                g.drawString("+10", ladrillo.getLadrilloX(), ladrillo.getLadrilloY());
                 if(!ladrillo.getMostrandoPuntos())
                 {
                     ladrillo.setMostrandoPuntos(true);

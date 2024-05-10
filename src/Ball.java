@@ -7,12 +7,12 @@ import java.io.File;
 
 public class Ball extends ImageIcon{
 
-    public int ballX = 325;
-    public int ballY = 562;
-    public int ballW, ballH;
-    public float speedX, speedY;
-    public int intialSpeedY = -6;
-    public Rectangle ballRect = new Rectangle(250, 600, 36, 36);
+    private int ballX = 325;
+    private int ballY = 562;
+    private int ballW, ballH;
+    private float speedX, speedY;
+    private int intialSpeedY = -6;
+    private Rectangle ballRect = new Rectangle(250, 600, 36, 36);
     private ModeloDaltonicos mDalt;
     private Clip ballSound;
 
@@ -50,5 +50,41 @@ public class Ball extends ImageIcon{
     public void playSound(){
         ballSound.setFramePosition(0);
         ballSound.start();
+    }
+
+    public void setSpeedX(float speedX) {
+        this.speedX = speedX;
+    }
+
+    public void setSpeedY(float speedY) {
+        this.speedY = speedY;
+    }
+
+    public int getBallX() {
+        return ballX;
+    }
+
+    public int getBallY() {
+        return ballY;
+    }
+
+    public float getSpeedX() {
+        return speedX;
+    }
+
+    public float getSpeedY() {
+        return speedY;
+    }
+
+    public Rectangle getBallRect() {
+        return ballRect;
+    }
+
+    public int getBallW() {
+        return ballW;
+    }
+
+    public int getBallH() {
+        return ballH;
     }
 }

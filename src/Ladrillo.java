@@ -3,11 +3,11 @@ import java.awt.*;
 
 public class Ladrillo extends Rectangle{
 
-    public int ladrilloX, ladrilloY;
-    public int ladrilloW, ladrilloH;
-    public int refuerzo;
-    public Rectangle ladrilloRectXUp, ladrilloRectXDown;
-    public Rectangle ladrilloRectYLeft, ladrilloRectYRight;
+    private int ladrilloX, ladrilloY;
+    private int ladrilloW, ladrilloH;
+    private int refuerzo;
+    private Rectangle ladrilloRectXUp, ladrilloRectXDown;
+    private Rectangle ladrilloRectYLeft, ladrilloRectYRight;
     private ImageIcon ladrilloImg;
     private ModeloDaltonicos mDalt;
     private boolean chocado = false;
@@ -84,4 +84,84 @@ public class Ladrillo extends Rectangle{
     public void setChocado(boolean chocado){
         this.chocado = chocado;
     }
+
+    public Rectangle getLadrilloRectXUp() {
+        return ladrilloRectXUp;
+    }
+
+    public Rectangle getLadrilloRectXDown() {
+        return ladrilloRectXDown;
+    }
+
+    public Rectangle getLadrilloRectYLeft() {
+        return ladrilloRectYLeft;
+    }
+
+    public Rectangle getLadrilloRectYRight() {
+        return ladrilloRectYRight;
+    }
+
+    public int getRefuerzo() {
+        return refuerzo;
+    }
+
+    public void setRefuerzo(int refuerzo) {
+        this.refuerzo = refuerzo;
+    }
+
+    public int getLadrilloX() {
+        return ladrilloX;
+    }
+
+    public int getLadrilloY() {
+        return ladrilloY;
+    }
+
+    public int getLadrilloW() {
+        return ladrilloW;
+    }
+
+    public int getLadrilloH() {
+        return ladrilloH;
+    }
+
+    public void setLadrilloX(int ladrilloX) {
+        this.ladrilloX = ladrilloX;
+    }
+
+    public void setLadrilloY(int ladrilloY) {
+        this.ladrilloY = ladrilloY;
+    }
+
+    public void setLadrilloW(int ladrilloW) {
+        this.ladrilloW = ladrilloW;
+    }
+
+    public void setLadrilloH(int ladrilloH) {
+        this.ladrilloH = ladrilloH;
+    }
+
+    public void setLadrilloImg(ImageIcon ladrilloImg) {
+        this.ladrilloImg = ladrilloImg;
+    }
+
+    public void setLadrilloRectXUp(Rectangle ladrilloRectXUp) {
+        this.ladrilloRectXUp = ladrilloRectXUp;
+    }
+
+    public void setLadrilloRectXDown(Rectangle ladrilloRectXDown) {
+        this.ladrilloRectXDown = ladrilloRectXDown;
+    }
+
+    public void setLadrilloRectYLeft(Rectangle ladrilloRectYLeft) {
+        this.ladrilloRectYLeft = ladrilloRectYLeft;
+    }
+
+    public void setLadrilloRectYRight(Rectangle ladrilloRectYRight) {
+        this.ladrilloRectYRight = ladrilloRectYRight;
+    }
+
+
+
+
 }
