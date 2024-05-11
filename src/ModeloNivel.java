@@ -14,7 +14,7 @@ import java.util.Random;
 public class ModeloNivel extends Observable {
 
     private int barX = 250;
-    private int barW, barH;
+    private int barW, barH, barWTotal;
     private ArrayList <Ball> balls = new ArrayList<>();
     private ArrayList <BuffGenerico> buffs = new ArrayList<>();
     private ArrayList <Ladrillo> ladrillosGolpeados = new ArrayList<>();
@@ -25,7 +25,12 @@ public class ModeloNivel extends Observable {
     private String texto = "";
     private boolean gameStarted = false;
     private int numCrearPelotas = 0;
-    private Rectangle barRect = new Rectangle(250, 600, 100, 20);
+    private Rectangle barRect = new Rectangle(250, 600, 190, 20);
+    private Rectangle barRect0 = new Rectangle(250, 600, 38, 20);
+    private Rectangle barRect1 = new Rectangle(250 + 38 , 600, 38, 20);
+    private Rectangle barRect2 = new Rectangle(250 + 76, 600, 38, 20);
+    private Rectangle barRect3 = new Rectangle(250 + 114, 600, 38, 20);
+    private Rectangle barRect4 = new Rectangle(250 + 152, 600, 38, 20);
     private int vidas = 3;
     private int numNv;
     private boolean gameOver = false;
@@ -80,7 +85,8 @@ public class ModeloNivel extends Observable {
     }
 
     public void setBarW(int barW){
-        this.barW = barW;
+        this.barW = barW/5;
+        this.barWTotal = barW;
     }
 
     public void setBarH(int barH){
@@ -127,7 +133,12 @@ public class ModeloNivel extends Observable {
     public void init() {
         juego = new Timer(3, new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                barRect.setBounds(barX, 600, barW, barH);
+                barRect.setBounds(barX, 600, barWTotal, barH);
+                barRect0.setBounds(barX, 600, barW, barH);
+                barRect1.setBounds(barX + barW, 600, barW, barH);
+                barRect2.setBounds(barX + barW * 2, 600, barW, barH);
+                barRect3.setBounds(barX + barW * 3, 600, barW, barH);
+                barRect4.setBounds(barX + barW * 4, 600, barW, barH);
                 for(int i = 0; i < numCrearPelotas; i++){
                     balls.add(new Ball(mDalt, new Random().nextInt(13) - 6));
                 }
@@ -166,31 +177,25 @@ public class ModeloNivel extends Observable {
                     }
 
                     //comprueba choque con barra
-                    if (ball.getBallRect().intersects(barRect)) {
-                        int midPointBallX = ball.getBallX() + ball.getBallW() / 2;
-                        int midPointBarX = barX + barW / 2;
-                        if (midPointBallX < midPointBarX) {
-                            float colisionPoint = 2 * (midPointBallX - barX);
-                            float speedMultiplier = colisionPoint / 100;
-                            ball.setSpeedY(-Math.abs(initialSpeedY * speedMultiplier));
-                            ball.setSpeedX(-(initialSpeedX * (1 - speedMultiplier)));
-                            if(ball.getBallY() > -3)
-                            {
-                                ball.setSpeedY(-3);
-                            }
-                        } else if (midPointBallX > midPointBarX) {
-                            float colisionPoint = 2 * (midPointBallX - midPointBarX);
-                            float speedMultiplier = (100 - colisionPoint) / 100;
-                            if(speedMultiplier < 0.5){
-                                speedMultiplier += 0.4;
-                            }
-                            ball.setSpeedY(-Math.abs(initialSpeedY * speedMultiplier));
-                            ball.setSpeedX(initialSpeedX * (1 - speedMultiplier));
-                            if(ball.getSpeedY() > -3)
-                            {
-                                ball.setSpeedY(-3);
-                            }
-                        }
+                    if(ball.getBallRect().intersects(barRect0)){
+                        ball.setSpeedX(-6);
+                        ball.setSpeedY(-4);
+                        ball.playSound();
+                    }else if(ball.getBallRect().intersects(barRect1)){
+                        ball.setSpeedX(-4);
+                        ball.setSpeedY(-6);
+                        ball.playSound();
+                    }else if(ball.getBallRect().intersects(barRect2)){
+                        ball.setSpeedX(0);
+                        ball.setSpeedY(-6);
+                        ball.playSound();
+                    }else if(ball.getBallRect().intersects(barRect3)){
+                        ball.setSpeedX(6);
+                        ball.setSpeedY(-4);
+                        ball.playSound();
+                    }else if(ball.getBallRect().intersects(barRect4)){
+                        ball.setSpeedX(4);
+                        ball.setSpeedY(-6);
                         ball.playSound();
                     }
 
