@@ -3,10 +3,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -22,7 +19,6 @@ public class ControladorNivel extends JFrame {
     private ModeloControladorGeneral mContr;
     private Usuario user;
 
-    private Robot robot;
 
     public ControladorNivel(int numNv, Usuario user, String semilla, ModeloDaltonicos mDalt, ModeloIdiomas mIdioma, ModeloControladorGeneral mContr){
         this.user = user;
@@ -36,11 +32,6 @@ public class ControladorNivel extends JFrame {
     public void confControladorNivel(String semilla, int numNv){
         nivel = new Nivel(semilla, mDalt);
         mNivel = new ModeloNivel(nivel, user, numNv, mIdioma, mDalt);
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            throw new RuntimeException(e);
-        }
 
         setIconImage(new ImageIcon("src/resources/Imagenes/logo2.png").getImage());
         setTitle("Break out");
@@ -146,6 +137,7 @@ public class ControladorNivel extends JFrame {
                 }
             }
         });
+
         setVisible(true);
     }
 
