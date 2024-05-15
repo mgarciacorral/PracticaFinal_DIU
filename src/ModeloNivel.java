@@ -19,6 +19,7 @@ public class ModeloNivel extends Observable {
     private ArrayList <BuffGenerico> buffs = new ArrayList<>();
     private ArrayList <Ladrillo> ladrillosGolpeados = new ArrayList<>();
     private Timer juego;
+    private Timer repaint;
     private int puntos = 0;
     private int initialSpeedX = 4;
     private int initialSpeedY = -4;
@@ -72,8 +73,6 @@ public class ModeloNivel extends Observable {
 
     public void setBarX(int barX){
         this.barX = barX;
-        setChanged();
-        notifyObservers();
     }
 
     public  ArrayList <Ball> getBalls(){
@@ -106,6 +105,7 @@ public class ModeloNivel extends Observable {
 
     public void pauseGame(){
         juego.stop();
+        repaint.stop();
         texto = mIdioma.translate("Pulsa <Enter> para lanzar la bola o <Esc> para salir");
         musicaFondo.stop();
         setChanged();
@@ -115,6 +115,7 @@ public class ModeloNivel extends Observable {
     public void continuar(){
         texto = "";
         juego.start();
+        repaint.start();
         musicaFondo.start();
         setChanged();
         notifyObservers();
@@ -237,12 +238,17 @@ public class ModeloNivel extends Observable {
                         buffs.remove(i);
                     }
                 }
+            }
+        });
+        juego.start();
 
+        repaint = new Timer(13, new ActionListener() {
+            public void actionPerformed(ActionEvent e){
                 setChanged();
                 notifyObservers();
             }
         });
-        juego.start();
+        repaint.start();
     }
 
     //en caso de choque con ladrillo se comprueba si es destruido y si se ha ganado
