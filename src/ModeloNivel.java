@@ -169,8 +169,11 @@ public class ModeloNivel extends Observable {
                     ball.move();
 
                     //comprueba choque con paredes
-                    if (ball.getBallX() < 0 || ball.getBallX() > 660) {
-                        ball.setSpeedX(-ball.getSpeedX());;
+                    if (ball.getBallX() < 0) {
+                        ball.setSpeedX(Math.abs(ball.getSpeedX()));
+                    }
+                    if(ball.getBallX() > 660){
+                        ball.setSpeedX(-Math.abs(ball.getSpeedX()));
                     }
 
                     if (ball.getBallY() < 50 || ball.getBallY() == 49) {
