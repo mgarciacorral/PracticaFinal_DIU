@@ -131,7 +131,7 @@ public class ControladorNivel extends JFrame {
 
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                if(evt.getX() > 100 && evt.getX() < 610 && mNivel.getGameStarted()){
+                if(evt.getX() > 50 && evt.getX() < 660 && mNivel.getGameStarted()){
                         int x = evt.getX();
                         mNivel.setBarX(x-100);
                 }

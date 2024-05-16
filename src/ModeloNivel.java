@@ -132,7 +132,7 @@ public class ModeloNivel extends Observable {
     }
 
     public void init() {
-        juego = new Timer(3, new ActionListener() {
+        juego = new Timer(5, new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 barRect.setBounds(barX, 600, barWTotal, barH);
                 barRect0.setBounds(barX, 600, barW, barH);
@@ -245,7 +245,7 @@ public class ModeloNivel extends Observable {
         });
         juego.start();
 
-        repaint = new Timer(13, new ActionListener() {
+        repaint = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 setChanged();
                 notifyObservers();
